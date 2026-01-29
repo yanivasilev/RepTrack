@@ -1,0 +1,57 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+enum Gender {
+  MALE
+  FEMALE
+}
+
+enum FitnessGoal {
+  GAIN_STRENGTH
+  IMPROVE_TECHNIQUE
+  GENERAL_FITNESS
+  BUILD_MUSCLE
+  LOSE_WEIGHT
+}
+
+enum ExperienceLevel {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+}
+
+enum TrainingStyle {
+  WEIGHT_LIFTING
+  POWER_LIFTING
+  BODY_BUILDING
+  BODYWEIGHT_TRAINING
+  HOME_WORKOUTS
+}
+
+enum TrainingFrequency {
+  ONE_TO_TWO_DAYS
+  THREE_TO_FOUR_DAYS
+  FIVE_PLUS_DAYS
+}
+
+model User {
+  id                Int               @id @default(autoincrement())
+  email             String            @unique
+  password          String
+  createdAt         DateTime          @default(now())
+  username          String            @unique
+  age               Int
+  gender            Gender
+  height            Int
+  weight            Int
+  fitnessGoal       FitnessGoal
+  experienceLevel   ExperienceLevel
+  trainingStyle     TrainingStyle
+  trainingFrequency TrainingFrequency
+}
