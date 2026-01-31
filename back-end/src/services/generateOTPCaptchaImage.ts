@@ -2,7 +2,7 @@ import { Captcha } from "captcha-canvas";
 import { randomInt } from "crypto";
 
 export async function generateOTPCaptchaImage(otp: string): Promise<Buffer> {
-    const captcha = new Captcha(220, 90);
+    const captcha = new Captcha(300, 100);
 
     captcha.async = false;
     captcha.addDecoy({

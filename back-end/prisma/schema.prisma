@@ -41,17 +41,34 @@ enum TrainingFrequency {
 }
 
 model User {
-  id                Int               @id @default(autoincrement())
-  email             String            @unique
-  password          String
-  createdAt         DateTime          @default(now())
-  username          String            @unique
-  age               Int
-  gender            Gender
-  height            Int
-  weight            Int
-  fitnessGoal       FitnessGoal
-  experienceLevel   ExperienceLevel
-  trainingStyle     TrainingStyle
-  trainingFrequency TrainingFrequency
+  id                 Int               @id @default(autoincrement())
+  email              String            @unique
+  password           String
+  createdAt          DateTime          @default(now())
+  username           String            @unique
+  age                Int
+  gender             Gender
+  height             Int
+  weight             Int
+  fitnessGoal        FitnessGoal
+  experienceLevel    ExperienceLevel
+  trainingStyle      TrainingStyle
+  trainingFrequency  TrainingFrequency
+  forgotPasswordOtps ForgotPasswordOtp[] 
+}
+
+model ForgotPasswordOtp {
+  id        String   @id @default(cuid())
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  otpHash   String
+  expiresAt DateTime
+  usedAt    DateTime?
+  attempts  Int      @default(0)
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+  @@index([expiresAt])
+  @@unique([userId])
 }

@@ -22,3 +22,8 @@ export * from './enums';
  * 
  */
 export type User = Prisma.UserModel
+/**
+ * Model ForgotPasswordOtp
+ * 
+ */
+export type ForgotPasswordOtp = Prisma.ForgotPasswordOtpModel

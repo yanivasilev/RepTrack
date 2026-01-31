@@ -3,7 +3,9 @@ import cors from "cors";
 import dotenv from "dotenv";
 import { register } from "./auth/register";
 import { login } from "./auth/login";
-import { forgotPassword } from "./auth/forgot-password";
+import { forgotPassword } from "./auth/forgotPassword";
+import { emailLimiterCleanup } from "./security/emailLimiterCleanup";
+import { ipLimiter } from "./security/ipLimiter";
 
 dotenv.config();
 
@@ -11,11 +13,13 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.get("/", (_req, res) => res.send("API running"));
+app.get("/", (_req, res) => res.send("API running: "));
 
 app.post("/auth/register", register);
 app.post("/auth/login", login);
-app.post("/auth/forgot-password", forgotPassword);
+app.post("/auth/forgot-password", ipLimiter("If an account exists, your verification code has been sent."), forgotPassword);
+
+emailLimiterCleanup();
 
 const port = Number(process.env.PORT) || 3000;
 app.listen(port, () => console.log(`Node.JS Server running: http://localhost:${port}`));

@@ -1,12 +1,16 @@
 import type { Request, Response } from "express";
+import crypto from "crypto";
 import { prisma } from "../db";
 import { forgotPasswordSchema } from "../schemas/forgotPasswordSchema";
 import { sendEmail } from "../services/sendEmail";
 import { generateOTP } from "../services/generateOTP";
 import { generateOTPCaptchaImage } from "../services/generateOTPCaptchaImage";
+import { emailLimiter } from "../security/emailLimiter";
 
 export async function forgotPassword(req: Request, res: Response) {
     const parsed = forgotPasswordSchema.safeParse(req.body);
+
+    const forgotPasswordResponse = () => res.status(200).json("If an account exists, your verification code has been sent.");
 
     if (!parsed.success) {
         const errors = parsed.error.issues.map((i) => ({
@@ -18,13 +22,38 @@ export async function forgotPassword(req: Request, res: Response) {
 
     const data = parsed.data;
 
+    const emailHash = crypto.createHash("sha256").update(data.email).digest("hex");
+    const emailLimiterCheck = emailLimiter(`tracker:email:${emailHash}`);
+
+    if (!emailLimiterCheck.allowed) {
+        console.log("Email limit reached!")
+        return forgotPasswordResponse();
+    }
+
     const user = await prisma.user.findUnique({ where: { email: data.email } });
     if (!user) {
-        return res.status(401).json("Email or password is invalid.");
+        return forgotPasswordResponse();
     }
 
     const otp = generateOTP();
     const otpCaptchaImage = await generateOTPCaptchaImage(otp);
+    const otpHash = crypto.createHash("sha256").update(`${otp}:${process.env.OTP_SECRET}`).digest("hex");
+    const expiresAt = new Date(Date.now() + 1 * 60 * 1000); // 1 MINUTE
+
+    await prisma.forgotPasswordOtp.upsert({
+        where: { userId: user.id },
+        update: {
+            otpHash,
+            expiresAt,
+            usedAt: null,
+            attempts: 0,
+        },
+        create: {
+            userId: user.id,
+            otpHash,
+            expiresAt,
+        },
+    });
 
     await sendEmail({
         to: data.email,
@@ -85,5 +114,5 @@ export async function forgotPassword(req: Request, res: Response) {
         atthacmentCid: "otp-image"
     });
 
-    return res.json("Your OTP has been sent to your email.");
+    return forgotPasswordResponse();
 }
