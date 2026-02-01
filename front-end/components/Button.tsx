@@ -7,7 +7,13 @@ type ButtonProps = {
 
 export default function Button({ label, onPress }: ButtonProps) {
     return (
-        <Pressable style={styles.button} onPress={onPress}>
+        <Pressable
+            style={({ pressed }) => [
+                styles.button,
+                pressed && styles.pressed,
+            ]}
+            onPress={onPress}
+        >
             <Text style={styles.text}>{label}</Text>
         </Pressable>
     );
@@ -27,4 +33,7 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         fontSize: 20,
     },
+    pressed: {
+        backgroundColor: "darkgreen"
+    }
 });

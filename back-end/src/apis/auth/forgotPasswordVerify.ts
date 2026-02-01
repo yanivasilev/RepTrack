@@ -3,7 +3,7 @@ import crypto from "crypto";
 import { prisma } from "../../db";
 import { forgotPasswordVerifySchema } from "../../schemas/auth/forgotPasswordVerifySchema";
 import { generateForgotPasswordToken } from "../../services/generateForgotPasswordToken";
-import { verifyOtp } from "../../services/verifyOTP";
+import { verifyOtp } from "../../services/verifyOtp";
 
 export async function forgotPasswordVerify(req: Request, res: Response) {
     const parsed = forgotPasswordVerifySchema.safeParse(req.body);

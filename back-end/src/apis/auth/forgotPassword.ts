@@ -3,9 +3,9 @@ import crypto from "crypto";
 import { prisma } from "../../db";
 import { forgotPasswordSchema } from "../../schemas/auth/forgotPasswordSchema";
 import { sendEmail } from "../../services/sendEmail";
-import { emailLimiter } from "../../security/emailLimiter";
-import { generateOtp } from "../../services/generateOTP";
-import { generateOtpCaptchaImage } from "../../services/generateOTPCaptchaImage";
+import { emailLimiter } from "../../middleware/emailLimiter";
+import { generateOtp } from "../../services/generateOtp";
+import { generateOtpCaptchaImage } from "../../services/generateOtpCaptchaImage";
 
 export async function forgotPassword(req: Request, res: Response) {
     const parsed = forgotPasswordSchema.safeParse(req.body);

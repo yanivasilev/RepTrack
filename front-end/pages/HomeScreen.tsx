@@ -11,6 +11,7 @@ import UnitInput from '../components/UnitInput';
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import UnderlineButton from '../components/UnderlineButton';
 import Selector from '../components/Selector';
+import DobInput from '../components/DobInput';
 
 type Props = NativeStackScreenProps<RootStackParamList, "Home">;
 
@@ -37,7 +38,7 @@ export default function HomeScreen({ navigation }: Props) {
 
     {/* STEP 1 */ }
     const [username, setUsername] = useState("");
-    const [age, setAge] = useState("");
+    const [dob, setDob] = useState<Date>(new Date(2002, 4, 10));
     const [sex, setSex] = useState<"MALE" | "FEMALE" | null>(null);
     const [height, setHeight] = useState("");
     const [heightUnit, setHeightUnit] = useState<"metric" | "imperial">("metric");
@@ -94,7 +95,10 @@ export default function HomeScreen({ navigation }: Props) {
                             else if (step === 2) goTo(1);
                             else if (step === 3) goTo(2);
                         }}
-                        style={styles.backButton}
+                        style={({ pressed }) => [
+                            styles.backButton,
+                            pressed && styles.pressed,
+                        ]}
                         hitSlop={10}
                     >
                         <Ionicons name="arrow-back" size={24} color="white" />
@@ -177,12 +181,10 @@ export default function HomeScreen({ navigation }: Props) {
                                         placeholder='Enter username'
                                     />
 
-                                    {/* CHANGE IT TO DOB OTHERWISE THE BACKEND WON'T WORK PROPERLY*/}
-                                    <Input
-                                        label='Age'
-                                        value={age}
-                                        onTextChange={setAge}
-                                        placeholder='Enter age'
+                                    <DobInput
+                                        label='Date of Birth'
+                                        value={dob}
+                                        onChange={setDob}
                                     />
 
                                     <DualSelectionInput
@@ -387,4 +389,7 @@ const styles = StyleSheet.create({
         height: "100%",
         backgroundColor: "green",
     },
+    pressed: {
+        backgroundColor: "darkgreen"
+    }
 });
