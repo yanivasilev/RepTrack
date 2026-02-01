@@ -12,6 +12,7 @@ import { requireLoggedOut } from "./security/requireLoggedOut";
 import { requireLoggedIn } from "./security/requireLoggedIn";
 import { loginChangePassword } from "./auth/loginChangePassword";
 import { loginChangeUsername } from "./auth/loginChangeUsername";
+import { loginChangeDetails } from "./auth/loginChangeDetails";
 
 dotenv.config();
 
@@ -31,6 +32,7 @@ app.post("/auth/forgot-password/reset", requireLoggedOut, forgotPasswordReset);
 // LOGGED IN ROUTES
 app.post("/auth/login/change-password", requireLoggedIn, loginChangePassword);
 app.post("/auth/login/change-username", requireLoggedIn, loginChangeUsername);
+app.post("/auth/login/change-details", requireLoggedIn, loginChangeDetails);
 
 emailLimiterCleanup();
 
