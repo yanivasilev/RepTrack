@@ -1,6 +1,6 @@
 import { z } from "zod";
-import { Sex, FitnessGoal, ExperienceLevel, TrainingStyle, TrainingFrequency } from "../../generated/prisma/enums";
-import { calculateAge } from "../helpers/calculateAge";
+import { Sex, FitnessGoal, ExperienceLevel, TrainingStyle, TrainingFrequency } from "../../../generated/prisma/enums";
+import { calculateAge } from "../../helpers/calculateAge";
 
 export const registerSchema = z.object({
     email: z.string().trim().toLowerCase()
@@ -48,4 +48,4 @@ export const registerSchema = z.object({
     trainingFrequency: z.nativeEnum(TrainingFrequency, "Invalid training frequency."),
 });
 
-export type RegisterInput = z.infer<typeof registerSchema>;
+export type registerInput = z.infer<typeof registerSchema>;

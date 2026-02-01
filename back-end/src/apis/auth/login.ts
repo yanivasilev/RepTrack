@@ -1,8 +1,8 @@
 import type { Request, Response } from "express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { prisma } from "../db";
-import { loginSchema } from "../schemas/loginSchema";
+import { prisma } from "../../db";
+import { loginSchema } from "../../schemas/auth/loginSchema";
 
 export async function login(req: Request, res: Response) {
     const parsed = loginSchema.safeParse(req.body);

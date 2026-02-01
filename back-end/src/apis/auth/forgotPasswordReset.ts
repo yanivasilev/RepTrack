@@ -1,8 +1,8 @@
 import type { Request, Response } from "express";
 import bcrypt from "bcrypt";
-import { prisma } from "../db";
-import { forgotPasswordResetSchema } from "../schemas/forgotPasswordResetSchema";
-import { verifyFPtoken } from "../services/verifyFPtoken";
+import { prisma } from "../../db";
+import { forgotPasswordResetSchema } from "../../schemas/auth/forgotPasswordResetSchema";
+import { verifyFPtoken } from "../../services/verifyFPtoken";
 
 export async function forgotPasswordReset(req: Request, res: Response) {
     const parsed = forgotPasswordResetSchema.safeParse(req.body);

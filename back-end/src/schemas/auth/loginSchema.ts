@@ -11,4 +11,4 @@ export const loginSchema = z.object({
         .max(72, "Password is too long.")
 });
 
-export type LoginInput = z.infer<typeof loginSchema>;
+export type loginInput = z.infer<typeof loginSchema>;

@@ -1,7 +1,7 @@
 import { z } from "zod";
-import { FitnessGoal, ExperienceLevel, TrainingStyle, TrainingFrequency } from "../../generated/prisma/enums";
+import { FitnessGoal, ExperienceLevel, TrainingStyle, TrainingFrequency } from "../../../generated/prisma/enums";
 
-export const loginChangeDetailsSchema = z.object({
+export const changeDetailsSchema = z.object({
     weight: z.coerce.number()
         .int("Weight must be a whole number.")
         .min(20, "Weight looks too small.")
@@ -13,4 +13,4 @@ export const loginChangeDetailsSchema = z.object({
     trainingFrequency: z.nativeEnum(TrainingFrequency, "Invalid training frequency."),
 });
 
-export type loginChangeDetailsInput = z.infer<typeof loginChangeDetailsSchema>;
+export type changeDetailsInput = z.infer<typeof changeDetailsSchema>;

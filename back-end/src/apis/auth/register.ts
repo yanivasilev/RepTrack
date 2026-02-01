@@ -1,7 +1,7 @@
 import type { Request, Response } from "express";
 import bcrypt from "bcrypt";
-import { prisma } from "../db";
-import { registerSchema } from "../schemas/registerSchema";
+import { prisma } from "../../db";
+import { registerSchema } from "../../schemas/auth/registerSchema";
 
 export async function register(req: Request, res: Response) {
     const parsed = registerSchema.safeParse(req.body);

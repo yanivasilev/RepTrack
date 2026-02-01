@@ -1,19 +1,18 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import { register } from "./auth/register";
-import { login } from "./auth/login";
-import { forgotPassword } from "./auth/forgotPassword";
+import { register } from "./apis/auth/register";
+import { login } from "./apis/auth/login";
+import { forgotPassword } from "./apis/auth/forgotPassword";
 import { emailLimiterCleanup } from "./security/emailLimiterCleanup";
 import { ipLimiter } from "./security/ipLimiter";
-import { forgotPasswordVerify } from "./auth/forgotPasswordVerify";
-import { forgotPasswordReset } from "./auth/forgotPasswordReset";
+import { forgotPasswordVerify } from "./apis/auth/forgotPasswordVerify";
+import { forgotPasswordReset } from "./apis/auth/forgotPasswordReset";
 import { requireLoggedOut } from "./security/requireLoggedOut";
 import { requireLoggedIn } from "./security/requireLoggedIn";
-import { loginChangePassword } from "./auth/loginChangePassword";
-import { loginChangeUsername } from "./auth/loginChangeUsername";
-import { loginChangeDetails } from "./auth/loginChangeDetails";
-
+import { changePassword } from "./apis/account/changePassword";
+import { changeUsername } from "./apis/account/changeUsername";
+import { changeDetails } from "./apis/account/changeDetails";
 dotenv.config();
 
 const app = express();
@@ -30,9 +29,9 @@ app.post("/auth/forgot-password/verify", requireLoggedOut, forgotPasswordVerify)
 app.post("/auth/forgot-password/reset", requireLoggedOut, forgotPasswordReset);
 
 // LOGGED IN ROUTES
-app.post("/auth/login/change-password", requireLoggedIn, loginChangePassword);
-app.post("/auth/login/change-username", requireLoggedIn, loginChangeUsername);
-app.post("/auth/login/change-details", requireLoggedIn, loginChangeDetails);
+app.post("/account/change-password", requireLoggedIn, changePassword);
+app.post("/account/change-username", requireLoggedIn, changeUsername);
+app.post("/account/change-details", requireLoggedIn, changeDetails);
 
 emailLimiterCleanup();
 

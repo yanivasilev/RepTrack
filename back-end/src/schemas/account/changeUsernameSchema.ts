@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const loginChangeUsernameSchema = z.object({
+export const changehangeUsernameSchema = z.object({
     currentUsername: z.string().trim().toLowerCase()
         .min(1, "Current username is required."),
 
@@ -10,4 +10,4 @@ export const loginChangeUsernameSchema = z.object({
         .regex(/^[a-zA-Z0-9](?:[a-zA-Z0-9._]*[a-zA-Z0-9])?$/, "Username can only contain letters, numbers, '.' and '_'.")
 });
 
-export type loginChangeUsernameInput = z.infer<typeof loginChangeUsernameSchema>;
+export type changehangeUsernameInput = z.infer<typeof changehangeUsernameSchema>;

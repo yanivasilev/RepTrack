@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const loginChangePasswordSchema = z.object({
+export const changePasswordSchema = z.object({
     currentPassword: z.string()
         .min(1, "Current password is required."),
 
@@ -17,4 +17,4 @@ export const loginChangePasswordSchema = z.object({
         .min(1, "Re-password is required.")
 });
 
-export type loginChangePasswordInput = z.infer<typeof loginChangePasswordSchema>;
+export type changePasswordInput = z.infer<typeof changePasswordSchema>;

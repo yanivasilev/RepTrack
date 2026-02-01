@@ -1,11 +1,11 @@
 import type { Request, Response } from "express";
 import bcrypt from "bcrypt";
-import { prisma } from "../db";
-import { getEmailFromAccessToken } from "../services/getEmailbyAccessToken";
-import { loginChangePasswordSchema } from "../schemas/loginChangePasswordSchema";
+import { prisma } from "../../db";
+import { getEmailFromAccessToken } from "../../services/getEmailbyAccessToken";
+import { changePasswordSchema } from "../../schemas/account/changePasswordSchema";
 
-export async function loginChangePassword(req: Request, res: Response) {
-    const parsed = loginChangePasswordSchema.safeParse(req.body);
+export async function changePassword(req: Request, res: Response) {
+    const parsed = changePasswordSchema.safeParse(req.body);
 
     if (!parsed.success) {
         const errors = parsed.error.issues.map((i) => ({

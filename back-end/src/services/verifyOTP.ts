@@ -1,6 +1,6 @@
 import crypto from "crypto";
 
-export function verifyOTP(inputOtp: string, storedOtpHash: string) {
+export function verifyOtp(inputOtp: string, storedOtpHash: string) {
     const inputHash = crypto.createHash("sha256")
         .update(`${inputOtp}:${process.env.OTP_SECRET}`)
         .digest("hex");

@@ -1,9 +1,9 @@
 import type { Request, Response } from "express";
 import crypto from "crypto";
-import { prisma } from "../db";
-import { forgotPasswordVerifySchema } from "../schemas/forgotPasswordVerifySchema";
-import { verifyOTP } from "../services/verifyOTP";
-import { generateForgotPasswordToken } from "../services/generateForgotPasswordToken";
+import { prisma } from "../../db";
+import { forgotPasswordVerifySchema } from "../../schemas/auth/forgotPasswordVerifySchema";
+import { generateForgotPasswordToken } from "../../services/generateForgotPasswordToken";
+import { verifyOtp } from "../../services/verifyOTP";
 
 export async function forgotPasswordVerify(req: Request, res: Response) {
     const parsed = forgotPasswordVerifySchema.safeParse(req.body);
@@ -37,7 +37,7 @@ export async function forgotPasswordVerify(req: Request, res: Response) {
 
     const storedOtpHash = record.otpHash;
 
-    if (!verifyOTP(data.otp, storedOtpHash)) {
+    if (!verifyOtp(data.otp, storedOtpHash)) {
         // Increase attempts on wrong OTP
         await prisma.forgotPasswordOtp.update({
             where: { userId: user.id },

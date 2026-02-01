@@ -1,11 +1,11 @@
 import type { Request, Response } from "express";
 import crypto from "crypto";
-import { prisma } from "../db";
-import { forgotPasswordSchema } from "../schemas/forgotPasswordSchema";
-import { sendEmail } from "../services/sendEmail";
-import { generateOTP } from "../services/generateOTP";
-import { generateOTPCaptchaImage } from "../services/generateOTPCaptchaImage";
-import { emailLimiter } from "../security/emailLimiter";
+import { prisma } from "../../db";
+import { forgotPasswordSchema } from "../../schemas/auth/forgotPasswordSchema";
+import { sendEmail } from "../../services/sendEmail";
+import { emailLimiter } from "../../security/emailLimiter";
+import { generateOtp } from "../../services/generateOTP";
+import { generateOtpCaptchaImage } from "../../services/generateOTPCaptchaImage";
 
 export async function forgotPassword(req: Request, res: Response) {
     const parsed = forgotPasswordSchema.safeParse(req.body);
@@ -35,8 +35,8 @@ export async function forgotPassword(req: Request, res: Response) {
         return forgotPasswordResponse();
     }
 
-    const otp = generateOTP();
-    const otpCaptchaImage = await generateOTPCaptchaImage(otp);
+    const otp = generateOtp();
+    const otpCaptchaImage = await generateOtpCaptchaImage(otp);
     const otpHash = crypto.createHash("sha256").update(`${otp}:${process.env.OTP_SECRET}`).digest("hex");
     const expiresAt = new Date(Date.now() + 1 * 60 * 1000); // 1 MINUTE
 

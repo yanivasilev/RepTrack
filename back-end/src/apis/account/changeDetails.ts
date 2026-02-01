@@ -1,10 +1,10 @@
 import type { Request, Response } from "express";
-import { prisma } from "../db";
-import { getEmailFromAccessToken } from "../services/getEmailbyAccessToken";
-import { loginChangeDetailsSchema } from "../schemas/loginChangeDetailsSchema";
+import { prisma } from "../../db";
+import { getEmailFromAccessToken } from "../../services/getEmailbyAccessToken";
+import { changeDetailsSchema } from "../../schemas/account/changeDetailsSchema";
 
-export async function loginChangeDetails(req: Request, res: Response) {
-    const parsed = loginChangeDetailsSchema.safeParse(req.body);
+export async function changeDetails(req: Request, res: Response) {
+    const parsed = changeDetailsSchema.safeParse(req.body);
 
     if (!parsed.success) {
         const errors = parsed.error.issues.map((i) => ({
