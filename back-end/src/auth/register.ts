@@ -19,6 +19,8 @@ export async function register(req: Request, res: Response) {
     const existingEmail = await prisma.user.findUnique({ where: { email: data.email } });
     if (existingEmail) return res.status(409).json("Email already exists.");
 
+    if (data.password !== data.rePassword) return res.status(409).json("Password and re-password must match.");
+
     const existingUsername = await prisma.user.findUnique({ where: { username: data.username } });
     if (existingUsername) return res.status(409).json("Username already exists.");
 
@@ -29,7 +31,7 @@ export async function register(req: Request, res: Response) {
             email: data.email,
             password: hashedPassword,
             username: data.username,
-            age: data.age,
+            dob: data.dob,
             gender: data.gender,
             height: data.height,
             weight: data.weight,

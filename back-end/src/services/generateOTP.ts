@@ -1,6 +1,6 @@
 import { randomInt } from "node:crypto";
 
-const CHARS = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789";
+const CHARS = "ABCDEFGHJKLMNPQRSTUVWXYZ123456789";
 
 export function generateOTP(length = 6): string {
     let otp = "";

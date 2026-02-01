@@ -453,10 +453,6 @@ export type ForgotPasswordOtpUncheckedUpdateManyWithoutUserNestedInput = {
   deleteMany?: Prisma.ForgotPasswordOtpScalarWhereInput | Prisma.ForgotPasswordOtpScalarWhereInput[]
 }
 
-export type NullableDateTimeFieldUpdateOperationsInput = {
-  set?: Date | string | null
-}
-
 export type ForgotPasswordOtpCreateWithoutUserInput = {
   id?: string
   otpHash: string

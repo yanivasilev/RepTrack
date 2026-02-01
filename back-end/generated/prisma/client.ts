@@ -47,3 +47,8 @@ export type User = Prisma.UserModel
  * 
  */
 export type ForgotPasswordOtp = Prisma.ForgotPasswordOtpModel
+/**
+ * Model ForgotPasswordSession
+ * 
+ */
+export type ForgotPasswordSession = Prisma.ForgotPasswordSessionModel

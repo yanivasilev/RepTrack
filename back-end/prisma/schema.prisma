@@ -41,34 +41,49 @@ enum TrainingFrequency {
 }
 
 model User {
-  id                 Int               @id @default(autoincrement())
-  email              String            @unique
-  password           String
-  createdAt          DateTime          @default(now())
-  username           String            @unique
-  age                Int
-  gender             Gender
-  height             Int
-  weight             Int
-  fitnessGoal        FitnessGoal
-  experienceLevel    ExperienceLevel
-  trainingStyle      TrainingStyle
-  trainingFrequency  TrainingFrequency
-  forgotPasswordOtps ForgotPasswordOtp[] 
+  id                     Int                     @id @default(autoincrement())
+  email                  String                  @unique
+  password               String
+  createdAt              DateTime                @default(now())
+  username               String                  @unique
+  lastUsernameChangeAt   DateTime?
+  dob                    DateTime
+  gender                 Gender
+  height                 Int
+  weight                 Int
+  fitnessGoal            FitnessGoal
+  experienceLevel        ExperienceLevel
+  trainingStyle          TrainingStyle
+  trainingFrequency      TrainingFrequency
+  forgotPasswordOtps     ForgotPasswordOtp[]
+  forgotPasswordSessions ForgotPasswordSession[]
 }
 
 model ForgotPasswordOtp {
-  id        String   @id @default(cuid())
-  userId    Int
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id     String @id @default(cuid())
+  userId Int    @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   otpHash   String
   expiresAt DateTime
   usedAt    DateTime?
-  attempts  Int      @default(0)
-  createdAt DateTime @default(now())
+  attempts  Int       @default(0)
+  createdAt DateTime  @default(now())
 
   @@index([userId])
   @@index([expiresAt])
-  @@unique([userId])
+}
+
+model ForgotPasswordSession {
+  id     String @id @default(cuid())
+  userId Int    @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  tokenHash String    @unique
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  @@index([userId])
+  @@index([expiresAt])
 }

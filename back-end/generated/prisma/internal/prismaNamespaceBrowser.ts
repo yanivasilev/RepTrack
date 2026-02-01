@@ -52,7 +52,8 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   User: 'User',
-  ForgotPasswordOtp: 'ForgotPasswordOtp'
+  ForgotPasswordOtp: 'ForgotPasswordOtp',
+  ForgotPasswordSession: 'ForgotPasswordSession'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -74,7 +75,8 @@ export const UserScalarFieldEnum = {
   password: 'password',
   createdAt: 'createdAt',
   username: 'username',
-  age: 'age',
+  lastUsernameChangeAt: 'lastUsernameChangeAt',
+  dob: 'dob',
   gender: 'gender',
   height: 'height',
   weight: 'weight',
@@ -98,6 +100,18 @@ export const ForgotPasswordOtpScalarFieldEnum = {
 } as const
 
 export type ForgotPasswordOtpScalarFieldEnum = (typeof ForgotPasswordOtpScalarFieldEnum)[keyof typeof ForgotPasswordOtpScalarFieldEnum]
+
+
+export const ForgotPasswordSessionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  tokenHash: 'tokenHash',
+  expiresAt: 'expiresAt',
+  usedAt: 'usedAt',
+  createdAt: 'createdAt'
+} as const
+
+export type ForgotPasswordSessionScalarFieldEnum = (typeof ForgotPasswordSessionScalarFieldEnum)[keyof typeof ForgotPasswordSessionScalarFieldEnum]
 
 
 export const SortOrder = {

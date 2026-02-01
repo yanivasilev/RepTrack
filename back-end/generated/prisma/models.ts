@@ -10,4 +10,5 @@
  */
 export type * from './models/User'
 export type * from './models/ForgotPasswordOtp'
+export type * from './models/ForgotPasswordSession'
 export type * from './commonInputTypes'

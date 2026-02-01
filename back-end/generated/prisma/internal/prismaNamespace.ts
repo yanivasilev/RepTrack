@@ -385,7 +385,8 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 export const ModelName = {
   User: 'User',
-  ForgotPasswordOtp: 'ForgotPasswordOtp'
+  ForgotPasswordOtp: 'ForgotPasswordOtp',
+  ForgotPasswordSession: 'ForgotPasswordSession'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -401,7 +402,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "forgotPasswordOtp"
+    modelProps: "user" | "forgotPasswordOtp" | "forgotPasswordSession"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -553,6 +554,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    ForgotPasswordSession: {
+      payload: Prisma.$ForgotPasswordSessionPayload<ExtArgs>
+      fields: Prisma.ForgotPasswordSessionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ForgotPasswordSessionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ForgotPasswordSessionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ForgotPasswordSessionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ForgotPasswordSessionPayload>
+        }
+        findFirst: {
+          args: Prisma.ForgotPasswordSessionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ForgotPasswordSessionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ForgotPasswordSessionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ForgotPasswordSessionPayload>
+        }
+        findMany: {
+          args: Prisma.ForgotPasswordSessionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ForgotPasswordSessionPayload>[]
+        }
+        create: {
+          args: Prisma.ForgotPasswordSessionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ForgotPasswordSessionPayload>
+        }
+        createMany: {
+          args: Prisma.ForgotPasswordSessionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ForgotPasswordSessionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ForgotPasswordSessionPayload>[]
+        }
+        delete: {
+          args: Prisma.ForgotPasswordSessionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ForgotPasswordSessionPayload>
+        }
+        update: {
+          args: Prisma.ForgotPasswordSessionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ForgotPasswordSessionPayload>
+        }
+        deleteMany: {
+          args: Prisma.ForgotPasswordSessionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ForgotPasswordSessionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ForgotPasswordSessionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ForgotPasswordSessionPayload>[]
+        }
+        upsert: {
+          args: Prisma.ForgotPasswordSessionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ForgotPasswordSessionPayload>
+        }
+        aggregate: {
+          args: Prisma.ForgotPasswordSessionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateForgotPasswordSession>
+        }
+        groupBy: {
+          args: Prisma.ForgotPasswordSessionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ForgotPasswordSessionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ForgotPasswordSessionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ForgotPasswordSessionCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -595,7 +670,8 @@ export const UserScalarFieldEnum = {
   password: 'password',
   createdAt: 'createdAt',
   username: 'username',
-  age: 'age',
+  lastUsernameChangeAt: 'lastUsernameChangeAt',
+  dob: 'dob',
   gender: 'gender',
   height: 'height',
   weight: 'weight',
@@ -619,6 +695,18 @@ export const ForgotPasswordOtpScalarFieldEnum = {
 } as const
 
 export type ForgotPasswordOtpScalarFieldEnum = (typeof ForgotPasswordOtpScalarFieldEnum)[keyof typeof ForgotPasswordOtpScalarFieldEnum]
+
+
+export const ForgotPasswordSessionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  tokenHash: 'tokenHash',
+  expiresAt: 'expiresAt',
+  usedAt: 'usedAt',
+  createdAt: 'createdAt'
+} as const
+
+export type ForgotPasswordSessionScalarFieldEnum = (typeof ForgotPasswordSessionScalarFieldEnum)[keyof typeof ForgotPasswordSessionScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -802,6 +890,7 @@ export type PrismaClientOptions = ({
 export type GlobalOmitConfig = {
   user?: Prisma.UserOmit
   forgotPasswordOtp?: Prisma.ForgotPasswordOtpOmit
+  forgotPasswordSession?: Prisma.ForgotPasswordSessionOmit
 }
 
 /* Types for Logging */

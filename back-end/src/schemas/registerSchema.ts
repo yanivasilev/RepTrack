@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { Gender, FitnessGoal, ExperienceLevel, TrainingStyle, TrainingFrequency } from "../../generated/prisma/enums";
+import { calculateAge } from "../helpers/calculateAge";
 
 export const registerSchema = z.object({
     email: z.string().trim().toLowerCase()
@@ -16,15 +17,18 @@ export const registerSchema = z.object({
         .regex(/[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/, "Password must include at least one special character.")
         .regex(/^[A-Za-z0-9!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]*$/, "Password must not contain illegal characters or spaces."),
 
+    rePassword: z.string()
+        .min(1, "Re-password is required."),
+
     username: z.string().trim().toLowerCase()
         .min(3, "Username must be at least 3 characters.")
         .max(20, "Username must not exceed 20 characters.")
         .regex(/^[a-zA-Z0-9](?:[a-zA-Z0-9._]*[a-zA-Z0-9])?$/, "Username can only contain letters, numbers, '.' and '_'."),
 
-    age: z.coerce.number()
-        .int("Age must be a whole number.")
-        .min(18, "You must 18 or over.")
-        .max(120, "Age looks invalid."),
+    dob: z.coerce.date()
+        .refine((dob) => !isNaN(dob.getTime()), "Date of birth must be a valid date.")
+        .refine((dob) => calculateAge(dob) >= 18, "You must be 18 or over.")
+        .refine((dob) => calculateAge(dob) <= 120, "Age looks invalid."),
 
     gender: z.nativeEnum(Gender, "Invalid gender."),
 

@@ -17,22 +17,25 @@ export async function login(req: Request, res: Response) {
 
     const data = parsed.data;
 
+    // Checking if use exists
     const user = await prisma.user.findUnique({ where: { email: data.email } });
     if (!user) {
         return res.status(401).json("Email or password is invalid.");
     }
 
+    // Checking if password is valid
     const ok = await bcrypt.compare(data.password, user.password);
     if (!ok) {
         return res.status(401).json("Email or password is invalid.");
     }
 
     const secret = process.env.JWT_SECRET;
-    if (!secret) return res.status(500).json("Secret token not set.");
+    if (!secret) return res.status(500).json("Access token not set.");
 
-    const token = jwt.sign({ sub: String(user.id), email: user.email }, secret, {
+    // Generating access token
+    const accessToken = jwt.sign({ sub: String(user.id), email: user.email }, secret, {
         expiresIn: "7d",
     });
 
-    return res.json({ token });
+    return res.json({ accessToken });
 }
