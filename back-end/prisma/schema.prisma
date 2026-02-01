@@ -7,7 +7,7 @@ datasource db {
   provider = "sqlite"
 }
 
-enum Gender {
+enum Sex {
   MALE
   FEMALE
 }
@@ -48,7 +48,7 @@ model User {
   username               String                  @unique
   lastUsernameChangeAt   DateTime?
   dob                    DateTime
-  gender                 Gender
+  sex                    Sex
   height                 Int
   weight                 Int
   fitnessGoal            FitnessGoal

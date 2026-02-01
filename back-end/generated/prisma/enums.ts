@@ -9,12 +9,12 @@
 * 🟢 You can import this file directly.
 */
 
-export const Gender = {
+export const Sex = {
   MALE: 'MALE',
   FEMALE: 'FEMALE'
 } as const
 
-export type Gender = (typeof Gender)[keyof typeof Gender]
+export type Sex = (typeof Sex)[keyof typeof Sex]
 
 
 export const FitnessGoal = {

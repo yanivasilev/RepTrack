@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { Gender, FitnessGoal, ExperienceLevel, TrainingStyle, TrainingFrequency } from "../../generated/prisma/enums";
+import { Sex, FitnessGoal, ExperienceLevel, TrainingStyle, TrainingFrequency } from "../../generated/prisma/enums";
 import { calculateAge } from "../helpers/calculateAge";
 
 export const registerSchema = z.object({
@@ -30,7 +30,7 @@ export const registerSchema = z.object({
         .refine((dob) => calculateAge(dob) >= 18, "You must be 18 or over.")
         .refine((dob) => calculateAge(dob) <= 120, "Age looks invalid."),
 
-    gender: z.nativeEnum(Gender, "Invalid gender."),
+    sex: z.nativeEnum(Sex, "Invalid sex."),
 
     height: z.coerce.number()
         .int("Height must be a whole number.")

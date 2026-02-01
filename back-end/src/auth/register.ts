@@ -32,7 +32,7 @@ export async function register(req: Request, res: Response) {
             password: hashedPassword,
             username: data.username,
             dob: data.dob,
-            gender: data.gender,
+            sex: data.sex,
             height: data.height,
             weight: data.weight,
             fitnessGoal: data.fitnessGoal,

@@ -46,7 +46,7 @@ export type UserMinAggregateOutputType = {
   username: string | null
   lastUsernameChangeAt: Date | null
   dob: Date | null
-  gender: $Enums.Gender | null
+  sex: $Enums.Sex | null
   height: number | null
   weight: number | null
   fitnessGoal: $Enums.FitnessGoal | null
@@ -63,7 +63,7 @@ export type UserMaxAggregateOutputType = {
   username: string | null
   lastUsernameChangeAt: Date | null
   dob: Date | null
-  gender: $Enums.Gender | null
+  sex: $Enums.Sex | null
   height: number | null
   weight: number | null
   fitnessGoal: $Enums.FitnessGoal | null
@@ -80,7 +80,7 @@ export type UserCountAggregateOutputType = {
   username: number
   lastUsernameChangeAt: number
   dob: number
-  gender: number
+  sex: number
   height: number
   weight: number
   fitnessGoal: number
@@ -111,7 +111,7 @@ export type UserMinAggregateInputType = {
   username?: true
   lastUsernameChangeAt?: true
   dob?: true
-  gender?: true
+  sex?: true
   height?: true
   weight?: true
   fitnessGoal?: true
@@ -128,7 +128,7 @@ export type UserMaxAggregateInputType = {
   username?: true
   lastUsernameChangeAt?: true
   dob?: true
-  gender?: true
+  sex?: true
   height?: true
   weight?: true
   fitnessGoal?: true
@@ -145,7 +145,7 @@ export type UserCountAggregateInputType = {
   username?: true
   lastUsernameChangeAt?: true
   dob?: true
-  gender?: true
+  sex?: true
   height?: true
   weight?: true
   fitnessGoal?: true
@@ -249,7 +249,7 @@ export type UserGroupByOutputType = {
   username: string
   lastUsernameChangeAt: Date | null
   dob: Date
-  gender: $Enums.Gender
+  sex: $Enums.Sex
   height: number
   weight: number
   fitnessGoal: $Enums.FitnessGoal
@@ -289,7 +289,7 @@ export type UserWhereInput = {
   username?: Prisma.StringFilter<"User"> | string
   lastUsernameChangeAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   dob?: Prisma.DateTimeFilter<"User"> | Date | string
-  gender?: Prisma.EnumGenderFilter<"User"> | $Enums.Gender
+  sex?: Prisma.EnumSexFilter<"User"> | $Enums.Sex
   height?: Prisma.IntFilter<"User"> | number
   weight?: Prisma.IntFilter<"User"> | number
   fitnessGoal?: Prisma.EnumFitnessGoalFilter<"User"> | $Enums.FitnessGoal
@@ -308,7 +308,7 @@ export type UserOrderByWithRelationInput = {
   username?: Prisma.SortOrder
   lastUsernameChangeAt?: Prisma.SortOrderInput | Prisma.SortOrder
   dob?: Prisma.SortOrder
-  gender?: Prisma.SortOrder
+  sex?: Prisma.SortOrder
   height?: Prisma.SortOrder
   weight?: Prisma.SortOrder
   fitnessGoal?: Prisma.SortOrder
@@ -330,7 +330,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   lastUsernameChangeAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   dob?: Prisma.DateTimeFilter<"User"> | Date | string
-  gender?: Prisma.EnumGenderFilter<"User"> | $Enums.Gender
+  sex?: Prisma.EnumSexFilter<"User"> | $Enums.Sex
   height?: Prisma.IntFilter<"User"> | number
   weight?: Prisma.IntFilter<"User"> | number
   fitnessGoal?: Prisma.EnumFitnessGoalFilter<"User"> | $Enums.FitnessGoal
@@ -349,7 +349,7 @@ export type UserOrderByWithAggregationInput = {
   username?: Prisma.SortOrder
   lastUsernameChangeAt?: Prisma.SortOrderInput | Prisma.SortOrder
   dob?: Prisma.SortOrder
-  gender?: Prisma.SortOrder
+  sex?: Prisma.SortOrder
   height?: Prisma.SortOrder
   weight?: Prisma.SortOrder
   fitnessGoal?: Prisma.SortOrder
@@ -374,7 +374,7 @@ export type UserScalarWhereWithAggregatesInput = {
   username?: Prisma.StringWithAggregatesFilter<"User"> | string
   lastUsernameChangeAt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
   dob?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
-  gender?: Prisma.EnumGenderWithAggregatesFilter<"User"> | $Enums.Gender
+  sex?: Prisma.EnumSexWithAggregatesFilter<"User"> | $Enums.Sex
   height?: Prisma.IntWithAggregatesFilter<"User"> | number
   weight?: Prisma.IntWithAggregatesFilter<"User"> | number
   fitnessGoal?: Prisma.EnumFitnessGoalWithAggregatesFilter<"User"> | $Enums.FitnessGoal
@@ -390,7 +390,7 @@ export type UserCreateInput = {
   username: string
   lastUsernameChangeAt?: Date | string | null
   dob: Date | string
-  gender: $Enums.Gender
+  sex: $Enums.Sex
   height: number
   weight: number
   fitnessGoal: $Enums.FitnessGoal
@@ -409,7 +409,7 @@ export type UserUncheckedCreateInput = {
   username: string
   lastUsernameChangeAt?: Date | string | null
   dob: Date | string
-  gender: $Enums.Gender
+  sex: $Enums.Sex
   height: number
   weight: number
   fitnessGoal: $Enums.FitnessGoal
@@ -427,7 +427,7 @@ export type UserUpdateInput = {
   username?: Prisma.StringFieldUpdateOperationsInput | string
   lastUsernameChangeAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   dob?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+  sex?: Prisma.EnumSexFieldUpdateOperationsInput | $Enums.Sex
   height?: Prisma.IntFieldUpdateOperationsInput | number
   weight?: Prisma.IntFieldUpdateOperationsInput | number
   fitnessGoal?: Prisma.EnumFitnessGoalFieldUpdateOperationsInput | $Enums.FitnessGoal
@@ -446,7 +446,7 @@ export type UserUncheckedUpdateInput = {
   username?: Prisma.StringFieldUpdateOperationsInput | string
   lastUsernameChangeAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   dob?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+  sex?: Prisma.EnumSexFieldUpdateOperationsInput | $Enums.Sex
   height?: Prisma.IntFieldUpdateOperationsInput | number
   weight?: Prisma.IntFieldUpdateOperationsInput | number
   fitnessGoal?: Prisma.EnumFitnessGoalFieldUpdateOperationsInput | $Enums.FitnessGoal
@@ -465,7 +465,7 @@ export type UserCreateManyInput = {
   username: string
   lastUsernameChangeAt?: Date | string | null
   dob: Date | string
-  gender: $Enums.Gender
+  sex: $Enums.Sex
   height: number
   weight: number
   fitnessGoal: $Enums.FitnessGoal
@@ -481,7 +481,7 @@ export type UserUpdateManyMutationInput = {
   username?: Prisma.StringFieldUpdateOperationsInput | string
   lastUsernameChangeAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   dob?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+  sex?: Prisma.EnumSexFieldUpdateOperationsInput | $Enums.Sex
   height?: Prisma.IntFieldUpdateOperationsInput | number
   weight?: Prisma.IntFieldUpdateOperationsInput | number
   fitnessGoal?: Prisma.EnumFitnessGoalFieldUpdateOperationsInput | $Enums.FitnessGoal
@@ -498,7 +498,7 @@ export type UserUncheckedUpdateManyInput = {
   username?: Prisma.StringFieldUpdateOperationsInput | string
   lastUsernameChangeAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   dob?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+  sex?: Prisma.EnumSexFieldUpdateOperationsInput | $Enums.Sex
   height?: Prisma.IntFieldUpdateOperationsInput | number
   weight?: Prisma.IntFieldUpdateOperationsInput | number
   fitnessGoal?: Prisma.EnumFitnessGoalFieldUpdateOperationsInput | $Enums.FitnessGoal
@@ -515,7 +515,7 @@ export type UserCountOrderByAggregateInput = {
   username?: Prisma.SortOrder
   lastUsernameChangeAt?: Prisma.SortOrder
   dob?: Prisma.SortOrder
-  gender?: Prisma.SortOrder
+  sex?: Prisma.SortOrder
   height?: Prisma.SortOrder
   weight?: Prisma.SortOrder
   fitnessGoal?: Prisma.SortOrder
@@ -538,7 +538,7 @@ export type UserMaxOrderByAggregateInput = {
   username?: Prisma.SortOrder
   lastUsernameChangeAt?: Prisma.SortOrder
   dob?: Prisma.SortOrder
-  gender?: Prisma.SortOrder
+  sex?: Prisma.SortOrder
   height?: Prisma.SortOrder
   weight?: Prisma.SortOrder
   fitnessGoal?: Prisma.SortOrder
@@ -555,7 +555,7 @@ export type UserMinOrderByAggregateInput = {
   username?: Prisma.SortOrder
   lastUsernameChangeAt?: Prisma.SortOrder
   dob?: Prisma.SortOrder
-  gender?: Prisma.SortOrder
+  sex?: Prisma.SortOrder
   height?: Prisma.SortOrder
   weight?: Prisma.SortOrder
   fitnessGoal?: Prisma.SortOrder
@@ -587,8 +587,8 @@ export type NullableDateTimeFieldUpdateOperationsInput = {
   set?: Date | string | null
 }
 
-export type EnumGenderFieldUpdateOperationsInput = {
-  set?: $Enums.Gender
+export type EnumSexFieldUpdateOperationsInput = {
+  set?: $Enums.Sex
 }
 
 export type IntFieldUpdateOperationsInput = {
@@ -650,7 +650,7 @@ export type UserCreateWithoutForgotPasswordOtpsInput = {
   username: string
   lastUsernameChangeAt?: Date | string | null
   dob: Date | string
-  gender: $Enums.Gender
+  sex: $Enums.Sex
   height: number
   weight: number
   fitnessGoal: $Enums.FitnessGoal
@@ -668,7 +668,7 @@ export type UserUncheckedCreateWithoutForgotPasswordOtpsInput = {
   username: string
   lastUsernameChangeAt?: Date | string | null
   dob: Date | string
-  gender: $Enums.Gender
+  sex: $Enums.Sex
   height: number
   weight: number
   fitnessGoal: $Enums.FitnessGoal
@@ -701,7 +701,7 @@ export type UserUpdateWithoutForgotPasswordOtpsInput = {
   username?: Prisma.StringFieldUpdateOperationsInput | string
   lastUsernameChangeAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   dob?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+  sex?: Prisma.EnumSexFieldUpdateOperationsInput | $Enums.Sex
   height?: Prisma.IntFieldUpdateOperationsInput | number
   weight?: Prisma.IntFieldUpdateOperationsInput | number
   fitnessGoal?: Prisma.EnumFitnessGoalFieldUpdateOperationsInput | $Enums.FitnessGoal
@@ -719,7 +719,7 @@ export type UserUncheckedUpdateWithoutForgotPasswordOtpsInput = {
   username?: Prisma.StringFieldUpdateOperationsInput | string
   lastUsernameChangeAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   dob?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+  sex?: Prisma.EnumSexFieldUpdateOperationsInput | $Enums.Sex
   height?: Prisma.IntFieldUpdateOperationsInput | number
   weight?: Prisma.IntFieldUpdateOperationsInput | number
   fitnessGoal?: Prisma.EnumFitnessGoalFieldUpdateOperationsInput | $Enums.FitnessGoal
@@ -736,7 +736,7 @@ export type UserCreateWithoutForgotPasswordSessionsInput = {
   username: string
   lastUsernameChangeAt?: Date | string | null
   dob: Date | string
-  gender: $Enums.Gender
+  sex: $Enums.Sex
   height: number
   weight: number
   fitnessGoal: $Enums.FitnessGoal
@@ -754,7 +754,7 @@ export type UserUncheckedCreateWithoutForgotPasswordSessionsInput = {
   username: string
   lastUsernameChangeAt?: Date | string | null
   dob: Date | string
-  gender: $Enums.Gender
+  sex: $Enums.Sex
   height: number
   weight: number
   fitnessGoal: $Enums.FitnessGoal
@@ -787,7 +787,7 @@ export type UserUpdateWithoutForgotPasswordSessionsInput = {
   username?: Prisma.StringFieldUpdateOperationsInput | string
   lastUsernameChangeAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   dob?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+  sex?: Prisma.EnumSexFieldUpdateOperationsInput | $Enums.Sex
   height?: Prisma.IntFieldUpdateOperationsInput | number
   weight?: Prisma.IntFieldUpdateOperationsInput | number
   fitnessGoal?: Prisma.EnumFitnessGoalFieldUpdateOperationsInput | $Enums.FitnessGoal
@@ -805,7 +805,7 @@ export type UserUncheckedUpdateWithoutForgotPasswordSessionsInput = {
   username?: Prisma.StringFieldUpdateOperationsInput | string
   lastUsernameChangeAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   dob?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+  sex?: Prisma.EnumSexFieldUpdateOperationsInput | $Enums.Sex
   height?: Prisma.IntFieldUpdateOperationsInput | number
   weight?: Prisma.IntFieldUpdateOperationsInput | number
   fitnessGoal?: Prisma.EnumFitnessGoalFieldUpdateOperationsInput | $Enums.FitnessGoal
@@ -863,7 +863,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   username?: boolean
   lastUsernameChangeAt?: boolean
   dob?: boolean
-  gender?: boolean
+  sex?: boolean
   height?: boolean
   weight?: boolean
   fitnessGoal?: boolean
@@ -883,7 +883,7 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   username?: boolean
   lastUsernameChangeAt?: boolean
   dob?: boolean
-  gender?: boolean
+  sex?: boolean
   height?: boolean
   weight?: boolean
   fitnessGoal?: boolean
@@ -900,7 +900,7 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   username?: boolean
   lastUsernameChangeAt?: boolean
   dob?: boolean
-  gender?: boolean
+  sex?: boolean
   height?: boolean
   weight?: boolean
   fitnessGoal?: boolean
@@ -917,7 +917,7 @@ export type UserSelectScalar = {
   username?: boolean
   lastUsernameChangeAt?: boolean
   dob?: boolean
-  gender?: boolean
+  sex?: boolean
   height?: boolean
   weight?: boolean
   fitnessGoal?: boolean
@@ -926,7 +926,7 @@ export type UserSelectScalar = {
   trainingFrequency?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "password" | "createdAt" | "username" | "lastUsernameChangeAt" | "dob" | "gender" | "height" | "weight" | "fitnessGoal" | "experienceLevel" | "trainingStyle" | "trainingFrequency", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "password" | "createdAt" | "username" | "lastUsernameChangeAt" | "dob" | "sex" | "height" | "weight" | "fitnessGoal" | "experienceLevel" | "trainingStyle" | "trainingFrequency", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   forgotPasswordOtps?: boolean | Prisma.User$forgotPasswordOtpsArgs<ExtArgs>
   forgotPasswordSessions?: boolean | Prisma.User$forgotPasswordSessionsArgs<ExtArgs>
@@ -949,7 +949,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     username: string
     lastUsernameChangeAt: Date | null
     dob: Date
-    gender: $Enums.Gender
+    sex: $Enums.Sex
     height: number
     weight: number
     fitnessGoal: $Enums.FitnessGoal
@@ -1388,7 +1388,7 @@ export interface UserFieldRefs {
   readonly username: Prisma.FieldRef<"User", 'String'>
   readonly lastUsernameChangeAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly dob: Prisma.FieldRef<"User", 'DateTime'>
-  readonly gender: Prisma.FieldRef<"User", 'Gender'>
+  readonly sex: Prisma.FieldRef<"User", 'Sex'>
   readonly height: Prisma.FieldRef<"User", 'Int'>
   readonly weight: Prisma.FieldRef<"User", 'Int'>
   readonly fitnessGoal: Prisma.FieldRef<"User", 'FitnessGoal'>

@@ -38,7 +38,7 @@ export default function HomeScreen({ navigation }: Props) {
     {/* STEP 1 */ }
     const [username, setUsername] = useState("");
     const [age, setAge] = useState("");
-    const [gender, setGender] = useState<"MALE" | "FEMALE" | null>(null);
+    const [sex, setSex] = useState<"MALE" | "FEMALE" | null>(null);
     const [height, setHeight] = useState("");
     const [heightUnit, setHeightUnit] = useState<"metric" | "imperial">("metric");
     const [weight, setWeight] = useState("");
@@ -177,6 +177,7 @@ export default function HomeScreen({ navigation }: Props) {
                                         placeholder='Enter username'
                                     />
 
+                                    {/* CHANGE IT TO DOB OTHERWISE THE BACKEND WON'T WORK PROPERLY*/}
                                     <Input
                                         label='Age'
                                         value={age}
@@ -185,11 +186,11 @@ export default function HomeScreen({ navigation }: Props) {
                                     />
 
                                     <DualSelectionInput
-                                        label='Gender'
-                                        value={gender}
+                                        label='Sex'
+                                        value={sex}
                                         option='MALE'
                                         option2='FEMALE'
-                                        onPress={setGender}
+                                        onPress={setSex}
                                     />
 
                                     <UnitInput<"metric" | "imperial">
