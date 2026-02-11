@@ -4,20 +4,25 @@ import jwt from "jsonwebtoken";
 export function requireLoggedIn(req: Request, res: Response, next: NextFunction) {
     const header = req.headers.authorization;
 
-    if (!header?.startsWith("Bearer ")) return res.status(401).json("You must be logged in.");
+    if (!header?.startsWith("Bearer ")) return res.status(401).json({ message: "You must be logged in." });
 
     const accessToken = header.split(" ")[1];
 
+    const secret = process.env.JWT_SECRET;
+    if (!secret) {
+        return res.status(500).json({ message: "Server misconfiguration." });
+    }
+
     try {
-        const payload = jwt.verify(accessToken, process.env.JWT_SECRET!) as jwt.JwtPayload;
+        const payload = jwt.verify(accessToken, secret) as jwt.JwtPayload;
 
         req.user = {
-            id: String(payload.sub),
+            id: Number(payload.sub),
             email: String(payload.email),
         };
 
         return next();
     } catch {
-        return res.status(401).json("Invalid or expired access token.");
+        return res.status(401).json({ message: "Invalid or expired access token." });
     }
 }

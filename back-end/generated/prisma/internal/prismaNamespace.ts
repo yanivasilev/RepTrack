@@ -678,7 +678,10 @@ export const UserScalarFieldEnum = {
   fitnessGoal: 'fitnessGoal',
   experienceLevel: 'experienceLevel',
   trainingStyle: 'trainingStyle',
-  trainingFrequency: 'trainingFrequency'
+  trainingFrequency: 'trainingFrequency',
+  avatarFileName: 'avatarFileName',
+  heightUnitType: 'heightUnitType',
+  weightUnitType: 'weightUnitType'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -784,6 +787,13 @@ export type EnumTrainingStyleFieldRefInput<$PrismaModel> = FieldRefInputType<$Pr
  * Reference to a field of type 'TrainingFrequency'
  */
 export type EnumTrainingFrequencyFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TrainingFrequency'>
+    
+
+
+/**
+ * Reference to a field of type 'UnitType'
+ */
+export type EnumUnitTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UnitType'>
     
 
 

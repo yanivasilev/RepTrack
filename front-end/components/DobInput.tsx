@@ -6,9 +6,10 @@ type DobInputProps = {
     label: string;
     value?: Date;
     onChange?: (date: Date) => void;
+    error?: string;
 };
 
-export default function DobInput({ label, value, onChange, }: DobInputProps) {
+export default function DobInput({ label, value, onChange, error }: DobInputProps) {
     const [internalDob, setInternalDob] = useState<Date>(value ?? new Date(2000, 0, 1));
     const [show, setShow] = useState<boolean>(false);
 
@@ -28,28 +29,51 @@ export default function DobInput({ label, value, onChange, }: DobInputProps) {
         }
     };
 
+    const color = error ? "red" : "green";
+    const borderColor = error ? "red" : "green";
+
     return (
         <View>
             <View style={styles.inputWrapper}>
-                <Text style={styles.label}>{label}</Text>
+                <Text style={{
+                    marginBottom: 5,
+                    color,
+                    fontWeight: "bold",
+                }}>
+                    {label}
+                </Text>
 
                 <Pressable
                     onPress={() => setShow(true)}
-                    style={styles.input}
+                    style={{
+                        width: "100%",
+                        borderWidth: 1,
+                        borderColor,
+                        borderRadius: 8,
+                        padding: 12,
+                        paddingRight: 80,
+                    }}
                 >
                     <Text style={{ color: "gray" }}>{dob.toLocaleDateString()}</Text>
                 </Pressable>
+
+                {error && (
+                    <Text style={{ color: "red", fontSize: 12, marginTop: 4 }}>
+                        {error}
+                    </Text>
+                )}
 
                 {show && Platform.OS === "ios" && (
                     <View style={styles.doneContainer}>
                         <Pressable
                             style={({ pressed }) => [
                                 styles.doneButton,
+                                error && styles.doneButtonError,
                                 pressed && styles.pressed,
                             ]}
                             onPress={() => setShow(false)}
                         >
-                            <Text style={[styles.doneText]}>
+                            <Text style={styles.doneText}>
                                 DONE
                             </Text>
                         </Pressable>
@@ -72,28 +96,14 @@ export default function DobInput({ label, value, onChange, }: DobInputProps) {
 }
 
 const styles = StyleSheet.create({
-    label: {
-        marginBottom: 5,
-        color: "green",
-        fontWeight: "bold",
-    },
     inputWrapper: {
-        position: "relative",
-    },
-    input: {
-        width: "100%",
-        borderWidth: 1,
-        borderColor: "green",
-        borderRadius: 8,
-        padding: 12,
-        paddingRight: 80,
+        position: "relative"
     },
     doneContainer: {
         position: "absolute",
         right: 8,
-        top: "50%",
-        flexDirection: "row",
-        transform: [{ translateY: -5 }],
+        top: 28,
+        flexDirection: "row"
     },
     doneButton: {
         width: 40,
@@ -103,12 +113,16 @@ const styles = StyleSheet.create({
         borderColor: "green",
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "green",
+        backgroundColor: "green"
+    },
+    doneButtonError: {
+        borderColor: "red",
+        backgroundColor: "red"
     },
     doneText: {
         fontSize: 12,
         fontWeight: "700",
-        color: "white",
+        color: "white"
     },
     pressed: {
         backgroundColor: "darkgreen"

@@ -6,31 +6,46 @@ type DualSelectionInputProps<Type extends string> = {
     option: Type;
     option2: Type;
     onPress: (value: Type) => void;
+    error?: string;
 }
 
-export default function DualSelectionInput<Type extends string>({ label, value, option, option2, onPress }: DualSelectionInputProps<Type>) {
+export default function DualSelectionInput<Type extends string>({ label, value, option, option2, onPress, error }: DualSelectionInputProps<Type>) {
     const is = value === option;
     const is2 = value === option2;
 
+    const color = error ? "red" : "green";
+
     return (
         <View>
-            <Text style={styles.label}>{label}</Text>
+            <Text style={{
+                marginBottom: 5,
+                color,
+                fontWeight: "bold",
+            }}>
+                {label}
+            </Text>
 
             <View style={styles.row}>
                 <Pressable
-                    style={[styles.button, is && styles.activeButton]}
+                    style={[styles.button, error && { borderColor: "red" }, is && styles.activeButton]}
                     onPress={() => onPress(option)}
                 >
-                    <Text style={[styles.text, is && styles.activeText]}>{option}</Text>
+                    <Text style={[styles.text, error && { color: "red" }, is && styles.activeText]}>{option}</Text>
                 </Pressable>
 
                 <Pressable
-                    style={[styles.button, is2 && styles.activeButton]}
+                    style={[styles.button, error && { borderColor: "red" }, is2 && styles.activeButton]}
                     onPress={() => onPress(option2)}
                 >
-                    <Text style={[styles.text, is2 && styles.activeText]}>{option2}</Text>
+                    <Text style={[styles.text, error && { color: "red" }, is2 && styles.activeText]}>{option2}</Text>
                 </Pressable>
             </View>
+
+            {error && (
+                <Text style={{ color: "red", fontSize: 12, marginTop: 4 }}>
+                    {error}
+                </Text>
+            )}
         </View>
     );
 }

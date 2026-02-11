@@ -55,3 +55,11 @@ export const TrainingFrequency = {
 } as const
 
 export type TrainingFrequency = (typeof TrainingFrequency)[keyof typeof TrainingFrequency]
+
+
+export const UnitType = {
+  METRIC: 'METRIC',
+  IMPERIAL: 'IMPERIAL'
+} as const
+
+export type UnitType = (typeof UnitType)[keyof typeof UnitType]

@@ -53,6 +53,9 @@ export type UserMinAggregateOutputType = {
   experienceLevel: $Enums.ExperienceLevel | null
   trainingStyle: $Enums.TrainingStyle | null
   trainingFrequency: $Enums.TrainingFrequency | null
+  avatarFileName: string | null
+  heightUnitType: $Enums.UnitType | null
+  weightUnitType: $Enums.UnitType | null
 }
 
 export type UserMaxAggregateOutputType = {
@@ -70,6 +73,9 @@ export type UserMaxAggregateOutputType = {
   experienceLevel: $Enums.ExperienceLevel | null
   trainingStyle: $Enums.TrainingStyle | null
   trainingFrequency: $Enums.TrainingFrequency | null
+  avatarFileName: string | null
+  heightUnitType: $Enums.UnitType | null
+  weightUnitType: $Enums.UnitType | null
 }
 
 export type UserCountAggregateOutputType = {
@@ -87,6 +93,9 @@ export type UserCountAggregateOutputType = {
   experienceLevel: number
   trainingStyle: number
   trainingFrequency: number
+  avatarFileName: number
+  heightUnitType: number
+  weightUnitType: number
   _all: number
 }
 
@@ -118,6 +127,9 @@ export type UserMinAggregateInputType = {
   experienceLevel?: true
   trainingStyle?: true
   trainingFrequency?: true
+  avatarFileName?: true
+  heightUnitType?: true
+  weightUnitType?: true
 }
 
 export type UserMaxAggregateInputType = {
@@ -135,6 +147,9 @@ export type UserMaxAggregateInputType = {
   experienceLevel?: true
   trainingStyle?: true
   trainingFrequency?: true
+  avatarFileName?: true
+  heightUnitType?: true
+  weightUnitType?: true
 }
 
 export type UserCountAggregateInputType = {
@@ -152,6 +167,9 @@ export type UserCountAggregateInputType = {
   experienceLevel?: true
   trainingStyle?: true
   trainingFrequency?: true
+  avatarFileName?: true
+  heightUnitType?: true
+  weightUnitType?: true
   _all?: true
 }
 
@@ -256,6 +274,9 @@ export type UserGroupByOutputType = {
   experienceLevel: $Enums.ExperienceLevel
   trainingStyle: $Enums.TrainingStyle
   trainingFrequency: $Enums.TrainingFrequency
+  avatarFileName: string | null
+  heightUnitType: $Enums.UnitType
+  weightUnitType: $Enums.UnitType
   _count: UserCountAggregateOutputType | null
   _avg: UserAvgAggregateOutputType | null
   _sum: UserSumAggregateOutputType | null
@@ -296,6 +317,9 @@ export type UserWhereInput = {
   experienceLevel?: Prisma.EnumExperienceLevelFilter<"User"> | $Enums.ExperienceLevel
   trainingStyle?: Prisma.EnumTrainingStyleFilter<"User"> | $Enums.TrainingStyle
   trainingFrequency?: Prisma.EnumTrainingFrequencyFilter<"User"> | $Enums.TrainingFrequency
+  avatarFileName?: Prisma.StringNullableFilter<"User"> | string | null
+  heightUnitType?: Prisma.EnumUnitTypeFilter<"User"> | $Enums.UnitType
+  weightUnitType?: Prisma.EnumUnitTypeFilter<"User"> | $Enums.UnitType
   forgotPasswordOtps?: Prisma.ForgotPasswordOtpListRelationFilter
   forgotPasswordSessions?: Prisma.ForgotPasswordSessionListRelationFilter
 }
@@ -315,6 +339,9 @@ export type UserOrderByWithRelationInput = {
   experienceLevel?: Prisma.SortOrder
   trainingStyle?: Prisma.SortOrder
   trainingFrequency?: Prisma.SortOrder
+  avatarFileName?: Prisma.SortOrderInput | Prisma.SortOrder
+  heightUnitType?: Prisma.SortOrder
+  weightUnitType?: Prisma.SortOrder
   forgotPasswordOtps?: Prisma.ForgotPasswordOtpOrderByRelationAggregateInput
   forgotPasswordSessions?: Prisma.ForgotPasswordSessionOrderByRelationAggregateInput
 }
@@ -337,6 +364,9 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   experienceLevel?: Prisma.EnumExperienceLevelFilter<"User"> | $Enums.ExperienceLevel
   trainingStyle?: Prisma.EnumTrainingStyleFilter<"User"> | $Enums.TrainingStyle
   trainingFrequency?: Prisma.EnumTrainingFrequencyFilter<"User"> | $Enums.TrainingFrequency
+  avatarFileName?: Prisma.StringNullableFilter<"User"> | string | null
+  heightUnitType?: Prisma.EnumUnitTypeFilter<"User"> | $Enums.UnitType
+  weightUnitType?: Prisma.EnumUnitTypeFilter<"User"> | $Enums.UnitType
   forgotPasswordOtps?: Prisma.ForgotPasswordOtpListRelationFilter
   forgotPasswordSessions?: Prisma.ForgotPasswordSessionListRelationFilter
 }, "id" | "email" | "username">
@@ -356,6 +386,9 @@ export type UserOrderByWithAggregationInput = {
   experienceLevel?: Prisma.SortOrder
   trainingStyle?: Prisma.SortOrder
   trainingFrequency?: Prisma.SortOrder
+  avatarFileName?: Prisma.SortOrderInput | Prisma.SortOrder
+  heightUnitType?: Prisma.SortOrder
+  weightUnitType?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _avg?: Prisma.UserAvgOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
@@ -381,6 +414,9 @@ export type UserScalarWhereWithAggregatesInput = {
   experienceLevel?: Prisma.EnumExperienceLevelWithAggregatesFilter<"User"> | $Enums.ExperienceLevel
   trainingStyle?: Prisma.EnumTrainingStyleWithAggregatesFilter<"User"> | $Enums.TrainingStyle
   trainingFrequency?: Prisma.EnumTrainingFrequencyWithAggregatesFilter<"User"> | $Enums.TrainingFrequency
+  avatarFileName?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  heightUnitType?: Prisma.EnumUnitTypeWithAggregatesFilter<"User"> | $Enums.UnitType
+  weightUnitType?: Prisma.EnumUnitTypeWithAggregatesFilter<"User"> | $Enums.UnitType
 }
 
 export type UserCreateInput = {
@@ -397,6 +433,9 @@ export type UserCreateInput = {
   experienceLevel: $Enums.ExperienceLevel
   trainingStyle: $Enums.TrainingStyle
   trainingFrequency: $Enums.TrainingFrequency
+  avatarFileName?: string | null
+  heightUnitType?: $Enums.UnitType
+  weightUnitType?: $Enums.UnitType
   forgotPasswordOtps?: Prisma.ForgotPasswordOtpCreateNestedManyWithoutUserInput
   forgotPasswordSessions?: Prisma.ForgotPasswordSessionCreateNestedManyWithoutUserInput
 }
@@ -416,6 +455,9 @@ export type UserUncheckedCreateInput = {
   experienceLevel: $Enums.ExperienceLevel
   trainingStyle: $Enums.TrainingStyle
   trainingFrequency: $Enums.TrainingFrequency
+  avatarFileName?: string | null
+  heightUnitType?: $Enums.UnitType
+  weightUnitType?: $Enums.UnitType
   forgotPasswordOtps?: Prisma.ForgotPasswordOtpUncheckedCreateNestedManyWithoutUserInput
   forgotPasswordSessions?: Prisma.ForgotPasswordSessionUncheckedCreateNestedManyWithoutUserInput
 }
@@ -434,6 +476,9 @@ export type UserUpdateInput = {
   experienceLevel?: Prisma.EnumExperienceLevelFieldUpdateOperationsInput | $Enums.ExperienceLevel
   trainingStyle?: Prisma.EnumTrainingStyleFieldUpdateOperationsInput | $Enums.TrainingStyle
   trainingFrequency?: Prisma.EnumTrainingFrequencyFieldUpdateOperationsInput | $Enums.TrainingFrequency
+  avatarFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  heightUnitType?: Prisma.EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+  weightUnitType?: Prisma.EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
   forgotPasswordOtps?: Prisma.ForgotPasswordOtpUpdateManyWithoutUserNestedInput
   forgotPasswordSessions?: Prisma.ForgotPasswordSessionUpdateManyWithoutUserNestedInput
 }
@@ -453,6 +498,9 @@ export type UserUncheckedUpdateInput = {
   experienceLevel?: Prisma.EnumExperienceLevelFieldUpdateOperationsInput | $Enums.ExperienceLevel
   trainingStyle?: Prisma.EnumTrainingStyleFieldUpdateOperationsInput | $Enums.TrainingStyle
   trainingFrequency?: Prisma.EnumTrainingFrequencyFieldUpdateOperationsInput | $Enums.TrainingFrequency
+  avatarFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  heightUnitType?: Prisma.EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+  weightUnitType?: Prisma.EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
   forgotPasswordOtps?: Prisma.ForgotPasswordOtpUncheckedUpdateManyWithoutUserNestedInput
   forgotPasswordSessions?: Prisma.ForgotPasswordSessionUncheckedUpdateManyWithoutUserNestedInput
 }
@@ -472,6 +520,9 @@ export type UserCreateManyInput = {
   experienceLevel: $Enums.ExperienceLevel
   trainingStyle: $Enums.TrainingStyle
   trainingFrequency: $Enums.TrainingFrequency
+  avatarFileName?: string | null
+  heightUnitType?: $Enums.UnitType
+  weightUnitType?: $Enums.UnitType
 }
 
 export type UserUpdateManyMutationInput = {
@@ -488,6 +539,9 @@ export type UserUpdateManyMutationInput = {
   experienceLevel?: Prisma.EnumExperienceLevelFieldUpdateOperationsInput | $Enums.ExperienceLevel
   trainingStyle?: Prisma.EnumTrainingStyleFieldUpdateOperationsInput | $Enums.TrainingStyle
   trainingFrequency?: Prisma.EnumTrainingFrequencyFieldUpdateOperationsInput | $Enums.TrainingFrequency
+  avatarFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  heightUnitType?: Prisma.EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+  weightUnitType?: Prisma.EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
 }
 
 export type UserUncheckedUpdateManyInput = {
@@ -505,6 +559,9 @@ export type UserUncheckedUpdateManyInput = {
   experienceLevel?: Prisma.EnumExperienceLevelFieldUpdateOperationsInput | $Enums.ExperienceLevel
   trainingStyle?: Prisma.EnumTrainingStyleFieldUpdateOperationsInput | $Enums.TrainingStyle
   trainingFrequency?: Prisma.EnumTrainingFrequencyFieldUpdateOperationsInput | $Enums.TrainingFrequency
+  avatarFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  heightUnitType?: Prisma.EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+  weightUnitType?: Prisma.EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
 }
 
 export type UserCountOrderByAggregateInput = {
@@ -522,6 +579,9 @@ export type UserCountOrderByAggregateInput = {
   experienceLevel?: Prisma.SortOrder
   trainingStyle?: Prisma.SortOrder
   trainingFrequency?: Prisma.SortOrder
+  avatarFileName?: Prisma.SortOrder
+  heightUnitType?: Prisma.SortOrder
+  weightUnitType?: Prisma.SortOrder
 }
 
 export type UserAvgOrderByAggregateInput = {
@@ -545,6 +605,9 @@ export type UserMaxOrderByAggregateInput = {
   experienceLevel?: Prisma.SortOrder
   trainingStyle?: Prisma.SortOrder
   trainingFrequency?: Prisma.SortOrder
+  avatarFileName?: Prisma.SortOrder
+  heightUnitType?: Prisma.SortOrder
+  weightUnitType?: Prisma.SortOrder
 }
 
 export type UserMinOrderByAggregateInput = {
@@ -562,6 +625,9 @@ export type UserMinOrderByAggregateInput = {
   experienceLevel?: Prisma.SortOrder
   trainingStyle?: Prisma.SortOrder
   trainingFrequency?: Prisma.SortOrder
+  avatarFileName?: Prisma.SortOrder
+  heightUnitType?: Prisma.SortOrder
+  weightUnitType?: Prisma.SortOrder
 }
 
 export type UserSumOrderByAggregateInput = {
@@ -615,6 +681,14 @@ export type EnumTrainingFrequencyFieldUpdateOperationsInput = {
   set?: $Enums.TrainingFrequency
 }
 
+export type NullableStringFieldUpdateOperationsInput = {
+  set?: string | null
+}
+
+export type EnumUnitTypeFieldUpdateOperationsInput = {
+  set?: $Enums.UnitType
+}
+
 export type UserCreateNestedOneWithoutForgotPasswordOtpsInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutForgotPasswordOtpsInput, Prisma.UserUncheckedCreateWithoutForgotPasswordOtpsInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutForgotPasswordOtpsInput
@@ -657,6 +731,9 @@ export type UserCreateWithoutForgotPasswordOtpsInput = {
   experienceLevel: $Enums.ExperienceLevel
   trainingStyle: $Enums.TrainingStyle
   trainingFrequency: $Enums.TrainingFrequency
+  avatarFileName?: string | null
+  heightUnitType?: $Enums.UnitType
+  weightUnitType?: $Enums.UnitType
   forgotPasswordSessions?: Prisma.ForgotPasswordSessionCreateNestedManyWithoutUserInput
 }
 
@@ -675,6 +752,9 @@ export type UserUncheckedCreateWithoutForgotPasswordOtpsInput = {
   experienceLevel: $Enums.ExperienceLevel
   trainingStyle: $Enums.TrainingStyle
   trainingFrequency: $Enums.TrainingFrequency
+  avatarFileName?: string | null
+  heightUnitType?: $Enums.UnitType
+  weightUnitType?: $Enums.UnitType
   forgotPasswordSessions?: Prisma.ForgotPasswordSessionUncheckedCreateNestedManyWithoutUserInput
 }
 
@@ -708,6 +788,9 @@ export type UserUpdateWithoutForgotPasswordOtpsInput = {
   experienceLevel?: Prisma.EnumExperienceLevelFieldUpdateOperationsInput | $Enums.ExperienceLevel
   trainingStyle?: Prisma.EnumTrainingStyleFieldUpdateOperationsInput | $Enums.TrainingStyle
   trainingFrequency?: Prisma.EnumTrainingFrequencyFieldUpdateOperationsInput | $Enums.TrainingFrequency
+  avatarFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  heightUnitType?: Prisma.EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+  weightUnitType?: Prisma.EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
   forgotPasswordSessions?: Prisma.ForgotPasswordSessionUpdateManyWithoutUserNestedInput
 }
 
@@ -726,6 +809,9 @@ export type UserUncheckedUpdateWithoutForgotPasswordOtpsInput = {
   experienceLevel?: Prisma.EnumExperienceLevelFieldUpdateOperationsInput | $Enums.ExperienceLevel
   trainingStyle?: Prisma.EnumTrainingStyleFieldUpdateOperationsInput | $Enums.TrainingStyle
   trainingFrequency?: Prisma.EnumTrainingFrequencyFieldUpdateOperationsInput | $Enums.TrainingFrequency
+  avatarFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  heightUnitType?: Prisma.EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+  weightUnitType?: Prisma.EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
   forgotPasswordSessions?: Prisma.ForgotPasswordSessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
@@ -743,6 +829,9 @@ export type UserCreateWithoutForgotPasswordSessionsInput = {
   experienceLevel: $Enums.ExperienceLevel
   trainingStyle: $Enums.TrainingStyle
   trainingFrequency: $Enums.TrainingFrequency
+  avatarFileName?: string | null
+  heightUnitType?: $Enums.UnitType
+  weightUnitType?: $Enums.UnitType
   forgotPasswordOtps?: Prisma.ForgotPasswordOtpCreateNestedManyWithoutUserInput
 }
 
@@ -761,6 +850,9 @@ export type UserUncheckedCreateWithoutForgotPasswordSessionsInput = {
   experienceLevel: $Enums.ExperienceLevel
   trainingStyle: $Enums.TrainingStyle
   trainingFrequency: $Enums.TrainingFrequency
+  avatarFileName?: string | null
+  heightUnitType?: $Enums.UnitType
+  weightUnitType?: $Enums.UnitType
   forgotPasswordOtps?: Prisma.ForgotPasswordOtpUncheckedCreateNestedManyWithoutUserInput
 }
 
@@ -794,6 +886,9 @@ export type UserUpdateWithoutForgotPasswordSessionsInput = {
   experienceLevel?: Prisma.EnumExperienceLevelFieldUpdateOperationsInput | $Enums.ExperienceLevel
   trainingStyle?: Prisma.EnumTrainingStyleFieldUpdateOperationsInput | $Enums.TrainingStyle
   trainingFrequency?: Prisma.EnumTrainingFrequencyFieldUpdateOperationsInput | $Enums.TrainingFrequency
+  avatarFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  heightUnitType?: Prisma.EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+  weightUnitType?: Prisma.EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
   forgotPasswordOtps?: Prisma.ForgotPasswordOtpUpdateManyWithoutUserNestedInput
 }
 
@@ -812,6 +907,9 @@ export type UserUncheckedUpdateWithoutForgotPasswordSessionsInput = {
   experienceLevel?: Prisma.EnumExperienceLevelFieldUpdateOperationsInput | $Enums.ExperienceLevel
   trainingStyle?: Prisma.EnumTrainingStyleFieldUpdateOperationsInput | $Enums.TrainingStyle
   trainingFrequency?: Prisma.EnumTrainingFrequencyFieldUpdateOperationsInput | $Enums.TrainingFrequency
+  avatarFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  heightUnitType?: Prisma.EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+  weightUnitType?: Prisma.EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
   forgotPasswordOtps?: Prisma.ForgotPasswordOtpUncheckedUpdateManyWithoutUserNestedInput
 }
 
@@ -870,6 +968,9 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   experienceLevel?: boolean
   trainingStyle?: boolean
   trainingFrequency?: boolean
+  avatarFileName?: boolean
+  heightUnitType?: boolean
+  weightUnitType?: boolean
   forgotPasswordOtps?: boolean | Prisma.User$forgotPasswordOtpsArgs<ExtArgs>
   forgotPasswordSessions?: boolean | Prisma.User$forgotPasswordSessionsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -890,6 +991,9 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   experienceLevel?: boolean
   trainingStyle?: boolean
   trainingFrequency?: boolean
+  avatarFileName?: boolean
+  heightUnitType?: boolean
+  weightUnitType?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -907,6 +1011,9 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   experienceLevel?: boolean
   trainingStyle?: boolean
   trainingFrequency?: boolean
+  avatarFileName?: boolean
+  heightUnitType?: boolean
+  weightUnitType?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectScalar = {
@@ -924,9 +1031,12 @@ export type UserSelectScalar = {
   experienceLevel?: boolean
   trainingStyle?: boolean
   trainingFrequency?: boolean
+  avatarFileName?: boolean
+  heightUnitType?: boolean
+  weightUnitType?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "password" | "createdAt" | "username" | "lastUsernameChangeAt" | "dob" | "sex" | "height" | "weight" | "fitnessGoal" | "experienceLevel" | "trainingStyle" | "trainingFrequency", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "password" | "createdAt" | "username" | "lastUsernameChangeAt" | "dob" | "sex" | "height" | "weight" | "fitnessGoal" | "experienceLevel" | "trainingStyle" | "trainingFrequency" | "avatarFileName" | "heightUnitType" | "weightUnitType", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   forgotPasswordOtps?: boolean | Prisma.User$forgotPasswordOtpsArgs<ExtArgs>
   forgotPasswordSessions?: boolean | Prisma.User$forgotPasswordSessionsArgs<ExtArgs>
@@ -956,6 +1066,9 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     experienceLevel: $Enums.ExperienceLevel
     trainingStyle: $Enums.TrainingStyle
     trainingFrequency: $Enums.TrainingFrequency
+    avatarFileName: string | null
+    heightUnitType: $Enums.UnitType
+    weightUnitType: $Enums.UnitType
   }, ExtArgs["result"]["user"]>
   composites: {}
 }
@@ -1395,6 +1508,9 @@ export interface UserFieldRefs {
   readonly experienceLevel: Prisma.FieldRef<"User", 'ExperienceLevel'>
   readonly trainingStyle: Prisma.FieldRef<"User", 'TrainingStyle'>
   readonly trainingFrequency: Prisma.FieldRef<"User", 'TrainingFrequency'>
+  readonly avatarFileName: Prisma.FieldRef<"User", 'String'>
+  readonly heightUnitType: Prisma.FieldRef<"User", 'UnitType'>
+  readonly weightUnitType: Prisma.FieldRef<"User", 'UnitType'>
 }
     
 
