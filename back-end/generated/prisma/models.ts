@@ -11,4 +11,8 @@
 export type * from './models/User'
 export type * from './models/ForgotPasswordOtp'
 export type * from './models/ForgotPasswordSession'
+export type * from './models/Thread'
+export type * from './models/Reply'
+export type * from './models/ThreadLike'
+export type * from './models/ReplyLike'
 export type * from './commonInputTypes'

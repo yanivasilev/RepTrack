@@ -32,3 +32,23 @@ export type ForgotPasswordOtp = Prisma.ForgotPasswordOtpModel
  * 
  */
 export type ForgotPasswordSession = Prisma.ForgotPasswordSessionModel
+/**
+ * Model Thread
+ * 
+ */
+export type Thread = Prisma.ThreadModel
+/**
+ * Model Reply
+ * 
+ */
+export type Reply = Prisma.ReplyModel
+/**
+ * Model ThreadLike
+ * 
+ */
+export type ThreadLike = Prisma.ThreadLikeModel
+/**
+ * Model ReplyLike
+ * 
+ */
+export type ReplyLike = Prisma.ReplyLikeModel

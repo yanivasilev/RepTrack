@@ -35,13 +35,13 @@ export const registerSchema = z.object({
 
     height: z.coerce.number()
         .int("Height must be a whole number.")
-        .min(50, "Height looks too small.")
-        .max(272, "Height looks too large."),
+        .min(99, "Height looks too small.")
+        .max(240, "Height looks too large."),
 
     weight: z.coerce.number()
         .int("Weight must be a whole number.")
-        .min(20, "Weight looks too small.")
-        .max(635, "Weight looks too large."),
+        .min(30, "Weight looks too small.")
+        .max(350, "Weight looks too large."),
 
     fitnessGoal: z.nativeEnum(FitnessGoal, "Fitness goal is invalid."),
     experienceLevel: z.nativeEnum(ExperienceLevel, "Experience level is invalid."),

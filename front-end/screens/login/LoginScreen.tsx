@@ -7,16 +7,17 @@ import Button from "../../components/Button";
 import Banner from "../../components/Banner";
 import { styles } from "./styles";
 import BackButton from "../../components/BackButton";
-import LoginForm, { LoginFormData } from "../../components/login/LoginForm";
-import { SubmitLogin } from "../../components/login/SubmitLoginForm";
+import LoginForm from "../../components/login/LoginForm";
 import { useAuth } from "../../hooks/authContext";
 import { useFocusEffect } from "@react-navigation/native";
 import { AuthStackParamList } from "../../navigation/AuthNavigator";
+import { LoginPayload } from "../../services/api/auth/loginApi";
+import { SubmitLogin } from "../../components/login/SubmitLogin";
 
 type Props = NativeStackScreenProps<AuthStackParamList, "Login">;
 
 // DEFAULT LOGIN DATA
-const initialLoginData: LoginFormData = {
+const initialLoginData: LoginPayload = {
     email: "",
     password: ""
 };
@@ -35,14 +36,14 @@ export default function LoginScreen({ navigation }: Props) {
 
     const { signIn } = useAuth();
 
-    const [data, setData] = useState<LoginFormData>(initialLoginData);
+    const [data, setData] = useState<LoginPayload>(initialLoginData);
 
-    const updateData = (fields: Partial<LoginFormData>) => {
+    const updateData = (fields: Partial<LoginPayload>) => {
         setData((prev) => ({ ...prev, ...fields }));
 
         setErrors((prev) => {
             const next = { ...prev };
-            (Object.keys(fields) as (keyof LoginFormData)[]).forEach((k) => {
+            (Object.keys(fields) as (keyof LoginPayload)[]).forEach((k) => {
                 delete next[k];
             });
             return next;
@@ -52,7 +53,7 @@ export default function LoginScreen({ navigation }: Props) {
     // OVERLAY MESSAGE TO GIVE LOGIN API FEEDBACK
     const [overlay, setOverlay] = useState<{ text: string; success: boolean; } | null>(null);
     const [loading, setLoading] = useState(false);
-    const [errors, setErrors] = useState<Partial<Record<keyof LoginFormData, string>>>({});
+    const [errors, setErrors] = useState<Partial<Record<keyof LoginPayload, string>>>({});
 
     const handleLoginPress = async () => {
         setLoading(true);

@@ -18,19 +18,9 @@ type UnitInputProps<Unit extends string> = {
     error?: string;
 };
 
-export default function UnitInput<Unit extends string>({
-    label,
-    text,
-    onTextChange,
-    placeholder,
-    unit,
-    unit1,
-    unit2,
-    unit1Label,
-    unit2Label,
-    onUnitChange,
-    error
-}: UnitInputProps<Unit>) {
+export default function UnitInput<Unit extends string>({ label, text, onTextChange, placeholder, unit, unit1,
+    unit2, unit1Label, unit2Label, onUnitChange, error }: UnitInputProps<Unit>) {
+
     const is1 = unit === unit1;
     const is2 = unit === unit2;
 

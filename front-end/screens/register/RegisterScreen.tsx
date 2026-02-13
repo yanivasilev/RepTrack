@@ -7,9 +7,10 @@ import UnderlineButton from '../../components/UnderlineButton';
 import Banner from '../../components/Banner';
 import { styles } from './styles';
 import RegisterForm, { RegisterFormData } from '../../components/register/RegisterForm';
-import { Errors, SubmitRegisterForm } from '../../components/register/SubmitRegisterForm';
 import { ArrowLeftIcon } from 'react-native-heroicons/outline';
 import { AuthStackParamList } from '../../navigation/AuthNavigator';
+import { SubmitRegister } from '../../components/register/SubmitRegister';
+import { RegisterPayload } from '../../services/api/auth/registerApi';
 
 type Props = NativeStackScreenProps<AuthStackParamList, "Register">;
 
@@ -22,7 +23,7 @@ const initialRegisterData: RegisterFormData = {
     dob: undefined,
     sex: null,
 
-    height: "",
+    height: null,
     heightUnitType: "METRIC",
 
     weight: "",
@@ -65,7 +66,7 @@ export default function RegisterScreen({ navigation }: Props) {
     };
 
     // FINDS WHICH STEP FIRST HAD AN ERROR
-    const findFirstErrorStep = (errs: Errors): number | null => {
+    const findFirstErrorStep = (errs: Partial<Record<keyof RegisterFormData, string>>): number | null => {
         for (const stepKey of Object.keys(stepErrors).map(Number).sort((a, b) => a - b)) {
             const fields = stepErrors[stepKey];
             const hasErrorOnThisStep = fields.some((f) => !!errs[f]);
@@ -80,7 +81,9 @@ export default function RegisterScreen({ navigation }: Props) {
         setErrors({});
 
         // SUBMITS REGISTER FORM
-        const res = await SubmitRegisterForm({ data });
+        const payload: RegisterPayload = { ...data, weight: data.weight ? Number(data.weight) : null };
+
+        const res = await SubmitRegister({ data: payload });
 
         setLoading(false);
 

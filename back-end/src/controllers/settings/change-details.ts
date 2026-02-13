@@ -13,8 +13,13 @@ export async function changeDetailsController(req: Request, res: Response) {
         return res.status(400).json({ errors });
     }
 
-    const user = (req as any).user; // set by requireAuth
-    const result = await changeDetailsService(user, parsed.data);
+    const authUser = (req as any).user;
+
+    const result = await changeDetailsService(authUser.email, parsed.data);
+
+    if (result.status === "user_not_found") {
+        return res.status(401).json({ message: "User not found." });
+    }
 
     if (result.status === "no_changes") {
         return res.status(400).json({ message: "No changes were made." });

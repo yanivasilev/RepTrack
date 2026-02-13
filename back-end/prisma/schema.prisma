@@ -61,10 +61,14 @@ model User {
   trainingStyle          TrainingStyle
   trainingFrequency      TrainingFrequency
   avatarFileName         String?
-  heightUnitType         UnitType                 @default(METRIC)
-  weightUnitType         UnitType                 @default(METRIC)
+  heightUnitType         UnitType                @default(METRIC)
+  weightUnitType         UnitType                @default(METRIC)
   forgotPasswordOtps     ForgotPasswordOtp[]
   forgotPasswordSessions ForgotPasswordSession[]
+  threads                Thread[]
+  replies                Reply[]
+  threadLikes            ThreadLike[]
+  replyLikes             ReplyLike[]
 }
 
 model ForgotPasswordOtp {
@@ -83,10 +87,9 @@ model ForgotPasswordOtp {
 }
 
 model ForgotPasswordSession {
-  id     String @id @default(cuid())
-  userId Int    @unique
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-
+  id        String    @id @default(cuid())
+  userId    Int       @unique
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   tokenHash String    @unique
   expiresAt DateTime
   usedAt    DateTime?
@@ -94,4 +97,62 @@ model ForgotPasswordSession {
 
   @@index([userId])
   @@index([expiresAt])
+}
+
+model Thread {
+  id         String       @id @default(cuid())
+  title      String
+  body       String?
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
+  authorId   Int
+  author     User         @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  replies    Reply[]
+  likes      ThreadLike[]
+  replyCount Int          @default(0)
+  likeCount  Int          @default(0)
+
+  @@index([authorId])
+  @@index([createdAt])
+}
+
+model Reply {
+  id        String      @id @default(cuid())
+  body      String
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  authorId  Int
+  author    User        @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  threadId  String
+  thread    Thread      @relation(fields: [threadId], references: [id], onDelete: Cascade)
+  likes     ReplyLike[]
+  likeCount Int         @default(0)
+
+  @@index([threadId])
+  @@index([authorId])
+  @@index([createdAt])
+}
+
+model ThreadLike {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  threadId  String
+  thread    Thread   @relation(fields: [threadId], references: [id], onDelete: Cascade)
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([threadId, userId])
+  @@index([userId])
+}
+
+model ReplyLike {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  replyId   String
+  reply     Reply    @relation(fields: [replyId], references: [id], onDelete: Cascade)
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([replyId, userId])
+  @@index([userId])
 }

@@ -7,10 +7,11 @@ import BackButton from "../../../components/BackButton";
 import Button from "../../../components/Button";
 import { useEffect, useState } from "react";
 import { profileDetailsApi } from "../../../services/api/profileDetailsApi";
-import { SubmitChangeUsername } from "../../../components/settings/SubmitChangeUsername";
 import { EXPERIENCE_LEVEL, ExperienceLevel, FITNESS_GOALS, FitnessGoal, TRAINING_FREQUENCY, TRAINING_STYLE, TrainingFrequency, TrainingStyle, UnitType } from "../../../libs/catalogs/register";
 import UnitInput from "../../../components/UnitInput";
 import Selector from "../../../components/Selector";
+import { SubmitChangeDetails } from "../../../components/settings/SubmitChangeDetails";
+import { convertWeightString } from "../../../libs/helpers/convertWeight";
 
 type Props = NativeStackScreenProps<AppStackParamList, "ChangeDetails">;
 
@@ -79,8 +80,7 @@ export default function ChangeDetailsScreen({ navigation }: Props) {
         setLoading(true);
         setErrors({});
 
-        const res = await SubmitChangeUsername({ data });
-
+        const res = await SubmitChangeDetails({ data });
         setLoading(false);
 
         if (!res.success) {
@@ -100,7 +100,7 @@ export default function ChangeDetailsScreen({ navigation }: Props) {
             success: true,
         });
         return;
-    } 
+    }
 
     return (
 
@@ -115,14 +115,24 @@ export default function ChangeDetailsScreen({ navigation }: Props) {
                             <UnitInput<UnitType>
                                 label="Weight"
                                 text={data.weight}
-                                onTextChange={(val) => setData(prev => ({ ...prev, weight: val }))}
+                                onTextChange={(val) => {
+                                    const cleaned = val.replace(/[^0-9]/g, "");
+
+                                    setData(prev => ({ ...prev, weight: cleaned }));
+                                }}
                                 placeholder="Enter weight"
                                 unit={data.weightUnitType}
                                 unit1="METRIC"
                                 unit2="IMPERIAL"
                                 unit1Label="KG"
                                 unit2Label="LB"
-                                onUnitChange={(val) => setData(prev => ({ ...prev, weightUnitType: val }))}
+                                onUnitChange={(nextUnit) => {
+                                    setData(prev => ({
+                                        ...prev,
+                                        weight: convertWeightString(prev.weight, prev.weightUnitType, nextUnit),
+                                        weightUnitType: nextUnit,
+                                    }));
+                                }}
                                 error={errors.weight || errors.weightUnitType}
                             />
 
@@ -161,7 +171,7 @@ export default function ChangeDetailsScreen({ navigation }: Props) {
                             />
                         </View>
 
-                        <Button label="DONE" onPress={() => console.log("UPDATE DETAILS")} />
+                        <Button label="DONE" onPress={handleChangeDetailsPress} />
                     </View>
                 </View>
 

@@ -2,7 +2,7 @@ import { ApiError } from "./apiError";
 
 // CONVERTING AXIOS ERRORS TO API ERRORS
 // IT HELPS BY STOPPING THE REPEAT OF TRY AND CATCH
-export function normaliseApiError(err: unknown, fallback = "Request failed"): never {
+export function normaliseApiError(err: unknown, fallback = "Request failed"): ApiError {
     const anyErr = err as any;
     const status: number | undefined = anyErr?.response?.status;
     const json = anyErr?.response?.data;

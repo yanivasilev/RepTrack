@@ -35,7 +35,7 @@ export const TRAINING_FREQUENCY = [
 export type TrainingFrequency = typeof TRAINING_FREQUENCY[number]["value"];
 
 export const UNIT_TYPE = [
-    { labelHeight: "M", labelWeight: "KG", value: "METRIC" },
+    { labelHeight: "CM", labelWeight: "KG", value: "METRIC" },
     { labelHeight: "FT", labelWeight: "LB", value: "IMPERIAL" },
 ] as const;
 

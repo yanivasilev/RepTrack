@@ -1,29 +1,30 @@
 import { Animated, Dimensions, View } from 'react-native';
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { useEffect, useRef, useState } from 'react';
-import { EXPERIENCE_LEVEL, FITNESS_GOALS, TRAINING_FREQUENCY, TRAINING_STYLE, UNIT_TYPE, UnitType } from '../../libs/catalogs/register';
+import { EXPERIENCE_LEVEL, ExperienceLevel, FITNESS_GOALS, FitnessGoal, TRAINING_FREQUENCY, TRAINING_STYLE, TrainingFrequency, TrainingStyle, UNIT_TYPE, UnitType } from '../../libs/catalogs/register';
 import Input from '../Input';
 import DobInput from '../DobInput';
 import DualSelectionInput from '../DualSelectionInput';
 import UnitInput from '../UnitInput';
 import Selector from '../Selector';
-import { Errors } from './SubmitRegisterForm';
+import { convertWeightString } from '../../libs/helpers/convertWeight';
+import HeightPickerInput from '../height-picker-input/HeightPickerInput';
 
 export type RegisterFormData = {
     email: string;
     password: string;
     confirmPassword: string;
     username: string;
-    dob?: Date;
+    dob: Date | undefined;
     sex: "MALE" | "FEMALE" | null;
-    height: string;
-    heightUnitType: typeof UNIT_TYPE[number]["value"] | null;
+    height: number | null;
+    heightUnitType: UnitType | null;
     weight: string;
-    weightUnitType: typeof UNIT_TYPE[number]["value"] | null;
-    fitnessGoal: typeof FITNESS_GOALS[number]["value"] | null;
-    experienceLevel: typeof EXPERIENCE_LEVEL[number]["value"] | null;
-    trainingStyle: typeof TRAINING_STYLE[number]["value"] | null;
-    trainingFrequency: typeof TRAINING_FREQUENCY[number]["value"] | null;
+    weightUnitType: UnitType | null;
+    fitnessGoal: FitnessGoal | null;
+    experienceLevel: ExperienceLevel | null;
+    trainingStyle: TrainingStyle | null;
+    trainingFrequency: TrainingFrequency | null;
 };
 
 type RegisterFormProps = {
@@ -31,13 +32,14 @@ type RegisterFormProps = {
     step: number;
     data: RegisterFormData;
     setData: (fields: Partial<RegisterFormData>) => void;
-    errors: Errors;
+    errors: Partial<Record<keyof RegisterFormData, string>>;
 }
 
 const CONTENT_WIDTH = Dimensions.get("window").width - 80;
 
 export default function RegisterForm({ totalSteps, step, data, setData, errors }: RegisterFormProps) {
     const x = useRef(new Animated.Value(0)).current;
+
 
     useEffect(() => {
         Animated.timing(x, {
@@ -146,34 +148,10 @@ export default function RegisterForm({ totalSteps, step, data, setData, errors }
                         />
 
                         <UnitInput<UnitType>
-                            label="Height"
-                            text={data.height}
-                            onTextChange={(val) => {
-                                const cleaned = val
-                                    .replace(/,/g, ".")
-                                    .replace(/[^0-9.]/g, "")
-                                    .replace(/(\..*)\./g, "$1");
-
-                                setData({ height: cleaned });
-                            }}
-                            placeholder="Enter height"
-                            unit={data.heightUnitType}
-                            unit1="METRIC"
-                            unit2="IMPERIAL"
-                            unit1Label="M"
-                            unit2Label="FT"
-                            onUnitChange={(val) => setData({ heightUnitType: val })}
-                            error={errors.height || errors.heightUnitType}
-                        />
-
-                        <UnitInput<UnitType>
                             label="Weight"
                             text={data.weight}
                             onTextChange={(val) => {
-                                const cleaned = val
-                                    .replace(/,/g, ".")
-                                    .replace(/[^0-9.]/g, "")
-                                    .replace(/(\..*)\./g, "$1");
+                                const cleaned = val.replace(/[^0-9]/g, "");
 
                                 setData({ weight: cleaned });
                             }}
@@ -183,9 +161,24 @@ export default function RegisterForm({ totalSteps, step, data, setData, errors }
                             unit2="IMPERIAL"
                             unit1Label="KG"
                             unit2Label="LB"
-                            onUnitChange={(val) => setData({ weightUnitType: val })}
+                            onUnitChange={(nextUnit) =>
+                                setData({
+                                    weight: convertWeightString(data.weight, data.weightUnitType, nextUnit),
+                                    weightUnitType: nextUnit,
+                                })
+                            }
                             error={errors.weight || errors.weightUnitType}
                         />
+
+                        <HeightPickerInput
+                            label="Height"
+                            value={data.height}
+                            onChange={(cm) => setData({ height: cm })}
+                            unit={data.heightUnitType}
+                            onUnitChange={(u) => setData({ heightUnitType: u })}
+                            error={errors.height || errors.heightUnitType}
+                        />
+
                     </View>
                 </KeyboardAwareScrollView>
 

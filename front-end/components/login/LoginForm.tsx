@@ -1,18 +1,12 @@
 import { View } from 'react-native';
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import Input from '../Input';
-import { Errors } from './SubmitLoginForm';
 import { useState } from 'react';
-
-export type LoginFormData = {
-    email: string;
-    password: string;
-};
-
+import { LoginPayload } from '../../services/api/auth/loginApi';
 type LoginFormProps = {
-    data: LoginFormData;
-    setData: (fields: Partial<LoginFormData>) => void;
-    errors: Errors;
+    data: LoginPayload;
+    setData: (fields: Partial<LoginPayload>) => void;
+    errors: Partial<Record<keyof LoginPayload, string>>;
 }
 
 export default function LoginForm({ data, setData, errors }: LoginFormProps) {

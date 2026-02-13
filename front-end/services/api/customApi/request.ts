@@ -9,6 +9,6 @@ export async function request<T>(config: AxiosRequestConfig, fallbackMsg?: strin
         const res = await api.request<T>(config);
         return res.data;
     } catch (err) {
-        normaliseApiError(err, fallbackMsg ?? "Request failed.");
+        throw normaliseApiError(err, fallbackMsg ?? "Request failed.");
     }
 }

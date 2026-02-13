@@ -1,5 +1,6 @@
 import axios, { AxiosHeaders } from "axios";
 import { deleteAccessToken, getAccessToken } from "../../../libs/storage/token";
+import chalk from "chalk";
 
 export const api = axios.create({
     baseURL: "http://192.168.1.146:3000",
@@ -21,10 +22,10 @@ api.interceptors.request.use(async (config) => {
     if (!isFormData && !(config.headers as any)["Content-Type"]) (config.headers as any)["Content-Type"] = "application/json";
 
     // DEBUGGING LOGS
-    console.log("[API REQUEST]", config.method?.toUpperCase(), config.url);
-    console.log("[API AUTH HEADER]", (config.headers as any)?.Authorization ?? "NO AUTH HEADER");
-    console.log("[API CONTENT-TYPE]", (config.headers as any)?.["Content-Type"] ?? "NONE");
-    console.log("[API IS FORMDATA]", isFormData);
+    console.log(chalk.green("[API CUSTOM REQUEST]"), config.method?.toUpperCase(), config.url);
+    console.log(chalk.cyan("[API CUSTOM AUTH HEADER]"), (config.headers as any)?.Authorization ?? "NO AUTH HEADER");
+    console.log(chalk.yellow("[API CUSTOM CONTENT-TYPE]"), (config.headers as any)?.["Content-Type"] ?? "NONE");
+    console.log(chalk.magenta("[API CUSTOM IS FORMDATA]"), isFormData);
 
     return config;
 });

@@ -53,7 +53,11 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   User: 'User',
   ForgotPasswordOtp: 'ForgotPasswordOtp',
-  ForgotPasswordSession: 'ForgotPasswordSession'
+  ForgotPasswordSession: 'ForgotPasswordSession',
+  Thread: 'Thread',
+  Reply: 'Reply',
+  ThreadLike: 'ThreadLike',
+  ReplyLike: 'ReplyLike'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -115,6 +119,53 @@ export const ForgotPasswordSessionScalarFieldEnum = {
 } as const
 
 export type ForgotPasswordSessionScalarFieldEnum = (typeof ForgotPasswordSessionScalarFieldEnum)[keyof typeof ForgotPasswordSessionScalarFieldEnum]
+
+
+export const ThreadScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  body: 'body',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  authorId: 'authorId',
+  replyCount: 'replyCount',
+  likeCount: 'likeCount'
+} as const
+
+export type ThreadScalarFieldEnum = (typeof ThreadScalarFieldEnum)[keyof typeof ThreadScalarFieldEnum]
+
+
+export const ReplyScalarFieldEnum = {
+  id: 'id',
+  body: 'body',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  authorId: 'authorId',
+  threadId: 'threadId',
+  likeCount: 'likeCount'
+} as const
+
+export type ReplyScalarFieldEnum = (typeof ReplyScalarFieldEnum)[keyof typeof ReplyScalarFieldEnum]
+
+
+export const ThreadLikeScalarFieldEnum = {
+  id: 'id',
+  createdAt: 'createdAt',
+  threadId: 'threadId',
+  userId: 'userId'
+} as const
+
+export type ThreadLikeScalarFieldEnum = (typeof ThreadLikeScalarFieldEnum)[keyof typeof ThreadLikeScalarFieldEnum]
+
+
+export const ReplyLikeScalarFieldEnum = {
+  id: 'id',
+  createdAt: 'createdAt',
+  replyId: 'replyId',
+  userId: 'userId'
+} as const
+
+export type ReplyLikeScalarFieldEnum = (typeof ReplyLikeScalarFieldEnum)[keyof typeof ReplyLikeScalarFieldEnum]
 
 
 export const SortOrder = {

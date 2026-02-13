@@ -63,6 +63,7 @@ export default function DobInput({ label, value, onChange, error }: DobInputProp
                     </Text>
                 )}
 
+                {/* DONE BUTTON (iOS only) */}
                 {show && Platform.OS === "ios" && (
                     <View style={styles.doneContainer}>
                         <Pressable
