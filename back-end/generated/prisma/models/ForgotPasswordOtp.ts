@@ -27,17 +27,19 @@ export type AggregateForgotPasswordOtp = {
 }
 
 export type ForgotPasswordOtpAvgAggregateOutputType = {
+  id: number | null
   userId: number | null
   attempts: number | null
 }
 
 export type ForgotPasswordOtpSumAggregateOutputType = {
+  id: number | null
   userId: number | null
   attempts: number | null
 }
 
 export type ForgotPasswordOtpMinAggregateOutputType = {
-  id: string | null
+  id: number | null
   userId: number | null
   otpHash: string | null
   expiresAt: Date | null
@@ -47,7 +49,7 @@ export type ForgotPasswordOtpMinAggregateOutputType = {
 }
 
 export type ForgotPasswordOtpMaxAggregateOutputType = {
-  id: string | null
+  id: number | null
   userId: number | null
   otpHash: string | null
   expiresAt: Date | null
@@ -69,11 +71,13 @@ export type ForgotPasswordOtpCountAggregateOutputType = {
 
 
 export type ForgotPasswordOtpAvgAggregateInputType = {
+  id?: true
   userId?: true
   attempts?: true
 }
 
 export type ForgotPasswordOtpSumAggregateInputType = {
+  id?: true
   userId?: true
   attempts?: true
 }
@@ -196,7 +200,7 @@ export type ForgotPasswordOtpGroupByArgs<ExtArgs extends runtime.Types.Extension
 }
 
 export type ForgotPasswordOtpGroupByOutputType = {
-  id: string
+  id: number
   userId: number
   otpHash: string
   expiresAt: Date
@@ -229,7 +233,7 @@ export type ForgotPasswordOtpWhereInput = {
   AND?: Prisma.ForgotPasswordOtpWhereInput | Prisma.ForgotPasswordOtpWhereInput[]
   OR?: Prisma.ForgotPasswordOtpWhereInput[]
   NOT?: Prisma.ForgotPasswordOtpWhereInput | Prisma.ForgotPasswordOtpWhereInput[]
-  id?: Prisma.StringFilter<"ForgotPasswordOtp"> | string
+  id?: Prisma.IntFilter<"ForgotPasswordOtp"> | number
   userId?: Prisma.IntFilter<"ForgotPasswordOtp"> | number
   otpHash?: Prisma.StringFilter<"ForgotPasswordOtp"> | string
   expiresAt?: Prisma.DateTimeFilter<"ForgotPasswordOtp"> | Date | string
@@ -251,7 +255,7 @@ export type ForgotPasswordOtpOrderByWithRelationInput = {
 }
 
 export type ForgotPasswordOtpWhereUniqueInput = Prisma.AtLeast<{
-  id?: string
+  id?: number
   userId?: number
   AND?: Prisma.ForgotPasswordOtpWhereInput | Prisma.ForgotPasswordOtpWhereInput[]
   OR?: Prisma.ForgotPasswordOtpWhereInput[]
@@ -283,7 +287,7 @@ export type ForgotPasswordOtpScalarWhereWithAggregatesInput = {
   AND?: Prisma.ForgotPasswordOtpScalarWhereWithAggregatesInput | Prisma.ForgotPasswordOtpScalarWhereWithAggregatesInput[]
   OR?: Prisma.ForgotPasswordOtpScalarWhereWithAggregatesInput[]
   NOT?: Prisma.ForgotPasswordOtpScalarWhereWithAggregatesInput | Prisma.ForgotPasswordOtpScalarWhereWithAggregatesInput[]
-  id?: Prisma.StringWithAggregatesFilter<"ForgotPasswordOtp"> | string
+  id?: Prisma.IntWithAggregatesFilter<"ForgotPasswordOtp"> | number
   userId?: Prisma.IntWithAggregatesFilter<"ForgotPasswordOtp"> | number
   otpHash?: Prisma.StringWithAggregatesFilter<"ForgotPasswordOtp"> | string
   expiresAt?: Prisma.DateTimeWithAggregatesFilter<"ForgotPasswordOtp"> | Date | string
@@ -293,7 +297,6 @@ export type ForgotPasswordOtpScalarWhereWithAggregatesInput = {
 }
 
 export type ForgotPasswordOtpCreateInput = {
-  id?: string
   otpHash: string
   expiresAt: Date | string
   usedAt?: Date | string | null
@@ -303,7 +306,7 @@ export type ForgotPasswordOtpCreateInput = {
 }
 
 export type ForgotPasswordOtpUncheckedCreateInput = {
-  id?: string
+  id?: number
   userId: number
   otpHash: string
   expiresAt: Date | string
@@ -313,7 +316,6 @@ export type ForgotPasswordOtpUncheckedCreateInput = {
 }
 
 export type ForgotPasswordOtpUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   otpHash?: Prisma.StringFieldUpdateOperationsInput | string
   expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   usedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -323,7 +325,7 @@ export type ForgotPasswordOtpUpdateInput = {
 }
 
 export type ForgotPasswordOtpUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   otpHash?: Prisma.StringFieldUpdateOperationsInput | string
   expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -333,7 +335,7 @@ export type ForgotPasswordOtpUncheckedUpdateInput = {
 }
 
 export type ForgotPasswordOtpCreateManyInput = {
-  id?: string
+  id?: number
   userId: number
   otpHash: string
   expiresAt: Date | string
@@ -343,7 +345,6 @@ export type ForgotPasswordOtpCreateManyInput = {
 }
 
 export type ForgotPasswordOtpUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   otpHash?: Prisma.StringFieldUpdateOperationsInput | string
   expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   usedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -352,7 +353,7 @@ export type ForgotPasswordOtpUpdateManyMutationInput = {
 }
 
 export type ForgotPasswordOtpUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   otpHash?: Prisma.StringFieldUpdateOperationsInput | string
   expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -382,6 +383,7 @@ export type ForgotPasswordOtpCountOrderByAggregateInput = {
 }
 
 export type ForgotPasswordOtpAvgOrderByAggregateInput = {
+  id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   attempts?: Prisma.SortOrder
 }
@@ -407,6 +409,7 @@ export type ForgotPasswordOtpMinOrderByAggregateInput = {
 }
 
 export type ForgotPasswordOtpSumOrderByAggregateInput = {
+  id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   attempts?: Prisma.SortOrder
 }
@@ -454,7 +457,6 @@ export type ForgotPasswordOtpUncheckedUpdateManyWithoutUserNestedInput = {
 }
 
 export type ForgotPasswordOtpCreateWithoutUserInput = {
-  id?: string
   otpHash: string
   expiresAt: Date | string
   usedAt?: Date | string | null
@@ -463,7 +465,7 @@ export type ForgotPasswordOtpCreateWithoutUserInput = {
 }
 
 export type ForgotPasswordOtpUncheckedCreateWithoutUserInput = {
-  id?: string
+  id?: number
   otpHash: string
   expiresAt: Date | string
   usedAt?: Date | string | null
@@ -500,7 +502,7 @@ export type ForgotPasswordOtpScalarWhereInput = {
   AND?: Prisma.ForgotPasswordOtpScalarWhereInput | Prisma.ForgotPasswordOtpScalarWhereInput[]
   OR?: Prisma.ForgotPasswordOtpScalarWhereInput[]
   NOT?: Prisma.ForgotPasswordOtpScalarWhereInput | Prisma.ForgotPasswordOtpScalarWhereInput[]
-  id?: Prisma.StringFilter<"ForgotPasswordOtp"> | string
+  id?: Prisma.IntFilter<"ForgotPasswordOtp"> | number
   userId?: Prisma.IntFilter<"ForgotPasswordOtp"> | number
   otpHash?: Prisma.StringFilter<"ForgotPasswordOtp"> | string
   expiresAt?: Prisma.DateTimeFilter<"ForgotPasswordOtp"> | Date | string
@@ -510,7 +512,7 @@ export type ForgotPasswordOtpScalarWhereInput = {
 }
 
 export type ForgotPasswordOtpCreateManyUserInput = {
-  id?: string
+  id?: number
   otpHash: string
   expiresAt: Date | string
   usedAt?: Date | string | null
@@ -519,7 +521,6 @@ export type ForgotPasswordOtpCreateManyUserInput = {
 }
 
 export type ForgotPasswordOtpUpdateWithoutUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   otpHash?: Prisma.StringFieldUpdateOperationsInput | string
   expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   usedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -528,7 +529,7 @@ export type ForgotPasswordOtpUpdateWithoutUserInput = {
 }
 
 export type ForgotPasswordOtpUncheckedUpdateWithoutUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   otpHash?: Prisma.StringFieldUpdateOperationsInput | string
   expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   usedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -537,7 +538,7 @@ export type ForgotPasswordOtpUncheckedUpdateWithoutUserInput = {
 }
 
 export type ForgotPasswordOtpUncheckedUpdateManyWithoutUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   otpHash?: Prisma.StringFieldUpdateOperationsInput | string
   expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   usedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -607,7 +608,7 @@ export type $ForgotPasswordOtpPayload<ExtArgs extends runtime.Types.Extensions.I
     user: Prisma.$UserPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    id: string
+    id: number
     userId: number
     otpHash: string
     expiresAt: Date
@@ -1038,7 +1039,7 @@ export interface Prisma__ForgotPasswordOtpClient<T, Null = never, ExtArgs extend
  * Fields of the ForgotPasswordOtp model
  */
 export interface ForgotPasswordOtpFieldRefs {
-  readonly id: Prisma.FieldRef<"ForgotPasswordOtp", 'String'>
+  readonly id: Prisma.FieldRef<"ForgotPasswordOtp", 'Int'>
   readonly userId: Prisma.FieldRef<"ForgotPasswordOtp", 'Int'>
   readonly otpHash: Prisma.FieldRef<"ForgotPasswordOtp", 'String'>
   readonly expiresAt: Prisma.FieldRef<"ForgotPasswordOtp", 'DateTime'>

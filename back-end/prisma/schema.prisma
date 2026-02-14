@@ -72,9 +72,9 @@ model User {
 }
 
 model ForgotPasswordOtp {
-  id     String @id @default(cuid())
-  userId Int    @unique
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id        Int       @id @default(autoincrement())
+  userId    Int       @unique
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   otpHash   String
   expiresAt DateTime
@@ -87,7 +87,7 @@ model ForgotPasswordOtp {
 }
 
 model ForgotPasswordSession {
-  id        String    @id @default(cuid())
+  id        Int       @id @default(autoincrement())
   userId    Int       @unique
   user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   tokenHash String    @unique
@@ -100,9 +100,9 @@ model ForgotPasswordSession {
 }
 
 model Thread {
-  id         String       @id @default(cuid())
+  id         Int          @id @default(autoincrement())
   title      String
-  body       String?
+  body       String
   createdAt  DateTime     @default(now())
   updatedAt  DateTime     @updatedAt
   authorId   Int
@@ -117,13 +117,13 @@ model Thread {
 }
 
 model Reply {
-  id        String      @id @default(cuid())
+  id        Int         @id @default(autoincrement())
   body      String
   createdAt DateTime    @default(now())
   updatedAt DateTime    @updatedAt
   authorId  Int
   author    User        @relation(fields: [authorId], references: [id], onDelete: Cascade)
-  threadId  String
+  threadId  Int
   thread    Thread      @relation(fields: [threadId], references: [id], onDelete: Cascade)
   likes     ReplyLike[]
   likeCount Int         @default(0)
@@ -134,9 +134,9 @@ model Reply {
 }
 
 model ThreadLike {
-  id        String   @id @default(cuid())
+  id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
-  threadId  String
+  threadId  Int
   thread    Thread   @relation(fields: [threadId], references: [id], onDelete: Cascade)
   userId    Int
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -146,9 +146,9 @@ model ThreadLike {
 }
 
 model ReplyLike {
-  id        String   @id @default(cuid())
+  id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
-  replyId   String
+  replyId   Int
   reply     Reply    @relation(fields: [replyId], references: [id], onDelete: Cascade)
   userId    Int
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)

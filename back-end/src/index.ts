@@ -22,6 +22,13 @@ import { forgotPasswordResetController } from "./controllers/auth/forgot-passwor
 import { forgotPasswordVerifyOtpController } from "./controllers/auth/forgot-password/forgot-password-verify-otp";
 import { uploadVideo } from "./middleware/uploadVideo";
 import { analyzePushupVideo } from "./controllers/poseController";
+import { createThreadController } from "./controllers/threads/create-thread";
+import { deleteThreadController } from "./controllers/threads/delete-thread";
+import { editThreadController } from "./controllers/threads/edit-thread";
+import { getAllThreadsController } from "./controllers/threads/get-all-threads";
+import { getThreadController } from "./controllers/threads/get-thread";
+import { likeThreadController } from "./controllers/threads/like-thread";
+import { unlikeThreadController } from "./controllers/threads/unlike-thread";
 
 dotenv.config();
 
@@ -36,7 +43,9 @@ app.get("/", (_req, res) => res.send("API running: "));
 // OTHER ROUTES
 app.get("/auth/check", requireLoggedIn, (_req, res) => { res.status(200).json({ ok: true }); });
 
-// LOGGED OUT ROUTES
+///////////////////////
+// LOGGED OUT ROUTES //
+///////////////////////
 app.post("/auth/login", requireLoggedOut, loginController);
 app.post("/auth/register", requireLoggedOut, registerController);
 
@@ -44,12 +53,23 @@ app.post("/auth/forgot-password", requireLoggedOut, ipLimiter("If an account exi
 app.post("/auth/forgot-password/verify", requireLoggedOut, forgotPasswordVerifyOtpController);
 app.post("/auth/forgot-password/reset", requireLoggedOut, forgotPasswordResetController);
 
-// LOGGED IN ROUTES
+//////////////////////
+// LOGGED IN ROUTES //
+//////////////////////
 app.put("/settings/change-details", requireLoggedIn, changeDetailsController);
 app.put("/settings/change-password", requireLoggedIn, changePasswordController);
 app.put("/settings/change-username", requireLoggedIn, changeUsernameController);
 app.put("/settings/change-avatar", requireLoggedIn, changeAvatarMiddleware.single("avatar"), changeAvatarController);
 app.get("/me", requireLoggedIn, meController);
+
+// THREADS
+app.post("/threads", requireLoggedIn, createThreadController);
+app.delete("/threads/:threadId", requireLoggedIn, deleteThreadController);
+app.patch("/threads/edit/:threadId", requireLoggedIn, editThreadController);
+app.get("/threads", requireLoggedIn, getAllThreadsController);
+app.get("/threads/:threadId", requireLoggedIn, getThreadController);
+app.post("/threads/:threadId/like", requireLoggedIn, likeThreadController);
+app.delete("/threads/:threadId/like", requireLoggedIn, unlikeThreadController);
 
 // TESTING POSE DETECTION
 app.post("/pushup", uploadVideo.single("video"), analyzePushupVideo);

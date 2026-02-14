@@ -1,13 +1,13 @@
 import type { Request, Response } from "express";
-import { likeThreadService } from "../../services/threads/like-thread";
+import { unlikeThreadService } from "../../services/threads/unlike-thread";
 
-export async function likeThreadController(req: Request, res: Response) {
+export async function unlikeThreadController(req: Request, res: Response) {
     const user = (req as any).user;
     const threadId = Number(req.params.threadId);
 
     if (!Number.isInteger(threadId) || threadId <= 0) return res.status(400).json({ message: "Invalid thread id." });
 
-    const result = await likeThreadService(user.id, threadId);
+    const result = await unlikeThreadService(user.id, threadId);
 
     if (result.status === "not_found") return res.status(404).json({ message: "Thread not found." });
 

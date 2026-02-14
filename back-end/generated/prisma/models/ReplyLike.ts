@@ -27,24 +27,28 @@ export type AggregateReplyLike = {
 }
 
 export type ReplyLikeAvgAggregateOutputType = {
+  id: number | null
+  replyId: number | null
   userId: number | null
 }
 
 export type ReplyLikeSumAggregateOutputType = {
+  id: number | null
+  replyId: number | null
   userId: number | null
 }
 
 export type ReplyLikeMinAggregateOutputType = {
-  id: string | null
+  id: number | null
   createdAt: Date | null
-  replyId: string | null
+  replyId: number | null
   userId: number | null
 }
 
 export type ReplyLikeMaxAggregateOutputType = {
-  id: string | null
+  id: number | null
   createdAt: Date | null
-  replyId: string | null
+  replyId: number | null
   userId: number | null
 }
 
@@ -58,10 +62,14 @@ export type ReplyLikeCountAggregateOutputType = {
 
 
 export type ReplyLikeAvgAggregateInputType = {
+  id?: true
+  replyId?: true
   userId?: true
 }
 
 export type ReplyLikeSumAggregateInputType = {
+  id?: true
+  replyId?: true
   userId?: true
 }
 
@@ -174,9 +182,9 @@ export type ReplyLikeGroupByArgs<ExtArgs extends runtime.Types.Extensions.Intern
 }
 
 export type ReplyLikeGroupByOutputType = {
-  id: string
+  id: number
   createdAt: Date
-  replyId: string
+  replyId: number
   userId: number
   _count: ReplyLikeCountAggregateOutputType | null
   _avg: ReplyLikeAvgAggregateOutputType | null
@@ -204,9 +212,9 @@ export type ReplyLikeWhereInput = {
   AND?: Prisma.ReplyLikeWhereInput | Prisma.ReplyLikeWhereInput[]
   OR?: Prisma.ReplyLikeWhereInput[]
   NOT?: Prisma.ReplyLikeWhereInput | Prisma.ReplyLikeWhereInput[]
-  id?: Prisma.StringFilter<"ReplyLike"> | string
+  id?: Prisma.IntFilter<"ReplyLike"> | number
   createdAt?: Prisma.DateTimeFilter<"ReplyLike"> | Date | string
-  replyId?: Prisma.StringFilter<"ReplyLike"> | string
+  replyId?: Prisma.IntFilter<"ReplyLike"> | number
   userId?: Prisma.IntFilter<"ReplyLike"> | number
   reply?: Prisma.XOR<Prisma.ReplyScalarRelationFilter, Prisma.ReplyWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -222,13 +230,13 @@ export type ReplyLikeOrderByWithRelationInput = {
 }
 
 export type ReplyLikeWhereUniqueInput = Prisma.AtLeast<{
-  id?: string
+  id?: number
   replyId_userId?: Prisma.ReplyLikeReplyIdUserIdCompoundUniqueInput
   AND?: Prisma.ReplyLikeWhereInput | Prisma.ReplyLikeWhereInput[]
   OR?: Prisma.ReplyLikeWhereInput[]
   NOT?: Prisma.ReplyLikeWhereInput | Prisma.ReplyLikeWhereInput[]
   createdAt?: Prisma.DateTimeFilter<"ReplyLike"> | Date | string
-  replyId?: Prisma.StringFilter<"ReplyLike"> | string
+  replyId?: Prisma.IntFilter<"ReplyLike"> | number
   userId?: Prisma.IntFilter<"ReplyLike"> | number
   reply?: Prisma.XOR<Prisma.ReplyScalarRelationFilter, Prisma.ReplyWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -250,56 +258,53 @@ export type ReplyLikeScalarWhereWithAggregatesInput = {
   AND?: Prisma.ReplyLikeScalarWhereWithAggregatesInput | Prisma.ReplyLikeScalarWhereWithAggregatesInput[]
   OR?: Prisma.ReplyLikeScalarWhereWithAggregatesInput[]
   NOT?: Prisma.ReplyLikeScalarWhereWithAggregatesInput | Prisma.ReplyLikeScalarWhereWithAggregatesInput[]
-  id?: Prisma.StringWithAggregatesFilter<"ReplyLike"> | string
+  id?: Prisma.IntWithAggregatesFilter<"ReplyLike"> | number
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"ReplyLike"> | Date | string
-  replyId?: Prisma.StringWithAggregatesFilter<"ReplyLike"> | string
+  replyId?: Prisma.IntWithAggregatesFilter<"ReplyLike"> | number
   userId?: Prisma.IntWithAggregatesFilter<"ReplyLike"> | number
 }
 
 export type ReplyLikeCreateInput = {
-  id?: string
   createdAt?: Date | string
   reply: Prisma.ReplyCreateNestedOneWithoutLikesInput
   user: Prisma.UserCreateNestedOneWithoutReplyLikesInput
 }
 
 export type ReplyLikeUncheckedCreateInput = {
-  id?: string
+  id?: number
   createdAt?: Date | string
-  replyId: string
+  replyId: number
   userId: number
 }
 
 export type ReplyLikeUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reply?: Prisma.ReplyUpdateOneRequiredWithoutLikesNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutReplyLikesNestedInput
 }
 
 export type ReplyLikeUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  replyId?: Prisma.StringFieldUpdateOperationsInput | string
+  replyId?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type ReplyLikeCreateManyInput = {
-  id?: string
+  id?: number
   createdAt?: Date | string
-  replyId: string
+  replyId: number
   userId: number
 }
 
 export type ReplyLikeUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ReplyLikeUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  replyId?: Prisma.StringFieldUpdateOperationsInput | string
+  replyId?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
@@ -314,7 +319,7 @@ export type ReplyLikeOrderByRelationAggregateInput = {
 }
 
 export type ReplyLikeReplyIdUserIdCompoundUniqueInput = {
-  replyId: string
+  replyId: number
   userId: number
 }
 
@@ -326,6 +331,8 @@ export type ReplyLikeCountOrderByAggregateInput = {
 }
 
 export type ReplyLikeAvgOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  replyId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
 }
 
@@ -344,6 +351,8 @@ export type ReplyLikeMinOrderByAggregateInput = {
 }
 
 export type ReplyLikeSumOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  replyId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
 }
 
@@ -432,15 +441,14 @@ export type ReplyLikeUncheckedUpdateManyWithoutReplyNestedInput = {
 }
 
 export type ReplyLikeCreateWithoutUserInput = {
-  id?: string
   createdAt?: Date | string
   reply: Prisma.ReplyCreateNestedOneWithoutLikesInput
 }
 
 export type ReplyLikeUncheckedCreateWithoutUserInput = {
-  id?: string
+  id?: number
   createdAt?: Date | string
-  replyId: string
+  replyId: number
 }
 
 export type ReplyLikeCreateOrConnectWithoutUserInput = {
@@ -472,20 +480,19 @@ export type ReplyLikeScalarWhereInput = {
   AND?: Prisma.ReplyLikeScalarWhereInput | Prisma.ReplyLikeScalarWhereInput[]
   OR?: Prisma.ReplyLikeScalarWhereInput[]
   NOT?: Prisma.ReplyLikeScalarWhereInput | Prisma.ReplyLikeScalarWhereInput[]
-  id?: Prisma.StringFilter<"ReplyLike"> | string
+  id?: Prisma.IntFilter<"ReplyLike"> | number
   createdAt?: Prisma.DateTimeFilter<"ReplyLike"> | Date | string
-  replyId?: Prisma.StringFilter<"ReplyLike"> | string
+  replyId?: Prisma.IntFilter<"ReplyLike"> | number
   userId?: Prisma.IntFilter<"ReplyLike"> | number
 }
 
 export type ReplyLikeCreateWithoutReplyInput = {
-  id?: string
   createdAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutReplyLikesInput
 }
 
 export type ReplyLikeUncheckedCreateWithoutReplyInput = {
-  id?: string
+  id?: number
   createdAt?: Date | string
   userId: number
 }
@@ -516,49 +523,47 @@ export type ReplyLikeUpdateManyWithWhereWithoutReplyInput = {
 }
 
 export type ReplyLikeCreateManyUserInput = {
-  id?: string
+  id?: number
   createdAt?: Date | string
-  replyId: string
+  replyId: number
 }
 
 export type ReplyLikeUpdateWithoutUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reply?: Prisma.ReplyUpdateOneRequiredWithoutLikesNestedInput
 }
 
 export type ReplyLikeUncheckedUpdateWithoutUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  replyId?: Prisma.StringFieldUpdateOperationsInput | string
+  replyId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type ReplyLikeUncheckedUpdateManyWithoutUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  replyId?: Prisma.StringFieldUpdateOperationsInput | string
+  replyId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type ReplyLikeCreateManyReplyInput = {
-  id?: string
+  id?: number
   createdAt?: Date | string
   userId: number
 }
 
 export type ReplyLikeUpdateWithoutReplyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutReplyLikesNestedInput
 }
 
 export type ReplyLikeUncheckedUpdateWithoutReplyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type ReplyLikeUncheckedUpdateManyWithoutReplyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userId?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -620,9 +625,9 @@ export type $ReplyLikePayload<ExtArgs extends runtime.Types.Extensions.InternalA
     user: Prisma.$UserPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    id: string
+    id: number
     createdAt: Date
-    replyId: string
+    replyId: number
     userId: number
   }, ExtArgs["result"]["replyLike"]>
   composites: {}
@@ -1049,9 +1054,9 @@ export interface Prisma__ReplyLikeClient<T, Null = never, ExtArgs extends runtim
  * Fields of the ReplyLike model
  */
 export interface ReplyLikeFieldRefs {
-  readonly id: Prisma.FieldRef<"ReplyLike", 'String'>
+  readonly id: Prisma.FieldRef<"ReplyLike", 'Int'>
   readonly createdAt: Prisma.FieldRef<"ReplyLike", 'DateTime'>
-  readonly replyId: Prisma.FieldRef<"ReplyLike", 'String'>
+  readonly replyId: Prisma.FieldRef<"ReplyLike", 'Int'>
   readonly userId: Prisma.FieldRef<"ReplyLike", 'Int'>
 }
     

@@ -1,6 +1,6 @@
 import { prisma } from "../../db";
 
-export async function likeThreadService(userId: number, threadId: number) {
+export async function unlikeThreadService(userId: number, threadId: number) {
     const thread = await prisma.thread.findUnique({
         where: { id: threadId },
         select: { id: true }
@@ -10,30 +10,30 @@ export async function likeThreadService(userId: number, threadId: number) {
 
     const result = await prisma.$transaction(async (tx) => {
 
-        // CHECK IF ITS ALREADY LIKED
+        // CHECK IF ITS ALREADY UNLIKED
         const existing = await tx.threadLike.findUnique({
             where: { threadId_userId: { threadId, userId } },
             select: { id: true }
         });
 
-        if (existing) {
+        if (!existing) {
             const t = await tx.thread.findUnique({
                 where: { id: threadId },
                 select: { likeCount: true }
             });
 
-            return { status: "ok" as const, liked: true, likeCount: t?.likeCount ?? 0 };
+            return { status: "ok" as const, liked: false, likeCount: t?.likeCount ?? 0 };
         }
 
-        await tx.threadLike.create({ data: { threadId, userId } });
+        await tx.threadLike.delete({ where: { threadId_userId: { threadId, userId } }, });
 
         const updated = await tx.thread.update({
             where: { id: threadId },
-            data: { likeCount: { increment: 1 } },
+            data: { likeCount: { decrement: 1 } },
             select: { likeCount: true }
         });
 
-        return { status: "ok" as const, liked: true, likeCount: updated.likeCount };
+        return { status: "ok" as const, liked: false, likeCount: updated.likeCount };
     });
 
     return result;

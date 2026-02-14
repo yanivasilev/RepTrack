@@ -27,32 +27,36 @@ export type AggregateReply = {
 }
 
 export type ReplyAvgAggregateOutputType = {
+  id: number | null
   authorId: number | null
+  threadId: number | null
   likeCount: number | null
 }
 
 export type ReplySumAggregateOutputType = {
+  id: number | null
   authorId: number | null
+  threadId: number | null
   likeCount: number | null
 }
 
 export type ReplyMinAggregateOutputType = {
-  id: string | null
+  id: number | null
   body: string | null
   createdAt: Date | null
   updatedAt: Date | null
   authorId: number | null
-  threadId: string | null
+  threadId: number | null
   likeCount: number | null
 }
 
 export type ReplyMaxAggregateOutputType = {
-  id: string | null
+  id: number | null
   body: string | null
   createdAt: Date | null
   updatedAt: Date | null
   authorId: number | null
-  threadId: string | null
+  threadId: number | null
   likeCount: number | null
 }
 
@@ -69,12 +73,16 @@ export type ReplyCountAggregateOutputType = {
 
 
 export type ReplyAvgAggregateInputType = {
+  id?: true
   authorId?: true
+  threadId?: true
   likeCount?: true
 }
 
 export type ReplySumAggregateInputType = {
+  id?: true
   authorId?: true
+  threadId?: true
   likeCount?: true
 }
 
@@ -196,12 +204,12 @@ export type ReplyGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
 }
 
 export type ReplyGroupByOutputType = {
-  id: string
+  id: number
   body: string
   createdAt: Date
   updatedAt: Date
   authorId: number
-  threadId: string
+  threadId: number
   likeCount: number
   _count: ReplyCountAggregateOutputType | null
   _avg: ReplyAvgAggregateOutputType | null
@@ -229,12 +237,12 @@ export type ReplyWhereInput = {
   AND?: Prisma.ReplyWhereInput | Prisma.ReplyWhereInput[]
   OR?: Prisma.ReplyWhereInput[]
   NOT?: Prisma.ReplyWhereInput | Prisma.ReplyWhereInput[]
-  id?: Prisma.StringFilter<"Reply"> | string
+  id?: Prisma.IntFilter<"Reply"> | number
   body?: Prisma.StringFilter<"Reply"> | string
   createdAt?: Prisma.DateTimeFilter<"Reply"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Reply"> | Date | string
   authorId?: Prisma.IntFilter<"Reply"> | number
-  threadId?: Prisma.StringFilter<"Reply"> | string
+  threadId?: Prisma.IntFilter<"Reply"> | number
   likeCount?: Prisma.IntFilter<"Reply"> | number
   author?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   thread?: Prisma.XOR<Prisma.ThreadScalarRelationFilter, Prisma.ThreadWhereInput>
@@ -255,7 +263,7 @@ export type ReplyOrderByWithRelationInput = {
 }
 
 export type ReplyWhereUniqueInput = Prisma.AtLeast<{
-  id?: string
+  id?: number
   AND?: Prisma.ReplyWhereInput | Prisma.ReplyWhereInput[]
   OR?: Prisma.ReplyWhereInput[]
   NOT?: Prisma.ReplyWhereInput | Prisma.ReplyWhereInput[]
@@ -263,7 +271,7 @@ export type ReplyWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"Reply"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Reply"> | Date | string
   authorId?: Prisma.IntFilter<"Reply"> | number
-  threadId?: Prisma.StringFilter<"Reply"> | string
+  threadId?: Prisma.IntFilter<"Reply"> | number
   likeCount?: Prisma.IntFilter<"Reply"> | number
   author?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   thread?: Prisma.XOR<Prisma.ThreadScalarRelationFilter, Prisma.ThreadWhereInput>
@@ -289,17 +297,16 @@ export type ReplyScalarWhereWithAggregatesInput = {
   AND?: Prisma.ReplyScalarWhereWithAggregatesInput | Prisma.ReplyScalarWhereWithAggregatesInput[]
   OR?: Prisma.ReplyScalarWhereWithAggregatesInput[]
   NOT?: Prisma.ReplyScalarWhereWithAggregatesInput | Prisma.ReplyScalarWhereWithAggregatesInput[]
-  id?: Prisma.StringWithAggregatesFilter<"Reply"> | string
+  id?: Prisma.IntWithAggregatesFilter<"Reply"> | number
   body?: Prisma.StringWithAggregatesFilter<"Reply"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Reply"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Reply"> | Date | string
   authorId?: Prisma.IntWithAggregatesFilter<"Reply"> | number
-  threadId?: Prisma.StringWithAggregatesFilter<"Reply"> | string
+  threadId?: Prisma.IntWithAggregatesFilter<"Reply"> | number
   likeCount?: Prisma.IntWithAggregatesFilter<"Reply"> | number
 }
 
 export type ReplyCreateInput = {
-  id?: string
   body: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -310,18 +317,17 @@ export type ReplyCreateInput = {
 }
 
 export type ReplyUncheckedCreateInput = {
-  id?: string
+  id?: number
   body: string
   createdAt?: Date | string
   updatedAt?: Date | string
   authorId: number
-  threadId: string
+  threadId: number
   likeCount?: number
   likes?: Prisma.ReplyLikeUncheckedCreateNestedManyWithoutReplyInput
 }
 
 export type ReplyUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   body?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -332,28 +338,27 @@ export type ReplyUpdateInput = {
 }
 
 export type ReplyUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   body?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   authorId?: Prisma.IntFieldUpdateOperationsInput | number
-  threadId?: Prisma.StringFieldUpdateOperationsInput | string
+  threadId?: Prisma.IntFieldUpdateOperationsInput | number
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   likes?: Prisma.ReplyLikeUncheckedUpdateManyWithoutReplyNestedInput
 }
 
 export type ReplyCreateManyInput = {
-  id?: string
+  id?: number
   body: string
   createdAt?: Date | string
   updatedAt?: Date | string
   authorId: number
-  threadId: string
+  threadId: number
   likeCount?: number
 }
 
 export type ReplyUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   body?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -361,12 +366,12 @@ export type ReplyUpdateManyMutationInput = {
 }
 
 export type ReplyUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   body?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   authorId?: Prisma.IntFieldUpdateOperationsInput | number
-  threadId?: Prisma.StringFieldUpdateOperationsInput | string
+  threadId?: Prisma.IntFieldUpdateOperationsInput | number
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
@@ -391,7 +396,9 @@ export type ReplyCountOrderByAggregateInput = {
 }
 
 export type ReplyAvgOrderByAggregateInput = {
+  id?: Prisma.SortOrder
   authorId?: Prisma.SortOrder
+  threadId?: Prisma.SortOrder
   likeCount?: Prisma.SortOrder
 }
 
@@ -416,7 +423,9 @@ export type ReplyMinOrderByAggregateInput = {
 }
 
 export type ReplySumOrderByAggregateInput = {
+  id?: Prisma.SortOrder
   authorId?: Prisma.SortOrder
+  threadId?: Prisma.SortOrder
   likeCount?: Prisma.SortOrder
 }
 
@@ -524,7 +533,6 @@ export type ReplyUpdateOneRequiredWithoutLikesNestedInput = {
 }
 
 export type ReplyCreateWithoutAuthorInput = {
-  id?: string
   body: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -534,11 +542,11 @@ export type ReplyCreateWithoutAuthorInput = {
 }
 
 export type ReplyUncheckedCreateWithoutAuthorInput = {
-  id?: string
+  id?: number
   body: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  threadId: string
+  threadId: number
   likeCount?: number
   likes?: Prisma.ReplyLikeUncheckedCreateNestedManyWithoutReplyInput
 }
@@ -572,17 +580,16 @@ export type ReplyScalarWhereInput = {
   AND?: Prisma.ReplyScalarWhereInput | Prisma.ReplyScalarWhereInput[]
   OR?: Prisma.ReplyScalarWhereInput[]
   NOT?: Prisma.ReplyScalarWhereInput | Prisma.ReplyScalarWhereInput[]
-  id?: Prisma.StringFilter<"Reply"> | string
+  id?: Prisma.IntFilter<"Reply"> | number
   body?: Prisma.StringFilter<"Reply"> | string
   createdAt?: Prisma.DateTimeFilter<"Reply"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Reply"> | Date | string
   authorId?: Prisma.IntFilter<"Reply"> | number
-  threadId?: Prisma.StringFilter<"Reply"> | string
+  threadId?: Prisma.IntFilter<"Reply"> | number
   likeCount?: Prisma.IntFilter<"Reply"> | number
 }
 
 export type ReplyCreateWithoutThreadInput = {
-  id?: string
   body: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -592,7 +599,7 @@ export type ReplyCreateWithoutThreadInput = {
 }
 
 export type ReplyUncheckedCreateWithoutThreadInput = {
-  id?: string
+  id?: number
   body: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -627,7 +634,6 @@ export type ReplyUpdateManyWithWhereWithoutThreadInput = {
 }
 
 export type ReplyCreateWithoutLikesInput = {
-  id?: string
   body: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -637,12 +643,12 @@ export type ReplyCreateWithoutLikesInput = {
 }
 
 export type ReplyUncheckedCreateWithoutLikesInput = {
-  id?: string
+  id?: number
   body: string
   createdAt?: Date | string
   updatedAt?: Date | string
   authorId: number
-  threadId: string
+  threadId: number
   likeCount?: number
 }
 
@@ -663,7 +669,6 @@ export type ReplyUpdateToOneWithWhereWithoutLikesInput = {
 }
 
 export type ReplyUpdateWithoutLikesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   body?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -673,26 +678,25 @@ export type ReplyUpdateWithoutLikesInput = {
 }
 
 export type ReplyUncheckedUpdateWithoutLikesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   body?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   authorId?: Prisma.IntFieldUpdateOperationsInput | number
-  threadId?: Prisma.StringFieldUpdateOperationsInput | string
+  threadId?: Prisma.IntFieldUpdateOperationsInput | number
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type ReplyCreateManyAuthorInput = {
-  id?: string
+  id?: number
   body: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  threadId: string
+  threadId: number
   likeCount?: number
 }
 
 export type ReplyUpdateWithoutAuthorInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   body?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -702,26 +706,26 @@ export type ReplyUpdateWithoutAuthorInput = {
 }
 
 export type ReplyUncheckedUpdateWithoutAuthorInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   body?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  threadId?: Prisma.StringFieldUpdateOperationsInput | string
+  threadId?: Prisma.IntFieldUpdateOperationsInput | number
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   likes?: Prisma.ReplyLikeUncheckedUpdateManyWithoutReplyNestedInput
 }
 
 export type ReplyUncheckedUpdateManyWithoutAuthorInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   body?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  threadId?: Prisma.StringFieldUpdateOperationsInput | string
+  threadId?: Prisma.IntFieldUpdateOperationsInput | number
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type ReplyCreateManyThreadInput = {
-  id?: string
+  id?: number
   body: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -730,7 +734,6 @@ export type ReplyCreateManyThreadInput = {
 }
 
 export type ReplyUpdateWithoutThreadInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   body?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -740,7 +743,7 @@ export type ReplyUpdateWithoutThreadInput = {
 }
 
 export type ReplyUncheckedUpdateWithoutThreadInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   body?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -750,7 +753,7 @@ export type ReplyUncheckedUpdateWithoutThreadInput = {
 }
 
 export type ReplyUncheckedUpdateManyWithoutThreadInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   body?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -861,12 +864,12 @@ export type $ReplyPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     likes: Prisma.$ReplyLikePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    id: string
+    id: number
     body: string
     createdAt: Date
     updatedAt: Date
     authorId: number
-    threadId: string
+    threadId: number
     likeCount: number
   }, ExtArgs["result"]["reply"]>
   composites: {}
@@ -1294,12 +1297,12 @@ export interface Prisma__ReplyClient<T, Null = never, ExtArgs extends runtime.Ty
  * Fields of the Reply model
  */
 export interface ReplyFieldRefs {
-  readonly id: Prisma.FieldRef<"Reply", 'String'>
+  readonly id: Prisma.FieldRef<"Reply", 'Int'>
   readonly body: Prisma.FieldRef<"Reply", 'String'>
   readonly createdAt: Prisma.FieldRef<"Reply", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Reply", 'DateTime'>
   readonly authorId: Prisma.FieldRef<"Reply", 'Int'>
-  readonly threadId: Prisma.FieldRef<"Reply", 'String'>
+  readonly threadId: Prisma.FieldRef<"Reply", 'Int'>
   readonly likeCount: Prisma.FieldRef<"Reply", 'Int'>
 }
     

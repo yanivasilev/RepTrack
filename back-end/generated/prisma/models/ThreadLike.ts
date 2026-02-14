@@ -27,24 +27,28 @@ export type AggregateThreadLike = {
 }
 
 export type ThreadLikeAvgAggregateOutputType = {
+  id: number | null
+  threadId: number | null
   userId: number | null
 }
 
 export type ThreadLikeSumAggregateOutputType = {
+  id: number | null
+  threadId: number | null
   userId: number | null
 }
 
 export type ThreadLikeMinAggregateOutputType = {
-  id: string | null
+  id: number | null
   createdAt: Date | null
-  threadId: string | null
+  threadId: number | null
   userId: number | null
 }
 
 export type ThreadLikeMaxAggregateOutputType = {
-  id: string | null
+  id: number | null
   createdAt: Date | null
-  threadId: string | null
+  threadId: number | null
   userId: number | null
 }
 
@@ -58,10 +62,14 @@ export type ThreadLikeCountAggregateOutputType = {
 
 
 export type ThreadLikeAvgAggregateInputType = {
+  id?: true
+  threadId?: true
   userId?: true
 }
 
 export type ThreadLikeSumAggregateInputType = {
+  id?: true
+  threadId?: true
   userId?: true
 }
 
@@ -174,9 +182,9 @@ export type ThreadLikeGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inter
 }
 
 export type ThreadLikeGroupByOutputType = {
-  id: string
+  id: number
   createdAt: Date
-  threadId: string
+  threadId: number
   userId: number
   _count: ThreadLikeCountAggregateOutputType | null
   _avg: ThreadLikeAvgAggregateOutputType | null
@@ -204,9 +212,9 @@ export type ThreadLikeWhereInput = {
   AND?: Prisma.ThreadLikeWhereInput | Prisma.ThreadLikeWhereInput[]
   OR?: Prisma.ThreadLikeWhereInput[]
   NOT?: Prisma.ThreadLikeWhereInput | Prisma.ThreadLikeWhereInput[]
-  id?: Prisma.StringFilter<"ThreadLike"> | string
+  id?: Prisma.IntFilter<"ThreadLike"> | number
   createdAt?: Prisma.DateTimeFilter<"ThreadLike"> | Date | string
-  threadId?: Prisma.StringFilter<"ThreadLike"> | string
+  threadId?: Prisma.IntFilter<"ThreadLike"> | number
   userId?: Prisma.IntFilter<"ThreadLike"> | number
   thread?: Prisma.XOR<Prisma.ThreadScalarRelationFilter, Prisma.ThreadWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -222,13 +230,13 @@ export type ThreadLikeOrderByWithRelationInput = {
 }
 
 export type ThreadLikeWhereUniqueInput = Prisma.AtLeast<{
-  id?: string
+  id?: number
   threadId_userId?: Prisma.ThreadLikeThreadIdUserIdCompoundUniqueInput
   AND?: Prisma.ThreadLikeWhereInput | Prisma.ThreadLikeWhereInput[]
   OR?: Prisma.ThreadLikeWhereInput[]
   NOT?: Prisma.ThreadLikeWhereInput | Prisma.ThreadLikeWhereInput[]
   createdAt?: Prisma.DateTimeFilter<"ThreadLike"> | Date | string
-  threadId?: Prisma.StringFilter<"ThreadLike"> | string
+  threadId?: Prisma.IntFilter<"ThreadLike"> | number
   userId?: Prisma.IntFilter<"ThreadLike"> | number
   thread?: Prisma.XOR<Prisma.ThreadScalarRelationFilter, Prisma.ThreadWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -250,56 +258,53 @@ export type ThreadLikeScalarWhereWithAggregatesInput = {
   AND?: Prisma.ThreadLikeScalarWhereWithAggregatesInput | Prisma.ThreadLikeScalarWhereWithAggregatesInput[]
   OR?: Prisma.ThreadLikeScalarWhereWithAggregatesInput[]
   NOT?: Prisma.ThreadLikeScalarWhereWithAggregatesInput | Prisma.ThreadLikeScalarWhereWithAggregatesInput[]
-  id?: Prisma.StringWithAggregatesFilter<"ThreadLike"> | string
+  id?: Prisma.IntWithAggregatesFilter<"ThreadLike"> | number
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"ThreadLike"> | Date | string
-  threadId?: Prisma.StringWithAggregatesFilter<"ThreadLike"> | string
+  threadId?: Prisma.IntWithAggregatesFilter<"ThreadLike"> | number
   userId?: Prisma.IntWithAggregatesFilter<"ThreadLike"> | number
 }
 
 export type ThreadLikeCreateInput = {
-  id?: string
   createdAt?: Date | string
   thread: Prisma.ThreadCreateNestedOneWithoutLikesInput
   user: Prisma.UserCreateNestedOneWithoutThreadLikesInput
 }
 
 export type ThreadLikeUncheckedCreateInput = {
-  id?: string
+  id?: number
   createdAt?: Date | string
-  threadId: string
+  threadId: number
   userId: number
 }
 
 export type ThreadLikeUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   thread?: Prisma.ThreadUpdateOneRequiredWithoutLikesNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutThreadLikesNestedInput
 }
 
 export type ThreadLikeUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  threadId?: Prisma.StringFieldUpdateOperationsInput | string
+  threadId?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type ThreadLikeCreateManyInput = {
-  id?: string
+  id?: number
   createdAt?: Date | string
-  threadId: string
+  threadId: number
   userId: number
 }
 
 export type ThreadLikeUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ThreadLikeUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  threadId?: Prisma.StringFieldUpdateOperationsInput | string
+  threadId?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
@@ -314,7 +319,7 @@ export type ThreadLikeOrderByRelationAggregateInput = {
 }
 
 export type ThreadLikeThreadIdUserIdCompoundUniqueInput = {
-  threadId: string
+  threadId: number
   userId: number
 }
 
@@ -326,6 +331,8 @@ export type ThreadLikeCountOrderByAggregateInput = {
 }
 
 export type ThreadLikeAvgOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  threadId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
 }
 
@@ -344,6 +351,8 @@ export type ThreadLikeMinOrderByAggregateInput = {
 }
 
 export type ThreadLikeSumOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  threadId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
 }
 
@@ -432,15 +441,14 @@ export type ThreadLikeUncheckedUpdateManyWithoutThreadNestedInput = {
 }
 
 export type ThreadLikeCreateWithoutUserInput = {
-  id?: string
   createdAt?: Date | string
   thread: Prisma.ThreadCreateNestedOneWithoutLikesInput
 }
 
 export type ThreadLikeUncheckedCreateWithoutUserInput = {
-  id?: string
+  id?: number
   createdAt?: Date | string
-  threadId: string
+  threadId: number
 }
 
 export type ThreadLikeCreateOrConnectWithoutUserInput = {
@@ -472,20 +480,19 @@ export type ThreadLikeScalarWhereInput = {
   AND?: Prisma.ThreadLikeScalarWhereInput | Prisma.ThreadLikeScalarWhereInput[]
   OR?: Prisma.ThreadLikeScalarWhereInput[]
   NOT?: Prisma.ThreadLikeScalarWhereInput | Prisma.ThreadLikeScalarWhereInput[]
-  id?: Prisma.StringFilter<"ThreadLike"> | string
+  id?: Prisma.IntFilter<"ThreadLike"> | number
   createdAt?: Prisma.DateTimeFilter<"ThreadLike"> | Date | string
-  threadId?: Prisma.StringFilter<"ThreadLike"> | string
+  threadId?: Prisma.IntFilter<"ThreadLike"> | number
   userId?: Prisma.IntFilter<"ThreadLike"> | number
 }
 
 export type ThreadLikeCreateWithoutThreadInput = {
-  id?: string
   createdAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutThreadLikesInput
 }
 
 export type ThreadLikeUncheckedCreateWithoutThreadInput = {
-  id?: string
+  id?: number
   createdAt?: Date | string
   userId: number
 }
@@ -516,49 +523,47 @@ export type ThreadLikeUpdateManyWithWhereWithoutThreadInput = {
 }
 
 export type ThreadLikeCreateManyUserInput = {
-  id?: string
+  id?: number
   createdAt?: Date | string
-  threadId: string
+  threadId: number
 }
 
 export type ThreadLikeUpdateWithoutUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   thread?: Prisma.ThreadUpdateOneRequiredWithoutLikesNestedInput
 }
 
 export type ThreadLikeUncheckedUpdateWithoutUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  threadId?: Prisma.StringFieldUpdateOperationsInput | string
+  threadId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type ThreadLikeUncheckedUpdateManyWithoutUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  threadId?: Prisma.StringFieldUpdateOperationsInput | string
+  threadId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type ThreadLikeCreateManyThreadInput = {
-  id?: string
+  id?: number
   createdAt?: Date | string
   userId: number
 }
 
 export type ThreadLikeUpdateWithoutThreadInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutThreadLikesNestedInput
 }
 
 export type ThreadLikeUncheckedUpdateWithoutThreadInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type ThreadLikeUncheckedUpdateManyWithoutThreadInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userId?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -620,9 +625,9 @@ export type $ThreadLikePayload<ExtArgs extends runtime.Types.Extensions.Internal
     user: Prisma.$UserPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    id: string
+    id: number
     createdAt: Date
-    threadId: string
+    threadId: number
     userId: number
   }, ExtArgs["result"]["threadLike"]>
   composites: {}
@@ -1049,9 +1054,9 @@ export interface Prisma__ThreadLikeClient<T, Null = never, ExtArgs extends runti
  * Fields of the ThreadLike model
  */
 export interface ThreadLikeFieldRefs {
-  readonly id: Prisma.FieldRef<"ThreadLike", 'String'>
+  readonly id: Prisma.FieldRef<"ThreadLike", 'Int'>
   readonly createdAt: Prisma.FieldRef<"ThreadLike", 'DateTime'>
-  readonly threadId: Prisma.FieldRef<"ThreadLike", 'String'>
+  readonly threadId: Prisma.FieldRef<"ThreadLike", 'Int'>
   readonly userId: Prisma.FieldRef<"ThreadLike", 'Int'>
 }
     
