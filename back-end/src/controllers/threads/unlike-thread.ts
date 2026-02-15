@@ -11,8 +11,5 @@ export async function unlikeThreadController(req: Request, res: Response) {
 
     if (result.status === "not_found") return res.status(404).json({ message: "Thread not found." });
 
-    return res.status(200).json({
-        liked: result.liked,
-        likeCount: result.likeCount
-    });
+    return res.status(200).json({ liked: result.liked, likeCount: result.likeCount });
 }

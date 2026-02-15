@@ -29,6 +29,25 @@ import { getAllThreadsController } from "./controllers/threads/get-all-threads";
 import { getThreadController } from "./controllers/threads/get-thread";
 import { likeThreadController } from "./controllers/threads/like-thread";
 import { unlikeThreadController } from "./controllers/threads/unlike-thread";
+import { createReplyController } from "./controllers/threads/replies/create-reply";
+import { deleteReplyController } from "./controllers/threads/replies/delete-reply";
+import { editReplyController } from "./controllers/threads/replies/edit-reply";
+import { likeReplyController } from "./controllers/threads/replies/like-reply";
+import { unlikeReplyController } from "./controllers/threads/replies/unlike-reply";
+import { addWorkoutExerciseController } from "./controllers/exercises/add-workout-exercise";
+import { updateWorkoutExerciseController } from "./controllers/exercises/update-workout-exercise";
+import { deleteWorkoutExerciseController } from "./controllers/exercises/delete-workout-exercise";
+import { addSetController } from "./controllers/exercises/sets/add-set";
+import { updateSetController } from "./controllers/exercises/sets/update-set";
+import { deleteSetController } from "./controllers/exercises/sets/delete-set";
+import { startWorkoutController } from "./controllers/workouts/start-workout";
+import { editWorkoutController } from "./controllers/workouts/edit-workout";
+import { finishWorkoutController } from "./controllers/workouts/finish-workout";
+import { deleteWorkoutController } from "./controllers/workouts/delete-workout";
+import { getWorkoutController } from "./controllers/workouts/get-workout";
+import { workoutHistoryController } from "./controllers/workouts/workout-history";
+import { getAllExercisesController } from "./controllers/exercises/get-all-exercises";
+import { getExerciseController } from "./controllers/exercises/get-exercise";
 
 dotenv.config();
 
@@ -70,6 +89,34 @@ app.get("/threads", requireLoggedIn, getAllThreadsController);
 app.get("/threads/:threadId", requireLoggedIn, getThreadController);
 app.post("/threads/:threadId/like", requireLoggedIn, likeThreadController);
 app.delete("/threads/:threadId/like", requireLoggedIn, unlikeThreadController);
+
+// REPLIES
+app.post("/reply/:threadId", requireLoggedIn, createReplyController);
+app.delete("/reply/:replyId", requireLoggedIn, deleteReplyController);
+app.patch("/reply/:replyId", requireLoggedIn, editReplyController);
+app.post("/reply/:replyId/like", requireLoggedIn, likeReplyController);
+app.delete("/reply/:replyId/like", requireLoggedIn, unlikeReplyController);
+
+// WORKOUTS
+app.post("/workouts/start", requireLoggedIn, startWorkoutController);
+app.patch("/workouts/edit/:workoutId", requireLoggedIn, editWorkoutController);
+app.patch("/workouts/finish/:workoutId", requireLoggedIn, finishWorkoutController);
+app.delete("/workouts/delete/:workoutId", requireLoggedIn, deleteWorkoutController);
+app.get("/workouts/:workoutId", requireLoggedIn, getWorkoutController);
+app.get("/workouts-history", requireLoggedIn, workoutHistoryController);
+
+// EXERCISES
+app.get("/exercises", requireLoggedIn, getAllExercisesController);
+app.get("/exercises/:exerciseId", requireLoggedIn, getExerciseController);
+app.post("/exercises/add/:workoutId", requireLoggedIn, addWorkoutExerciseController);
+app.patch("/exercises/update/:workoutExerciseId", requireLoggedIn, updateWorkoutExerciseController);
+app.delete("/exercises/delete/:workoutExerciseId", requireLoggedIn, deleteWorkoutExerciseController);
+
+// SETS
+app.post("/sets/add/:workoutExerciseId", requireLoggedIn, addSetController);
+app.patch("/sets/update/:setId", requireLoggedIn, updateSetController);
+app.delete("/sets/delete/:setId", requireLoggedIn, deleteSetController);
+
 
 // TESTING POSE DETECTION
 app.post("/pushup", uploadVideo.single("video"), analyzePushupVideo);

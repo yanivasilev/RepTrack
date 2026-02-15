@@ -11,6 +11,7 @@ export const editThreadSchema = z.object({
         .max(5000, "Body must not exceed 5000 characters.")
         .optional(),
 })
+
     .refine((v) => v.title !== undefined || v.body !== undefined, {
         message: "Provide title or body to update.",
         path: ["body"],

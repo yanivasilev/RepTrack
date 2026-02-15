@@ -326,6 +326,7 @@ export type UserWhereInput = {
   replies?: Prisma.ReplyListRelationFilter
   threadLikes?: Prisma.ThreadLikeListRelationFilter
   replyLikes?: Prisma.ReplyLikeListRelationFilter
+  workoutSessions?: Prisma.WorkoutSessionListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -352,6 +353,7 @@ export type UserOrderByWithRelationInput = {
   replies?: Prisma.ReplyOrderByRelationAggregateInput
   threadLikes?: Prisma.ThreadLikeOrderByRelationAggregateInput
   replyLikes?: Prisma.ReplyLikeOrderByRelationAggregateInput
+  workoutSessions?: Prisma.WorkoutSessionOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -381,6 +383,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   replies?: Prisma.ReplyListRelationFilter
   threadLikes?: Prisma.ThreadLikeListRelationFilter
   replyLikes?: Prisma.ReplyLikeListRelationFilter
+  workoutSessions?: Prisma.WorkoutSessionListRelationFilter
 }, "id" | "email" | "username">
 
 export type UserOrderByWithAggregationInput = {
@@ -454,6 +457,7 @@ export type UserCreateInput = {
   replies?: Prisma.ReplyCreateNestedManyWithoutAuthorInput
   threadLikes?: Prisma.ThreadLikeCreateNestedManyWithoutUserInput
   replyLikes?: Prisma.ReplyLikeCreateNestedManyWithoutUserInput
+  workoutSessions?: Prisma.WorkoutSessionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -480,6 +484,7 @@ export type UserUncheckedCreateInput = {
   replies?: Prisma.ReplyUncheckedCreateNestedManyWithoutAuthorInput
   threadLikes?: Prisma.ThreadLikeUncheckedCreateNestedManyWithoutUserInput
   replyLikes?: Prisma.ReplyLikeUncheckedCreateNestedManyWithoutUserInput
+  workoutSessions?: Prisma.WorkoutSessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -505,6 +510,7 @@ export type UserUpdateInput = {
   replies?: Prisma.ReplyUpdateManyWithoutAuthorNestedInput
   threadLikes?: Prisma.ThreadLikeUpdateManyWithoutUserNestedInput
   replyLikes?: Prisma.ReplyLikeUpdateManyWithoutUserNestedInput
+  workoutSessions?: Prisma.WorkoutSessionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -531,6 +537,7 @@ export type UserUncheckedUpdateInput = {
   replies?: Prisma.ReplyUncheckedUpdateManyWithoutAuthorNestedInput
   threadLikes?: Prisma.ThreadLikeUncheckedUpdateManyWithoutUserNestedInput
   replyLikes?: Prisma.ReplyLikeUncheckedUpdateManyWithoutUserNestedInput
+  workoutSessions?: Prisma.WorkoutSessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -801,6 +808,20 @@ export type UserUpdateOneRequiredWithoutReplyLikesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutReplyLikesInput, Prisma.UserUpdateWithoutReplyLikesInput>, Prisma.UserUncheckedUpdateWithoutReplyLikesInput>
 }
 
+export type UserCreateNestedOneWithoutWorkoutSessionsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutWorkoutSessionsInput, Prisma.UserUncheckedCreateWithoutWorkoutSessionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutWorkoutSessionsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutWorkoutSessionsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutWorkoutSessionsInput, Prisma.UserUncheckedCreateWithoutWorkoutSessionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutWorkoutSessionsInput
+  upsert?: Prisma.UserUpsertWithoutWorkoutSessionsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutWorkoutSessionsInput, Prisma.UserUpdateWithoutWorkoutSessionsInput>, Prisma.UserUncheckedUpdateWithoutWorkoutSessionsInput>
+}
+
 export type UserCreateWithoutForgotPasswordOtpsInput = {
   email: string
   password: string
@@ -823,6 +844,7 @@ export type UserCreateWithoutForgotPasswordOtpsInput = {
   replies?: Prisma.ReplyCreateNestedManyWithoutAuthorInput
   threadLikes?: Prisma.ThreadLikeCreateNestedManyWithoutUserInput
   replyLikes?: Prisma.ReplyLikeCreateNestedManyWithoutUserInput
+  workoutSessions?: Prisma.WorkoutSessionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutForgotPasswordOtpsInput = {
@@ -848,6 +870,7 @@ export type UserUncheckedCreateWithoutForgotPasswordOtpsInput = {
   replies?: Prisma.ReplyUncheckedCreateNestedManyWithoutAuthorInput
   threadLikes?: Prisma.ThreadLikeUncheckedCreateNestedManyWithoutUserInput
   replyLikes?: Prisma.ReplyLikeUncheckedCreateNestedManyWithoutUserInput
+  workoutSessions?: Prisma.WorkoutSessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutForgotPasswordOtpsInput = {
@@ -888,6 +911,7 @@ export type UserUpdateWithoutForgotPasswordOtpsInput = {
   replies?: Prisma.ReplyUpdateManyWithoutAuthorNestedInput
   threadLikes?: Prisma.ThreadLikeUpdateManyWithoutUserNestedInput
   replyLikes?: Prisma.ReplyLikeUpdateManyWithoutUserNestedInput
+  workoutSessions?: Prisma.WorkoutSessionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutForgotPasswordOtpsInput = {
@@ -913,6 +937,7 @@ export type UserUncheckedUpdateWithoutForgotPasswordOtpsInput = {
   replies?: Prisma.ReplyUncheckedUpdateManyWithoutAuthorNestedInput
   threadLikes?: Prisma.ThreadLikeUncheckedUpdateManyWithoutUserNestedInput
   replyLikes?: Prisma.ReplyLikeUncheckedUpdateManyWithoutUserNestedInput
+  workoutSessions?: Prisma.WorkoutSessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutForgotPasswordSessionsInput = {
@@ -937,6 +962,7 @@ export type UserCreateWithoutForgotPasswordSessionsInput = {
   replies?: Prisma.ReplyCreateNestedManyWithoutAuthorInput
   threadLikes?: Prisma.ThreadLikeCreateNestedManyWithoutUserInput
   replyLikes?: Prisma.ReplyLikeCreateNestedManyWithoutUserInput
+  workoutSessions?: Prisma.WorkoutSessionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutForgotPasswordSessionsInput = {
@@ -962,6 +988,7 @@ export type UserUncheckedCreateWithoutForgotPasswordSessionsInput = {
   replies?: Prisma.ReplyUncheckedCreateNestedManyWithoutAuthorInput
   threadLikes?: Prisma.ThreadLikeUncheckedCreateNestedManyWithoutUserInput
   replyLikes?: Prisma.ReplyLikeUncheckedCreateNestedManyWithoutUserInput
+  workoutSessions?: Prisma.WorkoutSessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutForgotPasswordSessionsInput = {
@@ -1002,6 +1029,7 @@ export type UserUpdateWithoutForgotPasswordSessionsInput = {
   replies?: Prisma.ReplyUpdateManyWithoutAuthorNestedInput
   threadLikes?: Prisma.ThreadLikeUpdateManyWithoutUserNestedInput
   replyLikes?: Prisma.ReplyLikeUpdateManyWithoutUserNestedInput
+  workoutSessions?: Prisma.WorkoutSessionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutForgotPasswordSessionsInput = {
@@ -1027,6 +1055,7 @@ export type UserUncheckedUpdateWithoutForgotPasswordSessionsInput = {
   replies?: Prisma.ReplyUncheckedUpdateManyWithoutAuthorNestedInput
   threadLikes?: Prisma.ThreadLikeUncheckedUpdateManyWithoutUserNestedInput
   replyLikes?: Prisma.ReplyLikeUncheckedUpdateManyWithoutUserNestedInput
+  workoutSessions?: Prisma.WorkoutSessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutThreadsInput = {
@@ -1051,6 +1080,7 @@ export type UserCreateWithoutThreadsInput = {
   replies?: Prisma.ReplyCreateNestedManyWithoutAuthorInput
   threadLikes?: Prisma.ThreadLikeCreateNestedManyWithoutUserInput
   replyLikes?: Prisma.ReplyLikeCreateNestedManyWithoutUserInput
+  workoutSessions?: Prisma.WorkoutSessionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutThreadsInput = {
@@ -1076,6 +1106,7 @@ export type UserUncheckedCreateWithoutThreadsInput = {
   replies?: Prisma.ReplyUncheckedCreateNestedManyWithoutAuthorInput
   threadLikes?: Prisma.ThreadLikeUncheckedCreateNestedManyWithoutUserInput
   replyLikes?: Prisma.ReplyLikeUncheckedCreateNestedManyWithoutUserInput
+  workoutSessions?: Prisma.WorkoutSessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutThreadsInput = {
@@ -1116,6 +1147,7 @@ export type UserUpdateWithoutThreadsInput = {
   replies?: Prisma.ReplyUpdateManyWithoutAuthorNestedInput
   threadLikes?: Prisma.ThreadLikeUpdateManyWithoutUserNestedInput
   replyLikes?: Prisma.ReplyLikeUpdateManyWithoutUserNestedInput
+  workoutSessions?: Prisma.WorkoutSessionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutThreadsInput = {
@@ -1141,6 +1173,7 @@ export type UserUncheckedUpdateWithoutThreadsInput = {
   replies?: Prisma.ReplyUncheckedUpdateManyWithoutAuthorNestedInput
   threadLikes?: Prisma.ThreadLikeUncheckedUpdateManyWithoutUserNestedInput
   replyLikes?: Prisma.ReplyLikeUncheckedUpdateManyWithoutUserNestedInput
+  workoutSessions?: Prisma.WorkoutSessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutRepliesInput = {
@@ -1165,6 +1198,7 @@ export type UserCreateWithoutRepliesInput = {
   threads?: Prisma.ThreadCreateNestedManyWithoutAuthorInput
   threadLikes?: Prisma.ThreadLikeCreateNestedManyWithoutUserInput
   replyLikes?: Prisma.ReplyLikeCreateNestedManyWithoutUserInput
+  workoutSessions?: Prisma.WorkoutSessionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutRepliesInput = {
@@ -1190,6 +1224,7 @@ export type UserUncheckedCreateWithoutRepliesInput = {
   threads?: Prisma.ThreadUncheckedCreateNestedManyWithoutAuthorInput
   threadLikes?: Prisma.ThreadLikeUncheckedCreateNestedManyWithoutUserInput
   replyLikes?: Prisma.ReplyLikeUncheckedCreateNestedManyWithoutUserInput
+  workoutSessions?: Prisma.WorkoutSessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutRepliesInput = {
@@ -1230,6 +1265,7 @@ export type UserUpdateWithoutRepliesInput = {
   threads?: Prisma.ThreadUpdateManyWithoutAuthorNestedInput
   threadLikes?: Prisma.ThreadLikeUpdateManyWithoutUserNestedInput
   replyLikes?: Prisma.ReplyLikeUpdateManyWithoutUserNestedInput
+  workoutSessions?: Prisma.WorkoutSessionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRepliesInput = {
@@ -1255,6 +1291,7 @@ export type UserUncheckedUpdateWithoutRepliesInput = {
   threads?: Prisma.ThreadUncheckedUpdateManyWithoutAuthorNestedInput
   threadLikes?: Prisma.ThreadLikeUncheckedUpdateManyWithoutUserNestedInput
   replyLikes?: Prisma.ReplyLikeUncheckedUpdateManyWithoutUserNestedInput
+  workoutSessions?: Prisma.WorkoutSessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutThreadLikesInput = {
@@ -1279,6 +1316,7 @@ export type UserCreateWithoutThreadLikesInput = {
   threads?: Prisma.ThreadCreateNestedManyWithoutAuthorInput
   replies?: Prisma.ReplyCreateNestedManyWithoutAuthorInput
   replyLikes?: Prisma.ReplyLikeCreateNestedManyWithoutUserInput
+  workoutSessions?: Prisma.WorkoutSessionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutThreadLikesInput = {
@@ -1304,6 +1342,7 @@ export type UserUncheckedCreateWithoutThreadLikesInput = {
   threads?: Prisma.ThreadUncheckedCreateNestedManyWithoutAuthorInput
   replies?: Prisma.ReplyUncheckedCreateNestedManyWithoutAuthorInput
   replyLikes?: Prisma.ReplyLikeUncheckedCreateNestedManyWithoutUserInput
+  workoutSessions?: Prisma.WorkoutSessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutThreadLikesInput = {
@@ -1344,6 +1383,7 @@ export type UserUpdateWithoutThreadLikesInput = {
   threads?: Prisma.ThreadUpdateManyWithoutAuthorNestedInput
   replies?: Prisma.ReplyUpdateManyWithoutAuthorNestedInput
   replyLikes?: Prisma.ReplyLikeUpdateManyWithoutUserNestedInput
+  workoutSessions?: Prisma.WorkoutSessionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutThreadLikesInput = {
@@ -1369,6 +1409,7 @@ export type UserUncheckedUpdateWithoutThreadLikesInput = {
   threads?: Prisma.ThreadUncheckedUpdateManyWithoutAuthorNestedInput
   replies?: Prisma.ReplyUncheckedUpdateManyWithoutAuthorNestedInput
   replyLikes?: Prisma.ReplyLikeUncheckedUpdateManyWithoutUserNestedInput
+  workoutSessions?: Prisma.WorkoutSessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutReplyLikesInput = {
@@ -1393,6 +1434,7 @@ export type UserCreateWithoutReplyLikesInput = {
   threads?: Prisma.ThreadCreateNestedManyWithoutAuthorInput
   replies?: Prisma.ReplyCreateNestedManyWithoutAuthorInput
   threadLikes?: Prisma.ThreadLikeCreateNestedManyWithoutUserInput
+  workoutSessions?: Prisma.WorkoutSessionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutReplyLikesInput = {
@@ -1418,6 +1460,7 @@ export type UserUncheckedCreateWithoutReplyLikesInput = {
   threads?: Prisma.ThreadUncheckedCreateNestedManyWithoutAuthorInput
   replies?: Prisma.ReplyUncheckedCreateNestedManyWithoutAuthorInput
   threadLikes?: Prisma.ThreadLikeUncheckedCreateNestedManyWithoutUserInput
+  workoutSessions?: Prisma.WorkoutSessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutReplyLikesInput = {
@@ -1458,6 +1501,7 @@ export type UserUpdateWithoutReplyLikesInput = {
   threads?: Prisma.ThreadUpdateManyWithoutAuthorNestedInput
   replies?: Prisma.ReplyUpdateManyWithoutAuthorNestedInput
   threadLikes?: Prisma.ThreadLikeUpdateManyWithoutUserNestedInput
+  workoutSessions?: Prisma.WorkoutSessionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReplyLikesInput = {
@@ -1483,6 +1527,125 @@ export type UserUncheckedUpdateWithoutReplyLikesInput = {
   threads?: Prisma.ThreadUncheckedUpdateManyWithoutAuthorNestedInput
   replies?: Prisma.ReplyUncheckedUpdateManyWithoutAuthorNestedInput
   threadLikes?: Prisma.ThreadLikeUncheckedUpdateManyWithoutUserNestedInput
+  workoutSessions?: Prisma.WorkoutSessionUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutWorkoutSessionsInput = {
+  email: string
+  password: string
+  createdAt?: Date | string
+  username: string
+  lastUsernameChangeAt?: Date | string | null
+  dob: Date | string
+  sex: $Enums.Sex
+  height: number
+  weight: number
+  fitnessGoal: $Enums.FitnessGoal
+  experienceLevel: $Enums.ExperienceLevel
+  trainingStyle: $Enums.TrainingStyle
+  trainingFrequency: $Enums.TrainingFrequency
+  avatarFileName?: string | null
+  heightUnitType?: $Enums.UnitType
+  weightUnitType?: $Enums.UnitType
+  forgotPasswordOtps?: Prisma.ForgotPasswordOtpCreateNestedManyWithoutUserInput
+  forgotPasswordSessions?: Prisma.ForgotPasswordSessionCreateNestedManyWithoutUserInput
+  threads?: Prisma.ThreadCreateNestedManyWithoutAuthorInput
+  replies?: Prisma.ReplyCreateNestedManyWithoutAuthorInput
+  threadLikes?: Prisma.ThreadLikeCreateNestedManyWithoutUserInput
+  replyLikes?: Prisma.ReplyLikeCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutWorkoutSessionsInput = {
+  id?: number
+  email: string
+  password: string
+  createdAt?: Date | string
+  username: string
+  lastUsernameChangeAt?: Date | string | null
+  dob: Date | string
+  sex: $Enums.Sex
+  height: number
+  weight: number
+  fitnessGoal: $Enums.FitnessGoal
+  experienceLevel: $Enums.ExperienceLevel
+  trainingStyle: $Enums.TrainingStyle
+  trainingFrequency: $Enums.TrainingFrequency
+  avatarFileName?: string | null
+  heightUnitType?: $Enums.UnitType
+  weightUnitType?: $Enums.UnitType
+  forgotPasswordOtps?: Prisma.ForgotPasswordOtpUncheckedCreateNestedManyWithoutUserInput
+  forgotPasswordSessions?: Prisma.ForgotPasswordSessionUncheckedCreateNestedManyWithoutUserInput
+  threads?: Prisma.ThreadUncheckedCreateNestedManyWithoutAuthorInput
+  replies?: Prisma.ReplyUncheckedCreateNestedManyWithoutAuthorInput
+  threadLikes?: Prisma.ThreadLikeUncheckedCreateNestedManyWithoutUserInput
+  replyLikes?: Prisma.ReplyLikeUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutWorkoutSessionsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutWorkoutSessionsInput, Prisma.UserUncheckedCreateWithoutWorkoutSessionsInput>
+}
+
+export type UserUpsertWithoutWorkoutSessionsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutWorkoutSessionsInput, Prisma.UserUncheckedUpdateWithoutWorkoutSessionsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutWorkoutSessionsInput, Prisma.UserUncheckedCreateWithoutWorkoutSessionsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutWorkoutSessionsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutWorkoutSessionsInput, Prisma.UserUncheckedUpdateWithoutWorkoutSessionsInput>
+}
+
+export type UserUpdateWithoutWorkoutSessionsInput = {
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  lastUsernameChangeAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  dob?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sex?: Prisma.EnumSexFieldUpdateOperationsInput | $Enums.Sex
+  height?: Prisma.IntFieldUpdateOperationsInput | number
+  weight?: Prisma.IntFieldUpdateOperationsInput | number
+  fitnessGoal?: Prisma.EnumFitnessGoalFieldUpdateOperationsInput | $Enums.FitnessGoal
+  experienceLevel?: Prisma.EnumExperienceLevelFieldUpdateOperationsInput | $Enums.ExperienceLevel
+  trainingStyle?: Prisma.EnumTrainingStyleFieldUpdateOperationsInput | $Enums.TrainingStyle
+  trainingFrequency?: Prisma.EnumTrainingFrequencyFieldUpdateOperationsInput | $Enums.TrainingFrequency
+  avatarFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  heightUnitType?: Prisma.EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+  weightUnitType?: Prisma.EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+  forgotPasswordOtps?: Prisma.ForgotPasswordOtpUpdateManyWithoutUserNestedInput
+  forgotPasswordSessions?: Prisma.ForgotPasswordSessionUpdateManyWithoutUserNestedInput
+  threads?: Prisma.ThreadUpdateManyWithoutAuthorNestedInput
+  replies?: Prisma.ReplyUpdateManyWithoutAuthorNestedInput
+  threadLikes?: Prisma.ThreadLikeUpdateManyWithoutUserNestedInput
+  replyLikes?: Prisma.ReplyLikeUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutWorkoutSessionsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  lastUsernameChangeAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  dob?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sex?: Prisma.EnumSexFieldUpdateOperationsInput | $Enums.Sex
+  height?: Prisma.IntFieldUpdateOperationsInput | number
+  weight?: Prisma.IntFieldUpdateOperationsInput | number
+  fitnessGoal?: Prisma.EnumFitnessGoalFieldUpdateOperationsInput | $Enums.FitnessGoal
+  experienceLevel?: Prisma.EnumExperienceLevelFieldUpdateOperationsInput | $Enums.ExperienceLevel
+  trainingStyle?: Prisma.EnumTrainingStyleFieldUpdateOperationsInput | $Enums.TrainingStyle
+  trainingFrequency?: Prisma.EnumTrainingFrequencyFieldUpdateOperationsInput | $Enums.TrainingFrequency
+  avatarFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  heightUnitType?: Prisma.EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+  weightUnitType?: Prisma.EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+  forgotPasswordOtps?: Prisma.ForgotPasswordOtpUncheckedUpdateManyWithoutUserNestedInput
+  forgotPasswordSessions?: Prisma.ForgotPasswordSessionUncheckedUpdateManyWithoutUserNestedInput
+  threads?: Prisma.ThreadUncheckedUpdateManyWithoutAuthorNestedInput
+  replies?: Prisma.ReplyUncheckedUpdateManyWithoutAuthorNestedInput
+  threadLikes?: Prisma.ThreadLikeUncheckedUpdateManyWithoutUserNestedInput
+  replyLikes?: Prisma.ReplyLikeUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -1497,6 +1660,7 @@ export type UserCountOutputType = {
   replies: number
   threadLikes: number
   replyLikes: number
+  workoutSessions: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1506,6 +1670,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   replies?: boolean | UserCountOutputTypeCountRepliesArgs
   threadLikes?: boolean | UserCountOutputTypeCountThreadLikesArgs
   replyLikes?: boolean | UserCountOutputTypeCountReplyLikesArgs
+  workoutSessions?: boolean | UserCountOutputTypeCountWorkoutSessionsArgs
 }
 
 /**
@@ -1560,6 +1725,13 @@ export type UserCountOutputTypeCountReplyLikesArgs<ExtArgs extends runtime.Types
   where?: Prisma.ReplyLikeWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountWorkoutSessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.WorkoutSessionWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1585,6 +1757,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   replies?: boolean | Prisma.User$repliesArgs<ExtArgs>
   threadLikes?: boolean | Prisma.User$threadLikesArgs<ExtArgs>
   replyLikes?: boolean | Prisma.User$replyLikesArgs<ExtArgs>
+  workoutSessions?: boolean | Prisma.User$workoutSessionsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1656,6 +1829,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   replies?: boolean | Prisma.User$repliesArgs<ExtArgs>
   threadLikes?: boolean | Prisma.User$threadLikesArgs<ExtArgs>
   replyLikes?: boolean | Prisma.User$replyLikesArgs<ExtArgs>
+  workoutSessions?: boolean | Prisma.User$workoutSessionsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1670,6 +1844,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     replies: Prisma.$ReplyPayload<ExtArgs>[]
     threadLikes: Prisma.$ThreadLikePayload<ExtArgs>[]
     replyLikes: Prisma.$ReplyLikePayload<ExtArgs>[]
+    workoutSessions: Prisma.$WorkoutSessionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -2089,6 +2264,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   replies<T extends Prisma.User$repliesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$repliesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReplyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   threadLikes<T extends Prisma.User$threadLikesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$threadLikesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ThreadLikePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   replyLikes<T extends Prisma.User$replyLikesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$replyLikesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReplyLikePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  workoutSessions<T extends Prisma.User$workoutSessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$workoutSessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WorkoutSessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2662,6 +2838,30 @@ export type User$replyLikesArgs<ExtArgs extends runtime.Types.Extensions.Interna
   take?: number
   skip?: number
   distinct?: Prisma.ReplyLikeScalarFieldEnum | Prisma.ReplyLikeScalarFieldEnum[]
+}
+
+/**
+ * User.workoutSessions
+ */
+export type User$workoutSessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the WorkoutSession
+   */
+  select?: Prisma.WorkoutSessionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the WorkoutSession
+   */
+  omit?: Prisma.WorkoutSessionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.WorkoutSessionInclude<ExtArgs> | null
+  where?: Prisma.WorkoutSessionWhereInput
+  orderBy?: Prisma.WorkoutSessionOrderByWithRelationInput | Prisma.WorkoutSessionOrderByWithRelationInput[]
+  cursor?: Prisma.WorkoutSessionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.WorkoutSessionScalarFieldEnum | Prisma.WorkoutSessionScalarFieldEnum[]
 }
 
 /**

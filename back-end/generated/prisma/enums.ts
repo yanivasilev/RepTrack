@@ -63,3 +63,44 @@ export const UnitType = {
 } as const
 
 export type UnitType = (typeof UnitType)[keyof typeof UnitType]
+
+
+export const ExerciseCategory = {
+  STRENGTH: 'STRENGTH',
+  CARDIO: 'CARDIO',
+  BODYWEIGHT: 'BODYWEIGHT',
+  MACHINE: 'MACHINE',
+  OTHER: 'OTHER'
+} as const
+
+export type ExerciseCategory = (typeof ExerciseCategory)[keyof typeof ExerciseCategory]
+
+
+export const MuscleGroup = {
+  CHEST: 'CHEST',
+  BACK: 'BACK',
+  SHOULDERS: 'SHOULDERS',
+  BICEPS: 'BICEPS',
+  TRICEPS: 'TRICEPS',
+  LEGS: 'LEGS',
+  GLUTES: 'GLUTES',
+  CORE: 'CORE',
+  FULL_BODY: 'FULL_BODY',
+  OTHER: 'OTHER'
+} as const
+
+export type MuscleGroup = (typeof MuscleGroup)[keyof typeof MuscleGroup]
+
+
+export const Equipment = {
+  BARBELL: 'BARBELL',
+  DUMBBELL: 'DUMBBELL',
+  MACHINE: 'MACHINE',
+  CABLE: 'CABLE',
+  BODYWEIGHT: 'BODYWEIGHT',
+  KETTLEBELL: 'KETTLEBELL',
+  BAND: 'BAND',
+  OTHER: 'OTHER'
+} as const
+
+export type Equipment = (typeof Equipment)[keyof typeof Equipment]

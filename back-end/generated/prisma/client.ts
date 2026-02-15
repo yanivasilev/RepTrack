@@ -72,3 +72,23 @@ export type ThreadLike = Prisma.ThreadLikeModel
  * 
  */
 export type ReplyLike = Prisma.ReplyLikeModel
+/**
+ * Model Exercise
+ * 
+ */
+export type Exercise = Prisma.ExerciseModel
+/**
+ * Model WorkoutSession
+ * 
+ */
+export type WorkoutSession = Prisma.WorkoutSessionModel
+/**
+ * Model WorkoutExercise
+ * 
+ */
+export type WorkoutExercise = Prisma.WorkoutExerciseModel
+/**
+ * Model WorkoutSet
+ * 
+ */
+export type WorkoutSet = Prisma.WorkoutSetModel

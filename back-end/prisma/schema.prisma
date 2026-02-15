@@ -45,6 +45,38 @@ enum UnitType {
   IMPERIAL
 }
 
+enum ExerciseCategory {
+  STRENGTH
+  CARDIO
+  BODYWEIGHT
+  MACHINE
+  OTHER
+}
+
+enum MuscleGroup {
+  CHEST
+  BACK
+  SHOULDERS
+  BICEPS
+  TRICEPS
+  LEGS
+  GLUTES
+  CORE
+  FULL_BODY
+  OTHER
+}
+
+enum Equipment {
+  BARBELL
+  DUMBBELL
+  MACHINE
+  CABLE
+  BODYWEIGHT
+  KETTLEBELL
+  BAND
+  OTHER
+}
+
 model User {
   id                     Int                     @id @default(autoincrement())
   email                  String                  @unique
@@ -54,8 +86,8 @@ model User {
   lastUsernameChangeAt   DateTime?
   dob                    DateTime
   sex                    Sex
-  height                 Int
-  weight                 Int
+  height                 Int                     //STORED AS CM
+  weight                 Int                     //STORED AS KG
   fitnessGoal            FitnessGoal
   experienceLevel        ExperienceLevel
   trainingStyle          TrainingStyle
@@ -69,6 +101,7 @@ model User {
   replies                Reply[]
   threadLikes            ThreadLike[]
   replyLikes             ReplyLike[]
+  workoutSessions        WorkoutSession[]
 }
 
 model ForgotPasswordOtp {
@@ -155,4 +188,67 @@ model ReplyLike {
 
   @@unique([replyId, userId])
   @@index([userId])
+}
+
+model Exercise {
+  id               Int               @id @default(autoincrement())
+  name             String            @unique
+  category         ExerciseCategory  @default(STRENGTH)
+  muscleGroup      MuscleGroup       @default(OTHER)
+  equipment        Equipment         @default(OTHER)
+  isBodyweight     Boolean           @default(false)
+  createdAt        DateTime          @default(now())
+  workoutExercises WorkoutExercise[]
+
+  @@index([muscleGroup])
+  @@index([equipment])
+}
+
+model WorkoutSession {
+  id        Int                @id @default(autoincrement())
+  userId    Int
+  user      User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  startedAt DateTime           @default(now())
+  endedAt   DateTime?
+  notes     String?
+  createdAt DateTime           @default(now())
+  updatedAt DateTime           @updatedAt
+  exercises WorkoutExercise[]
+
+  @@index([userId, startedAt])
+}
+
+model WorkoutExercise {
+  id         Int            @id @default(autoincrement())
+  sessionId  Int
+  session    WorkoutSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  exerciseId Int
+  exercise   Exercise       @relation(fields: [exerciseId], references: [id], onDelete: Restrict)
+  orderIndex Int            @default(0)
+  notes      String?
+  sets       WorkoutSet[]
+
+  @@index([sessionId])
+  @@index([exerciseId])
+}
+
+model WorkoutSet {
+  id                Int             @id @default(autoincrement())
+
+  workoutExerciseId Int
+  workoutExercise   WorkoutExercise @relation(fields: [workoutExerciseId], references: [id], onDelete: Cascade)
+
+  setNumber         Int
+  reps              Int?
+  weight            Float?          // STORED AS KG
+  durationSeconds   Int?            // FOR TIMED SETS (E.G PLANK)
+  distanceMeters    Float?          // FOR CARDIO SETS
+  rpe               Int?            // 1..10
+  isWarmup          Boolean         @default(false)
+  isFailure         Boolean         @default(false)
+
+  createdAt         DateTime        @default(now())
+
+  @@unique([workoutExerciseId, setNumber])
+  @@index([workoutExerciseId])
 }

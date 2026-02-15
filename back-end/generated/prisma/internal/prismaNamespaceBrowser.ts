@@ -57,7 +57,11 @@ export const ModelName = {
   Thread: 'Thread',
   Reply: 'Reply',
   ThreadLike: 'ThreadLike',
-  ReplyLike: 'ReplyLike'
+  ReplyLike: 'ReplyLike',
+  Exercise: 'Exercise',
+  WorkoutSession: 'WorkoutSession',
+  WorkoutExercise: 'WorkoutExercise',
+  WorkoutSet: 'WorkoutSet'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -166,6 +170,60 @@ export const ReplyLikeScalarFieldEnum = {
 } as const
 
 export type ReplyLikeScalarFieldEnum = (typeof ReplyLikeScalarFieldEnum)[keyof typeof ReplyLikeScalarFieldEnum]
+
+
+export const ExerciseScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  category: 'category',
+  muscleGroup: 'muscleGroup',
+  equipment: 'equipment',
+  isBodyweight: 'isBodyweight',
+  createdAt: 'createdAt'
+} as const
+
+export type ExerciseScalarFieldEnum = (typeof ExerciseScalarFieldEnum)[keyof typeof ExerciseScalarFieldEnum]
+
+
+export const WorkoutSessionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  startedAt: 'startedAt',
+  endedAt: 'endedAt',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type WorkoutSessionScalarFieldEnum = (typeof WorkoutSessionScalarFieldEnum)[keyof typeof WorkoutSessionScalarFieldEnum]
+
+
+export const WorkoutExerciseScalarFieldEnum = {
+  id: 'id',
+  sessionId: 'sessionId',
+  exerciseId: 'exerciseId',
+  orderIndex: 'orderIndex',
+  notes: 'notes'
+} as const
+
+export type WorkoutExerciseScalarFieldEnum = (typeof WorkoutExerciseScalarFieldEnum)[keyof typeof WorkoutExerciseScalarFieldEnum]
+
+
+export const WorkoutSetScalarFieldEnum = {
+  id: 'id',
+  workoutExerciseId: 'workoutExerciseId',
+  setNumber: 'setNumber',
+  reps: 'reps',
+  weight: 'weight',
+  durationSeconds: 'durationSeconds',
+  distanceMeters: 'distanceMeters',
+  rpe: 'rpe',
+  isWarmup: 'isWarmup',
+  isFailure: 'isFailure',
+  createdAt: 'createdAt'
+} as const
+
+export type WorkoutSetScalarFieldEnum = (typeof WorkoutSetScalarFieldEnum)[keyof typeof WorkoutSetScalarFieldEnum]
 
 
 export const SortOrder = {
