@@ -1,17 +1,9 @@
+import { ApiSucess } from "../../../libs/types/api-responds/ApiSuccess";
+import { ChangePasswordType } from "../../../libs/types/settings/ChangePasswordType";
 import { request } from "../customApi/request";
 
-export type ChangePasswordPayload = {
-    currentPassword: string;
-    newPassword: string;
-    newConfirmPassword: string;
-};
-
-export type ChangePasswordApiSuccess = {
-    message?: string;
-};
-
-export function changePasswordApi(payload: ChangePasswordPayload) {
-    return request<ChangePasswordApiSuccess>(
+export function changePasswordApi(payload: ChangePasswordType) {
+    return request<ApiSucess>(
         {
             method: "PUT",
             url: "/settings/change-password",

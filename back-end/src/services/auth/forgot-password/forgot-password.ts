@@ -2,40 +2,23 @@ import crypto from "crypto";
 import { prisma } from "../../../db";
 import { generateOtp } from "../../../libs/forgot-password/generateOtp";
 import { generateOtpCaptchaImage } from "../../../libs/forgot-password/generateOtpCaptchaImage";
-import { emailLimiter } from "../../../middleware/emailLimiter";
 import { sendEmail } from "../../../libs/email/sendEmail";
 
 export async function forgotPasswordService(email: string) {
-  // Rate limit (hashed key so you’re not storing raw emails in redis/kv)
-  const emailHash = crypto.createHash("sha256").update(email).digest("hex");
-  const limiterCheck = emailLimiter(`tracker:email:${emailHash}`);
-
-  if (!limiterCheck.allowed) {
-    // best practice: do nothing else
-    return;
-  }
-
-  // Lookup user (don’t throw if missing)
+  // CHECKS IF USER EXISTS
   const user = await prisma.user.findUnique({ where: { email } });
-  if (!user) return;
+  if (!user) return { status: "invalid" as const };
 
-  
-  // OTP + captcha image
+  // GENERATES OTP
   const otp = generateOtp();
   const otpCaptchaImage = await generateOtpCaptchaImage(otp);
 
+  // HASHES OTP
   const otpSecret = process.env.OTP_SECRET;
-  if (!otpSecret) {
-    // You could log this. Don’t throw details to client.
-    return;
-  }
-
   const otpHash = crypto.createHash("sha256").update(`${otp}:${otpSecret}`).digest("hex");
+  const expiresAt = new Date(Date.now() + 5 * 60 * 1000); // 5 MINUTES
 
-  // NOTE: your comment/text says 10 min / 5 min but code is 1 min — pick one.
-  const expiresAt = new Date(Date.now() + 5 * 60 * 1000); // 5 minutes
-
-  // Store OTP state
+  // UPDATES DB
   await prisma.forgotPasswordOtp.upsert({
     where: { userId: user.id },
     update: {
@@ -51,7 +34,7 @@ export async function forgotPasswordService(email: string) {
     },
   });
 
-  // Send email
+  // SENDS EMAIL
   await sendEmail({
     to: email,
     subject: "Password reset verification code",
@@ -109,4 +92,6 @@ If you did not request a password reset, you can safely ignore this email.
     attachmentFileName: "verification-code.png",
     attachmentCid: "otp-image",
   });
+
+  return { status: "ok" as const };
 }

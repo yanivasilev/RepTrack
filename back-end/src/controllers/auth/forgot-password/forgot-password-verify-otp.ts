@@ -15,12 +15,7 @@ export async function forgotPasswordVerifyOtpController(req: Request, res: Respo
 
     const result = await forgotPasswordVerifyOtpService(parsed.data);
 
-    if (result.status === "invalid") {
-        return res.status(400).json({ message: "Your OTP is either invalid or expired." });
-    }
+    if (result.status === "invalid") return res.status(400).json({ message: "Your OTP is either invalid or expired." });
 
-    return res.status(200).json({
-        message: "OTP verified successfully.",
-        token: result.token,
-    });
+    return res.status(200).json({ message: "OTP verified successfully.", token: result.token, });
 }

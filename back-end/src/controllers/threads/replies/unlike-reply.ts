@@ -1,11 +1,21 @@
 import type { Request, Response } from "express";
+import { replyIdSchema } from "../../../schemas/threads/replies/reply-id";
 import { unlikeReplyService } from "../../../services/threads/replies/unlike-reply";
 
 export async function unlikeReplyController(req: Request, res: Response) {
     const user = (req as any).user;
-    const replyId = Number(req.params.replyId);
+    const parsed = replyIdSchema.safeParse(req.params);
+    
+    if (!parsed.success) {
+        return res.status(400).json({
+            errors: parsed.error.issues.map((i) => ({
+                field: i.path.join("."),
+                message: i.message,
+            })),
+        });
+    }
 
-    if (!Number.isInteger(replyId) || replyId <= 0) return res.status(400).json({ message: "Invalid reply id." });
+    const { replyId } = parsed.data;
 
     const result = await unlikeReplyService(user.id, replyId);
 

@@ -1,0 +1,1 @@
+export type ShoulderSide = "left" | "right";

@@ -1,11 +1,12 @@
 import { submitForm } from "../../forms/submitForm";
 import { validateUsername } from "../../forms/validations/validateUsername";
-import { changeUsernameApi, ChangeUsernamePayload } from "../../services/api/settings/changeUsernameApi";
+import { ChangeUsernameType } from "../../libs/types/settings/ChangeUsernameType";
+import { changeUsernameApi } from "../../services/api/settings/changeUsernameApi";
 
-type Fields = keyof ChangeUsernamePayload;
+type Fields = keyof ChangeUsernameType;
 
-export async function SubmitChangeUsername({ data }: { data: ChangeUsernamePayload }) {
-    return submitForm<ChangeUsernamePayload, Fields, { message?: string }>({
+export async function SubmitChangeUsername({ data }: { data: ChangeUsernameType }) {
+    return submitForm<ChangeUsernameType, Fields, { message?: string }>({
         data,
         validate: (d) => {
             const usernameError = validateUsername(d.username);

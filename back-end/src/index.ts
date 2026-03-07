@@ -13,15 +13,15 @@ import path from "path";
 import { changeDetailsController } from "./controllers/settings/change-details";
 import { changePasswordController } from "./controllers/settings/change-password";
 import { changeUsernameController } from "./controllers/settings/change-username";
-import { meController } from "./controllers/me";
 import { changeAvatarController } from "./controllers/settings/change-avatar";
 import { registerController } from "./controllers/auth/register";
 import { loginController } from "./controllers/auth/login";
 import { forgotPasswordController } from "./controllers/auth/forgot-password/forgot-password";
 import { forgotPasswordResetController } from "./controllers/auth/forgot-password/forgot-password-reset";
 import { forgotPasswordVerifyOtpController } from "./controllers/auth/forgot-password/forgot-password-verify-otp";
+import { emailVerificationController } from "./controllers/auth/email-verification/email-verification";
+import { emailVerificationVerifyOtpController } from "./controllers/auth/email-verification/email-verification-verify-otp";
 import { uploadVideo } from "./middleware/uploadVideo";
-import { analyzePushupVideo } from "./controllers/poseController";
 import { createThreadController } from "./controllers/threads/create-thread";
 import { deleteThreadController } from "./controllers/threads/delete-thread";
 import { editThreadController } from "./controllers/threads/edit-thread";
@@ -34,20 +34,20 @@ import { deleteReplyController } from "./controllers/threads/replies/delete-repl
 import { editReplyController } from "./controllers/threads/replies/edit-reply";
 import { likeReplyController } from "./controllers/threads/replies/like-reply";
 import { unlikeReplyController } from "./controllers/threads/replies/unlike-reply";
-import { addWorkoutExerciseController } from "./controllers/exercises/add-workout-exercise";
-import { updateWorkoutExerciseController } from "./controllers/exercises/update-workout-exercise";
-import { deleteWorkoutExerciseController } from "./controllers/exercises/delete-workout-exercise";
-import { addSetController } from "./controllers/exercises/sets/add-set";
-import { updateSetController } from "./controllers/exercises/sets/update-set";
-import { deleteSetController } from "./controllers/exercises/sets/delete-set";
-import { startWorkoutController } from "./controllers/workouts/start-workout";
-import { editWorkoutController } from "./controllers/workouts/edit-workout";
-import { finishWorkoutController } from "./controllers/workouts/finish-workout";
 import { deleteWorkoutController } from "./controllers/workouts/delete-workout";
 import { getWorkoutController } from "./controllers/workouts/get-workout";
 import { workoutHistoryController } from "./controllers/workouts/workout-history";
 import { getAllExercisesController } from "./controllers/exercises/get-all-exercises";
 import { getExerciseController } from "./controllers/exercises/get-exercise";
+import { workoutStatsController } from "./controllers/workouts/workout-stats";
+import { saveWorkoutController } from "./controllers/workouts/save-workout";
+import { workoutSuggestionController } from "./controllers/workouts/workout-suggestion";
+import { getProfileController } from "./controllers/profiles/get-profile";
+import { getProfileByIdController } from "./controllers/profiles/get-profile-by-id";
+import { getAllProfilesController } from "./controllers/profiles/get-all-profiles";
+import { getProfileThreadsController } from "./controllers/profiles/get-profile-threads";
+import { getProfileRepliesController } from "./controllers/profiles/get-profile-replies";
+import { formFeedbackController } from "./controllers/form-feedback/form-feedback";
 
 dotenv.config();
 
@@ -60,7 +60,7 @@ app.use(express.json());
 app.get("/", (_req, res) => res.send("API running: "));
 
 // OTHER ROUTES
-app.get("/auth/check", requireLoggedIn, (_req, res) => { res.status(200).json({ ok: true }); });
+app.get("/auth/check", requireLoggedIn, (_req, res) => { res.status(200).json({ user: (_req as any).user }); });
 
 ///////////////////////
 // LOGGED OUT ROUTES //
@@ -71,20 +71,30 @@ app.post("/auth/register", requireLoggedOut, registerController);
 app.post("/auth/forgot-password", requireLoggedOut, ipLimiter("If an account exists, your verification code has been sent."), forgotPasswordController);
 app.post("/auth/forgot-password/verify", requireLoggedOut, forgotPasswordVerifyOtpController);
 app.post("/auth/forgot-password/reset", requireLoggedOut, forgotPasswordResetController);
+app.post("/auth/email-verification", requireLoggedOut, ipLimiter("If an account exists, your verification code has been sent."), emailVerificationController);
+app.post("/auth/email-verification/verify", requireLoggedOut, emailVerificationVerifyOtpController);
 
 //////////////////////
 // LOGGED IN ROUTES //
 //////////////////////
+
+// SETTINGS
 app.put("/settings/change-details", requireLoggedIn, changeDetailsController);
 app.put("/settings/change-password", requireLoggedIn, changePasswordController);
 app.put("/settings/change-username", requireLoggedIn, changeUsernameController);
 app.put("/settings/change-avatar", requireLoggedIn, changeAvatarMiddleware.single("avatar"), changeAvatarController);
-app.get("/me", requireLoggedIn, meController);
+
+// PROFILES
+app.get("/profiles/me", requireLoggedIn, getProfileController);
+app.get("/profiles/:userId/threads", requireLoggedIn, getProfileThreadsController);
+app.get("/profiles/:userId/replies", requireLoggedIn, getProfileRepliesController);
+app.get("/profiles/:userId", requireLoggedIn, getProfileByIdController);
+app.get("/profiles", requireLoggedIn, getAllProfilesController);
 
 // THREADS
 app.post("/threads", requireLoggedIn, createThreadController);
 app.delete("/threads/:threadId", requireLoggedIn, deleteThreadController);
-app.patch("/threads/edit/:threadId", requireLoggedIn, editThreadController);
+app.patch("/threads/:threadId", requireLoggedIn, editThreadController);
 app.get("/threads", requireLoggedIn, getAllThreadsController);
 app.get("/threads/:threadId", requireLoggedIn, getThreadController);
 app.post("/threads/:threadId/like", requireLoggedIn, likeThreadController);
@@ -98,28 +108,19 @@ app.post("/reply/:replyId/like", requireLoggedIn, likeReplyController);
 app.delete("/reply/:replyId/like", requireLoggedIn, unlikeReplyController);
 
 // WORKOUTS
-app.post("/workouts/start", requireLoggedIn, startWorkoutController);
-app.patch("/workouts/edit/:workoutId", requireLoggedIn, editWorkoutController);
-app.patch("/workouts/finish/:workoutId", requireLoggedIn, finishWorkoutController);
+app.post("/workouts", requireLoggedIn, saveWorkoutController);
 app.delete("/workouts/delete/:workoutId", requireLoggedIn, deleteWorkoutController);
 app.get("/workouts/:workoutId", requireLoggedIn, getWorkoutController);
 app.get("/workouts-history", requireLoggedIn, workoutHistoryController);
+app.get("/workouts-stats", requireLoggedIn, workoutStatsController);
+app.get("/workouts-suggestion/:exerciseId", requireLoggedIn, workoutSuggestionController);
 
 // EXERCISES
 app.get("/exercises", requireLoggedIn, getAllExercisesController);
 app.get("/exercises/:exerciseId", requireLoggedIn, getExerciseController);
-app.post("/exercises/add/:workoutId", requireLoggedIn, addWorkoutExerciseController);
-app.patch("/exercises/update/:workoutExerciseId", requireLoggedIn, updateWorkoutExerciseController);
-app.delete("/exercises/delete/:workoutExerciseId", requireLoggedIn, deleteWorkoutExerciseController);
 
-// SETS
-app.post("/sets/add/:workoutExerciseId", requireLoggedIn, addSetController);
-app.patch("/sets/update/:setId", requireLoggedIn, updateSetController);
-app.delete("/sets/delete/:setId", requireLoggedIn, deleteSetController);
-
-
-// TESTING POSE DETECTION
-app.post("/pushup", uploadVideo.single("video"), analyzePushupVideo);
+// FORM FEEDBACK
+app.post("/form-feedback/:exerciseId", uploadVideo.single("video"), formFeedbackController);
 
 app.use("/uploads", express.static(path.join(process.cwd(), "public", "uploads")));
 
@@ -128,7 +129,7 @@ app.use((err: any, _req: Request, res: Response, next: NextFunction) => {
     if (err instanceof multer.MulterError) {
         if (err.code === "LIMIT_FILE_SIZE") {
             return res.status(413).json({
-                message: "File size is limited to 2 MB."
+                message: "File size is limited to 50 MB."
             });
         }
 

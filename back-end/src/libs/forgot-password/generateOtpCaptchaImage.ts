@@ -5,6 +5,8 @@ export async function generateOtpCaptchaImage(otp: string): Promise<Buffer> {
     const captcha = new Captcha(300, 100);
 
     captcha.async = false;
+
+    // ADDS BACKGROUND NOISE
     captcha.addDecoy({
         color: "#6b7280",
         font: "Arial",
@@ -13,6 +15,7 @@ export async function generateOtpCaptchaImage(otp: string): Promise<Buffer> {
         total: randomInt(30, 70),
     });
 
+    // DRAWS RANDOM TRACE LINES
     const traceCount = randomInt(1, 3);
     for (let i = 0; i < traceCount; i++) {
         captcha.drawTrace({
@@ -22,6 +25,7 @@ export async function generateOtpCaptchaImage(otp: string): Promise<Buffer> {
         });
     }
 
+    // RENDERS OTP
     captcha.drawCaptcha({ text: otp });
 
     const png = await captcha.png;

@@ -1,33 +1,36 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { AppStackParamList } from "../../../navigation/AppNavigator";
 import { styles } from "./styles";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { ActivityIndicator, Modal, Pressable, Text, View } from "react-native";
-import BackButton from "../../../components/BackButton";
-import Input from "../../../components/Input";
-import Button from "../../../components/Button";
+import { Keyboard, KeyboardAvoidingView, Platform, Text, TouchableWithoutFeedback, View } from "react-native";
+import BackButton from "../../../components/buttons/BackButton";
+import Input from "../../../components/inputs/Input";
+import Button from "../../../components/buttons/Button";
 import { useEffect, useState } from "react";
-import { profileDetailsApi } from "../../../services/api/profileDetailsApi";
 import { SubmitChangeUsername } from "../../../components/settings/SubmitChangeUsername";
+import { ProfilesParamList } from "../../../navigation/ProfilesNavigator";
+import { getProfileApi } from "../../../services/api/profiles/getProfileApi";
+import Loading from "../../../components/Loading";
+import Error from "../../../components/Error";
+import FeedbackModal from "../../../components/FeedbackModal";
 
-type Props = NativeStackScreenProps<AppStackParamList, "ChangeUsername">;
+type Props = NativeStackScreenProps<ProfilesParamList, "ChangeUsername">;
 
 export default function ChangeUsernameScreen({ navigation }: Props) {
     const [username, setUsername] = useState("");
     const [overlay, setOverlay] = useState<{ text: string; success: boolean; } | null>(null);
-    const [loading, setLoading] = useState(false);
+    const [submitting, setSubmitting] = useState(false);
+    const [loading, setLoading] = useState(true);
+    const [fetchError, setFetchError] = useState<string | null>(null);
     const [errors, setErrors] = useState<Partial<Record<"username", string>>>({});
 
     useEffect(() => {
         (async () => {
             try {
                 setLoading(true);
+                setFetchError(null);
                 await fetchUsername();
             } catch (e: any) {
-                setOverlay({
-                    text: e?.message ?? "Failed to load username.",
-                    success: false,
-                });
+                setFetchError(e?.message ?? "Failed to load username.");
             } finally {
                 setLoading(false);
             }
@@ -36,17 +39,17 @@ export default function ChangeUsernameScreen({ navigation }: Props) {
 
     const fetchUsername = async () => {
         setErrors({});
-        const res = await profileDetailsApi();
+        const res = await getProfileApi();
         setUsername(res.username);
     };
 
     const handleChangeUsernamePress = async () => {
-        setLoading(true);
+        setSubmitting(true);
         setErrors({});
 
         const res = await SubmitChangeUsername({ data: { username } });
 
-        setLoading(false);
+        setSubmitting(false);
 
         if (!res.success) {
             if (!res.errors) {
@@ -64,63 +67,45 @@ export default function ChangeUsernameScreen({ navigation }: Props) {
             text: res.message,
             success: true,
         });
-        return;
-    }
+    };
+
+    if (loading) return <Loading />;
+
+    if (fetchError) return <Error navigation={navigation} error={fetchError ?? "Something went wrong."} />;
 
     return (
-        <SafeAreaView style={styles.safe}>
-            <View style={styles.root}>
-                <BackButton navigation={navigation} />
-                <Text style={styles.title}>Change{"\n"}Username</Text>
+        <SafeAreaView style={styles.safe} edges={["top", "left", "right"]}>
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+                <KeyboardAvoidingView style={styles.root} behavior={Platform.OS === "ios" ? "padding" : undefined} keyboardVerticalOffset={Platform.OS === "ios" ? 0 : 0}>
+                    <BackButton navigation={navigation} />
+                    <Text style={styles.title}>Change{"\n"}Username</Text>
 
-                <View style={styles.container}>
-                    <View>
-                        <Input
-                            label='Username'
-                            placeholder='Enter username'
-                            value={username}
-                            onChangeText={(v) => setUsername(v)}
-                            error={errors.username}
-                        />
-                        <Text style={{ marginTop: 5, fontSize: 12, color: "gray" }}>You can only change your username once every 30 days.</Text>
-                    </View>
-
-                    <Button label="DONE" onPress={handleChangeUsernamePress} />
-                </View>
-            </View>
-
-            {/* FEEDBACK MESSAGE */}
-            {(overlay || loading) && (
-                <Modal
-                    visible={true}
-                    transparent
-                    animationType="fade"
-                    onRequestClose={() => setOverlay(null)} // ANDROID BACK BUTTON
-                >
-                    <View style={styles.overlay}>
-                        <View style={!loading && styles.box}>
-                            {loading ? (
-                                <ActivityIndicator size="large" color="#22c55e" />
-                            ) : (
-                                <Text
-                                    style={[
-                                        styles.text,
-                                        { color: overlay?.success ? "green" : "red" },
-                                    ]}
-                                >
-                                    {overlay?.text}
-                                </Text>
-                            )}
-
-                            {!loading && (
-                                <Pressable onPress={() => setOverlay(null)} style={({ pressed }) => [styles.closeButton, pressed && styles.closeButtonPressed]}>
-                                    <Text style={styles.closeText}>CLOSE</Text>
-                                </Pressable>
-                            )}
+                    <View style={styles.container}>
+                        <View>
+                            <Input
+                                label="Username"
+                                placeholder="Enter username"
+                                value={username}
+                                onChangeText={(v) => setUsername(v)}
+                                error={errors.username}
+                            />
+                            <Text style={styles.tip}>
+                                You can only change your username once every 30 days.
+                            </Text>
                         </View>
+
+                        <Button label="DONE" onPress={handleChangeUsernamePress} />
                     </View>
-                </Modal>
-            )}
+
+                    <FeedbackModal
+                        visible={Boolean(overlay) || submitting}
+                        loading={submitting}
+                        message={overlay?.text}
+                        success={overlay?.success}
+                        onClose={() => setOverlay(null)}
+                    />
+                </KeyboardAvoidingView>
+            </TouchableWithoutFeedback>
         </SafeAreaView>
     );
 }

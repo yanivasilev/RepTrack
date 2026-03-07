@@ -16,7 +16,7 @@ export async function getAllExercisesController(req: Request, res: Response) {
 
     const { page, limit, query } = parsed.data;
 
-    const result = await getAllExercisesService({ page, limit, query });
+    const result = await getAllExercisesService(page, limit, query);
 
     return res.status(200).json(result);
 }

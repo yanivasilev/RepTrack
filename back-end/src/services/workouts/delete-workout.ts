@@ -6,9 +6,11 @@ export async function deleteWorkoutService(userId: number, workoutId: number) {
         select: { userId: true },
     });
 
+    // CHECKS IF WORKOUT EXISTS AND IF AUTHOR MATCHES
     if (!workout) return { status: "not_found" as const };
     if (workout.userId !== userId) return { status: "unauthorised" as const };
 
+    // DELETES WORKOUT FROM DB
     await prisma.workoutSession.delete({ where: { id: workoutId }, });
 
     return { status: "ok" as const };

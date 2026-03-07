@@ -15,13 +15,9 @@ export async function loginController(req: Request, res: Response) {
 
     const result = await loginService(parsed.data);
 
-    if (result.status === "invalid") {
-        return res.status(401).json({ message: "Email or password is invalid." });
-    }
-
-    if (result.status === "server_error") {
-        return res.status(500).json({ message: "Access token was not generated." });
-    }
+    if (result.status === "invalid") return res.status(401).json({ message: "Email or password is invalid." });
+    if (result.status === "email_not_verified") return res.status(403).json({ message: "You need to verify your email before logging in.", code: "EMAIL_NOT_VERIFIED" });
+    if (result.status === "server_error") return res.status(500).json({ message: "Access token was not generated." });
 
     return res.json({ accessToken: result.accessToken });
 }

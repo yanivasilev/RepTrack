@@ -1,15 +1,9 @@
+import { ApiSucess } from "../../../../libs/types/api-responds/ApiSuccess";
+import { ForgotPasswordApiType } from "../../../../libs/types/auth/forgot-password/ForgotPassowrdApiType";
 import { request } from "../../customApi/request";
 
-export type ForgotPasswordPayload = {
-    email: string;
-};
-
-export type ForgotPasswordApiSuccess = {
-    message?: string;
-};
-
-export function forgotPasswordApi(payload: ForgotPasswordPayload) {
-    return request<ForgotPasswordApiSuccess>(
+export function forgotPasswordApi(payload: ForgotPasswordApiType) {
+    return request<ApiSucess>(
         {
             method: "POST",
             url: "/auth/forgot-password",

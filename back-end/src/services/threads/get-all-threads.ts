@@ -1,13 +1,23 @@
 import { prisma } from "../../db";
 
-export async function getAllThreadsService(userId: number, opts: { page: number; limit: number }) {
-    const { page, limit } = opts;
+export async function getAllThreadsService(userId: number, opts: { page: number; limit: number; query?: string; }) {
+    const { page, limit, query } = opts;
     const skip = (page - 1) * limit;
 
+    const queryTrimmed = query?.trim();
+    const where = queryTrimmed ? {
+        OR: [
+            { title: { contains: query } },
+            { body: { contains: query } },
+        ],
+    } : {};
+
+    // GETS THREADS FROM THE DB
     const [total, threads] = await Promise.all([
-        prisma.thread.count(),
+        prisma.thread.count({ where }),
         prisma.thread.findMany({
-            orderBy: { createdAt: "desc" },
+            where,
+            orderBy: [{ createdAt: "desc" }, { id: "desc" }],
             skip,
             take: limit,
             select: {
@@ -31,6 +41,7 @@ export async function getAllThreadsService(userId: number, opts: { page: number;
         }),
     ]);
 
+    // MAPS THEM TO CORRECT FORMAT
     const items = threads.map((t) => ({
         id: t.id,
         title: t.title,

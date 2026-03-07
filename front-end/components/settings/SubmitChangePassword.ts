@@ -2,12 +2,13 @@ import { submitForm } from "../../forms/submitForm";
 import { validateConfirmPassword } from "../../forms/validations/validateConfirmPassword";
 import { validatePassword } from "../../forms/validations/validatePassword";
 import { validateCurrentPassword } from "../../forms/validations/vildateCurrentPassword";
-import { changePasswordApi, ChangePasswordPayload } from "../../services/api/settings/changePasswordApi";
+import { ChangePasswordType } from "../../libs/types/settings/ChangePasswordType";
+import { changePasswordApi } from "../../services/api/settings/changePasswordApi";
 
-type Fields = keyof ChangePasswordPayload;
+type Fields = keyof ChangePasswordType;
 
-export async function SubmitChangePassword({ data }: { data: ChangePasswordPayload }) {
-    return submitForm<ChangePasswordPayload, Fields, { message?: string }>({
+export async function SubmitChangePassword({ data }: { data: ChangePasswordType }) {
+    return submitForm<ChangePasswordType, Fields, { message?: string }>({
         data,
         validate: (d) => {
             const errors: Partial<Record<Fields, string>> = {};

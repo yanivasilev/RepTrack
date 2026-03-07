@@ -8,9 +8,7 @@ export function verifyFPtoken(inputToken: string, storedTokenHash: string) {
     const bufferInputToken = Buffer.from(inputHash, 'hex');
     const bufferStoredToken = Buffer.from(storedTokenHash, 'hex');
 
-    if (bufferInputToken.length !== bufferStoredToken.length) {
-        return false;
-    }
+    if (bufferInputToken.length !== bufferStoredToken.length) return false;
 
     return crypto.timingSafeEqual(bufferInputToken, bufferStoredToken);
 }

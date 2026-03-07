@@ -17,7 +17,7 @@ export const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
-        paddingHorizontal: 30,
+        paddingHorizontal: 16,
         justifyContent: "space-between",
     },
     overlay: {
@@ -63,5 +63,10 @@ export const styles = StyleSheet.create({
         backgroundColor: "rgba(15, 23, 42, 0.75)",
         justifyContent: "center",
         alignItems: "center",
+    },
+    tip: {
+        marginTop: 5,
+        fontSize: 12,
+        color: "gray"
     }
 })

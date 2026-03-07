@@ -1,18 +1,21 @@
 import { prisma } from "../../../db";
 
-export async function editReplyService(userId: number, replyId: number, data: { body: string }) {
+export async function editReplyService(userId: number, replyId: number, body: string) {
     const reply = await prisma.reply.findUnique({
         where: { id: replyId },
         select: { authorId: true, body: true },
     });
 
+    // CHECKS IF REPLY EXISTS AND IF AUTHOR MATCHES
     if (!reply) return { status: "not_found" as const };
     if (reply.authorId !== userId) return { status: "unauthorised" as const };
 
-    const newBody = data.body.trim();
+    const newBody = body.trim();
 
+    // CHECKS IF THERE WE ANY CHANGES
     if (newBody === reply.body) return { status: "no_changes" as const };
 
+    // UPDATES DB
     const updated = await prisma.reply.update({
         where: { id: replyId },
         data: { body: newBody },
@@ -23,5 +26,5 @@ export async function editReplyService(userId: number, replyId: number, data: { 
         },
     });
 
-    return { status: "ok" as const, reply: updated };
+    return { status: "updated" as const, reply: updated };
 }

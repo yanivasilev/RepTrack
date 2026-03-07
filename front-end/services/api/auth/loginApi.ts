@@ -1,17 +1,9 @@
+import { ApiSuccessLogin } from "../../../libs/types/api-responds/ApiSuccessLogin";
+import { LoginFormType } from "../../../libs/types/auth/LoginFormType";
 import { request } from "../customApi/request";
 
-export type LoginPayload = {
-    email: string;
-    password: string;
-};
-
-export type LoginApiSuccess = {
-    message?: string;
-    accessToken?: string;
-};
-
-export function LoginApi(payload: LoginPayload) {
-    return request<LoginApiSuccess>(
+export function loginApi(payload: LoginFormType) {
+    return request<ApiSuccessLogin>(
         {
             method: "POST",
             url: "/auth/login",

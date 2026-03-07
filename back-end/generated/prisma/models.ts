@@ -9,6 +9,7 @@
  * 🟢 You can import this file directly.
  */
 export type * from './models/User'
+export type * from './models/EmailVerificationOtp'
 export type * from './models/ForgotPasswordOtp'
 export type * from './models/ForgotPasswordSession'
 export type * from './models/Thread'
@@ -19,4 +20,6 @@ export type * from './models/Exercise'
 export type * from './models/WorkoutSession'
 export type * from './models/WorkoutExercise'
 export type * from './models/WorkoutSet'
+export type * from './models/Badge'
+export type * from './models/UserBadge'
 export type * from './commonInputTypes'

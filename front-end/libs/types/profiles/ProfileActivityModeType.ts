@@ -1,0 +1,1 @@
+export type ProfileActivityModeType = "threads" | "replies";

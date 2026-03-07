@@ -22,8 +22,10 @@ export async function getThreadService(userId: number, threadId: number, replies
         },
     });
 
+    // CHECKS IF THREAD EXISTS
     if (!thread) return { status: "not_found" as const };
 
+    // GETS THE REPLIES OF THE THREAD
     const [repliesTotal, repliesRows] = await Promise.all([
         prisma.reply.count({ where: { threadId } }),
         prisma.reply.findMany({
@@ -47,6 +49,7 @@ export async function getThreadService(userId: number, threadId: number, replies
         }),
     ]);
 
+    // MAPS THEM TO CORRECT FORMAT
     const mappedReplies = repliesRows.map((r) => ({
         id: r.id,
         body: r.body,
@@ -58,26 +61,23 @@ export async function getThreadService(userId: number, threadId: number, replies
     }));
 
     return {
-        status: "ok" as const,
-        data: {
-            thread: {
-                id: thread.id,
-                title: thread.title,
-                body: thread.body,
-                createdAt: thread.createdAt,
-                updatedAt: thread.updatedAt,
-                likeCount: thread.likeCount,
-                replyCount: thread.replyCount,
-                author: thread.author,
-                likedByMe: thread.likes.length > 0,
-            },
-            replies: {
-                page: replies.page,
-                limit: replies.limit,
-                total: repliesTotal,
-                totalPages: Math.ceil(repliesTotal / replies.limit),
-                items: mappedReplies,
-            },
+        thread: {
+            id: thread.id,
+            title: thread.title,
+            body: thread.body,
+            createdAt: thread.createdAt,
+            updatedAt: thread.updatedAt,
+            likeCount: thread.likeCount,
+            replyCount: thread.replyCount,
+            author: thread.author,
+            likedByMe: thread.likes.length > 0,
+        },
+        replies: {
+            page: replies.page,
+            limit: replies.limit,
+            total: repliesTotal,
+            totalPages: Math.ceil(repliesTotal / replies.limit),
+            items: mappedReplies,
         },
     };
 }

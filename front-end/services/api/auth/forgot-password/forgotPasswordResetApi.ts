@@ -1,18 +1,9 @@
+import { ApiSucess } from "../../../../libs/types/api-responds/ApiSuccess";
+import { ForgotPasswordResetType } from "../../../../libs/types/auth/forgot-password/ForgotPasswordResetType";
 import { request } from "../../customApi/request";
 
-export type ForgotPasswordResetPayload = {
-    email: string;
-    token: string;
-    password: string;
-    confirmPassword: string;
-};
-
-export type ForgotPasswordResetApiSuccess = {
-    message?: string;
-};
-
-export function forgotPasswordResetApi(payload: ForgotPasswordResetPayload) {
-    return request<ForgotPasswordResetApiSuccess>(
+export function forgotPasswordResetApi(payload: ForgotPasswordResetType) {
+    return request<ApiSucess>(
         {
             method: "POST",
             url: "/auth/forgot-password/reset",

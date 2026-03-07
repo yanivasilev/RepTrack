@@ -1,11 +1,21 @@
 import type { Request, Response } from "express";
+import { replyIdSchema } from "../../../schemas/threads/replies/reply-id";
 import { likeReplyService } from "../../../services/threads/replies/like-reply";
 
 export async function likeReplyController(req: Request, res: Response) {
     const user = (req as any).user;
-    const replyId = Number(req.params.replyId);
+    const parsed = replyIdSchema.safeParse(req.params);
 
-    if (!Number.isInteger(replyId) || replyId <= 0) return res.status(400).json({ message: "Invalid reply id." });
+    if (!parsed.success) {
+        return res.status(400).json({
+            errors: parsed.error.issues.map((i) => ({
+                field: i.path.join("."),
+                message: i.message,
+            })),
+        });
+    }
+
+    const { replyId } = parsed.data;
 
     const result = await likeReplyService(user.id, replyId);
 

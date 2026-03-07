@@ -6,16 +6,16 @@ export async function unlikeReplyService(userId: number, replyId: number) {
         select: { id: true }
     });
 
+    // CHECKS IF REPLY EXISTS
     if (!reply) return { status: "not_found" as const };
 
     const result = await prisma.$transaction(async (tx) => {
-
-        // CHECK IF ITS ALREADY UNLIKED
         const existing = await tx.replyLike.findUnique({
             where: { replyId_userId: { replyId, userId } },
             select: { id: true }
         });
 
+        // CHECK IF ITS ALREADY UNLIKED
         if (!existing) {
             const t = await tx.reply.findUnique({
                 where: { id: replyId },
@@ -25,6 +25,7 @@ export async function unlikeReplyService(userId: number, replyId: number) {
             return { status: "ok" as const, liked: false, likeCount: t?.likeCount ?? 0 };
         }
 
+        // UPDATES DB
         await tx.replyLike.delete({ where: { replyId_userId: { replyId, userId } }, });
 
         const updated = await tx.reply.update({

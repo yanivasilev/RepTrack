@@ -286,6 +286,13 @@ export type BoolFilter<$PrismaModel = never> = {
   not?: Prisma.NestedBoolFilter<$PrismaModel> | boolean
 }
 
+export type EnumExerciseTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.ExerciseType | Prisma.EnumExerciseTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.ExerciseType[]
+  notIn?: $Enums.ExerciseType[]
+  not?: Prisma.NestedEnumExerciseTypeFilter<$PrismaModel> | $Enums.ExerciseType
+}
+
 export type EnumExerciseCategoryWithAggregatesFilter<$PrismaModel = never> = {
   equals?: $Enums.ExerciseCategory | Prisma.EnumExerciseCategoryFieldRefInput<$PrismaModel>
   in?: $Enums.ExerciseCategory[]
@@ -322,6 +329,16 @@ export type BoolWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedBoolFilter<$PrismaModel>
   _max?: Prisma.NestedBoolFilter<$PrismaModel>
+}
+
+export type EnumExerciseTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ExerciseType | Prisma.EnumExerciseTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.ExerciseType[]
+  notIn?: $Enums.ExerciseType[]
+  not?: Prisma.NestedEnumExerciseTypeWithAggregatesFilter<$PrismaModel> | $Enums.ExerciseType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumExerciseTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumExerciseTypeFilter<$PrismaModel>
 }
 
 export type IntNullableFilter<$PrismaModel = never> = {
@@ -376,6 +393,23 @@ export type FloatNullableWithAggregatesFilter<$PrismaModel = never> = {
   _sum?: Prisma.NestedFloatNullableFilter<$PrismaModel>
   _min?: Prisma.NestedFloatNullableFilter<$PrismaModel>
   _max?: Prisma.NestedFloatNullableFilter<$PrismaModel>
+}
+
+export type EnumBadgeTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.BadgeType | Prisma.EnumBadgeTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.BadgeType[]
+  notIn?: $Enums.BadgeType[]
+  not?: Prisma.NestedEnumBadgeTypeFilter<$PrismaModel> | $Enums.BadgeType
+}
+
+export type EnumBadgeTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.BadgeType | Prisma.EnumBadgeTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.BadgeType[]
+  notIn?: $Enums.BadgeType[]
+  not?: Prisma.NestedEnumBadgeTypeWithAggregatesFilter<$PrismaModel> | $Enums.BadgeType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumBadgeTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumBadgeTypeFilter<$PrismaModel>
 }
 
 export type NestedIntFilter<$PrismaModel = never> = {
@@ -667,6 +701,13 @@ export type NestedBoolFilter<$PrismaModel = never> = {
   not?: Prisma.NestedBoolFilter<$PrismaModel> | boolean
 }
 
+export type NestedEnumExerciseTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.ExerciseType | Prisma.EnumExerciseTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.ExerciseType[]
+  notIn?: $Enums.ExerciseType[]
+  not?: Prisma.NestedEnumExerciseTypeFilter<$PrismaModel> | $Enums.ExerciseType
+}
+
 export type NestedEnumExerciseCategoryWithAggregatesFilter<$PrismaModel = never> = {
   equals?: $Enums.ExerciseCategory | Prisma.EnumExerciseCategoryFieldRefInput<$PrismaModel>
   in?: $Enums.ExerciseCategory[]
@@ -703,6 +744,16 @@ export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedBoolFilter<$PrismaModel>
   _max?: Prisma.NestedBoolFilter<$PrismaModel>
+}
+
+export type NestedEnumExerciseTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ExerciseType | Prisma.EnumExerciseTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.ExerciseType[]
+  notIn?: $Enums.ExerciseType[]
+  not?: Prisma.NestedEnumExerciseTypeWithAggregatesFilter<$PrismaModel> | $Enums.ExerciseType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumExerciseTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumExerciseTypeFilter<$PrismaModel>
 }
 
 export type NestedFloatNullableFilter<$PrismaModel = never> = {
@@ -746,6 +797,23 @@ export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
   _sum?: Prisma.NestedFloatNullableFilter<$PrismaModel>
   _min?: Prisma.NestedFloatNullableFilter<$PrismaModel>
   _max?: Prisma.NestedFloatNullableFilter<$PrismaModel>
+}
+
+export type NestedEnumBadgeTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.BadgeType | Prisma.EnumBadgeTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.BadgeType[]
+  notIn?: $Enums.BadgeType[]
+  not?: Prisma.NestedEnumBadgeTypeFilter<$PrismaModel> | $Enums.BadgeType
+}
+
+export type NestedEnumBadgeTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.BadgeType | Prisma.EnumBadgeTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.BadgeType[]
+  notIn?: $Enums.BadgeType[]
+  not?: Prisma.NestedEnumBadgeTypeWithAggregatesFilter<$PrismaModel> | $Enums.BadgeType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumBadgeTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumBadgeTypeFilter<$PrismaModel>
 }
 
 

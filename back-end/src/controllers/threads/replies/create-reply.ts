@@ -4,11 +4,7 @@ import { createReplyService } from "../../../services/threads/replies/create-rep
 
 export async function createReplyController(req: Request, res: Response) {
     const user = (req as any).user;
-    const threadId = Number(req.params.threadId);
-
-    if (!Number.isInteger(threadId) || threadId <= 0) return res.status(400).json({ message: "Invalid thread id." });
-
-    const parsed = createReplySchema.safeParse(req.body);
+    const parsed = createReplySchema.safeParse({ params: req.params, body: req.body });
 
     if (!parsed.success) {
         return res.status(400).json({
@@ -19,12 +15,10 @@ export async function createReplyController(req: Request, res: Response) {
         });
     }
 
-    const result = await createReplyService(user.id, threadId, parsed.data.body);
+    const { threadId } = parsed.data.params;
+    const result = await createReplyService(user.id, threadId, parsed.data.body.body);
 
     if (result.status === "not_found") return res.status(404).json({ message: "Thread not found." });
 
-    return res.status(201).json({
-        message: "Reply created successfully.",
-        reply: result.reply,
-    });
+    return res.status(201).json({ message: "Reply created successfully.", reply: result.reply });
 }

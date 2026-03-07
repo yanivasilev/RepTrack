@@ -1,0 +1,1 @@
+export type Signal = "ELBOW" | "SHOULDER_Y";

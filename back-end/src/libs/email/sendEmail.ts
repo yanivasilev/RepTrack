@@ -11,6 +11,7 @@ type sendEmailProps = {
 }
 
 export async function sendEmail({ to, subject, text, html, attachment, attachmentFileName, attachmentCid }: sendEmailProps) {
+    // CREATES SMTP TRANSPORTER
     const transporter = nodemailer.createTransport({
         host: process.env.SMTP_HOST,
         port: Number(process.env.SMTP_PORT),
@@ -21,6 +22,7 @@ export async function sendEmail({ to, subject, text, html, attachment, attachmen
         }
     });
 
+    // ATTACHMENTS
     const attachments =
         attachment
             ? [
@@ -32,6 +34,7 @@ export async function sendEmail({ to, subject, text, html, attachment, attachmen
             ]
             : undefined;
 
+    // SENDS EMAIL
     const email = await transporter.sendMail({
         from: process.env.SMTP_USER,
         to: to,
@@ -42,5 +45,4 @@ export async function sendEmail({ to, subject, text, html, attachment, attachmen
     });
 
     return email.messageId;
-
 }

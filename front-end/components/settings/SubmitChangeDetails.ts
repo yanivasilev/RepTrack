@@ -1,33 +1,31 @@
 import { submitForm } from "../../forms/submitForm";
 import { validateEnum } from "../../forms/validations/validateEnum";
 import { validateWeight } from "../../forms/validations/validateWeight";
-import { EXPERIENCE_LEVEL, ExperienceLevel, FITNESS_GOALS, FitnessGoal, TRAINING_FREQUENCY, TRAINING_STYLE, TrainingFrequency, TrainingStyle, UNIT_TYPE, UnitType } from "../../libs/catalogs/register";
-import { changeDetailsApi, ChangeDetailsPayload } from "../../services/api/settings/changeDetailsApi";
+import { EXPERIENCE_LEVEL } from "../../libs/types/common/ExperienceLevel";
+import { FITNESS_GOALS } from "../../libs/types/common/FitnessGoals";
+import { ChangeDetailsType } from "../../libs/types/settings/ChangeDetailsType";
+import { TRAINING_FREQUENCY } from "../../libs/types/common/TrainingFrequency";
+import { TRAINING_STYLE } from "../../libs/types/common/TrainingStyle";
+import { UNIT_TYPE } from "../../libs/types/common/UnitType";
+import { changeDetailsApi } from "../../services/api/settings/changeDetailsApi";
+import { convertWeight } from "../../libs/helpers/convertWeight";
 
+type Fields = keyof ChangeDetailsType;
 
-export type ChangeDetailsFormData = {
-    weight: string;
-    weightUnitType: UnitType;
-    fitnessGoal: FitnessGoal | null;
-    experienceLevel: ExperienceLevel | null;
-    trainingStyle: TrainingStyle | null;
-    trainingFrequency: TrainingFrequency | null;
-};
-
-type Fields = keyof ChangeDetailsFormData;
-
-export async function SubmitChangeDetails({ data }: { data: ChangeDetailsFormData }) {
-    return submitForm<ChangeDetailsFormData, Fields, { message?: string }>({
+export async function SubmitChangeDetails({ data }: { data: ChangeDetailsType }) {
+    return submitForm<ChangeDetailsType, Fields, { message?: string }>({
         data,
         validate: (d) => {
             const errors: Partial<Record<Fields, string>> = {};
 
-            const weightToNumber = Number(d.weight);
-            const weightError = validateWeight(weightToNumber, d.weightUnitType);
+            const weightError = validateWeight(d.weight, d.weightUnitType);
             if (weightError) errors.weight = weightError;
 
             const weightUnitTypeError = validateEnum(d.weightUnitType, UNIT_TYPE, "Weight unit");
             if (weightUnitTypeError) errors.weightUnitType = weightUnitTypeError;
+
+            const heightUnitTypeError = validateEnum(d.heightUnitType, UNIT_TYPE, "Height unit");
+            if (heightUnitTypeError) errors.heightUnitType = heightUnitTypeError;
 
             const fitnessGoalError = validateEnum(d.fitnessGoal, FITNESS_GOALS, "Fitness goal");
             if (fitnessGoalError) errors.fitnessGoal = fitnessGoalError;
@@ -44,16 +42,18 @@ export async function SubmitChangeDetails({ data }: { data: ChangeDetailsFormDat
             return Object.keys(errors).length ? errors : null;
         },
         apiCall: async (d) => {
-            const payload: ChangeDetailsPayload = {
-                weight: Number(d.weight),
-                weightUnitType: d.weightUnitType,
-                fitnessGoal: d.fitnessGoal!, // safe because validateEnum required it
-                experienceLevel: d.experienceLevel!,
-                trainingStyle: d.trainingStyle!,
-                trainingFrequency: d.trainingFrequency!,
-            };
+            const normalizedWeight = Math.round(
+                convertWeight(
+                    d.weight,
+                    d.weightUnitType === "IMPERIAL" ? "IMPERIAL" : "METRIC",
+                    "METRIC"
+                )
+            );
 
-            return changeDetailsApi(payload);
+            return changeDetailsApi({
+                ...d,
+                weight: normalizedWeight,
+            });
         },
         successMessage: (res) => res?.message ?? "Details changed successfully.",
         fallbackErrorMessage: "Change details failed.",

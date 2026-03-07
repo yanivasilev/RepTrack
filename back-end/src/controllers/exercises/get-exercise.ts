@@ -1,14 +1,24 @@
 import type { Request, Response } from "express";
+import { getExerciseSchema } from "../../schemas/exercises/get-exercise";
 import { getExerciseService } from "../../services/exercises/get-exercise";
 
 export async function getExerciseController(req: Request, res: Response) {
-    const exerciseId = Number(req.params.exerciseId);
+    const parsed = getExerciseSchema.safeParse(req.params);
 
-    if (!Number.isInteger(exerciseId) || exerciseId <= 0) return res.status(400).json({ message: "Invalid exercise id." });
+    if (!parsed.success) {
+        return res.status(400).json({
+            errors: parsed.error.issues.map((i) => ({
+                field: i.path.join("."),
+                message: i.message,
+            })),
+        });
+    }
+
+    const { exerciseId } = parsed.data;
 
     const result = await getExerciseService(exerciseId);
 
     if (result.status === "not_found") return res.status(404).json({ message: "Exercise not found." });
 
-    return res.status(200).json({ exercise: result.exercise });
+    return res.status(200).json(result);
 }

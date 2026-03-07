@@ -41,7 +41,9 @@ export type ExerciseMinAggregateOutputType = {
   muscleGroup: $Enums.MuscleGroup | null
   equipment: $Enums.Equipment | null
   isBodyweight: boolean | null
+  experienceLevel: $Enums.ExperienceLevel | null
   createdAt: Date | null
+  exerciseType: $Enums.ExerciseType | null
 }
 
 export type ExerciseMaxAggregateOutputType = {
@@ -51,7 +53,9 @@ export type ExerciseMaxAggregateOutputType = {
   muscleGroup: $Enums.MuscleGroup | null
   equipment: $Enums.Equipment | null
   isBodyweight: boolean | null
+  experienceLevel: $Enums.ExperienceLevel | null
   createdAt: Date | null
+  exerciseType: $Enums.ExerciseType | null
 }
 
 export type ExerciseCountAggregateOutputType = {
@@ -61,7 +65,9 @@ export type ExerciseCountAggregateOutputType = {
   muscleGroup: number
   equipment: number
   isBodyweight: number
+  experienceLevel: number
   createdAt: number
+  exerciseType: number
   _all: number
 }
 
@@ -81,7 +87,9 @@ export type ExerciseMinAggregateInputType = {
   muscleGroup?: true
   equipment?: true
   isBodyweight?: true
+  experienceLevel?: true
   createdAt?: true
+  exerciseType?: true
 }
 
 export type ExerciseMaxAggregateInputType = {
@@ -91,7 +99,9 @@ export type ExerciseMaxAggregateInputType = {
   muscleGroup?: true
   equipment?: true
   isBodyweight?: true
+  experienceLevel?: true
   createdAt?: true
+  exerciseType?: true
 }
 
 export type ExerciseCountAggregateInputType = {
@@ -101,7 +111,9 @@ export type ExerciseCountAggregateInputType = {
   muscleGroup?: true
   equipment?: true
   isBodyweight?: true
+  experienceLevel?: true
   createdAt?: true
+  exerciseType?: true
   _all?: true
 }
 
@@ -198,7 +210,9 @@ export type ExerciseGroupByOutputType = {
   muscleGroup: $Enums.MuscleGroup
   equipment: $Enums.Equipment
   isBodyweight: boolean
+  experienceLevel: $Enums.ExperienceLevel
   createdAt: Date
+  exerciseType: $Enums.ExerciseType
   _count: ExerciseCountAggregateOutputType | null
   _avg: ExerciseAvgAggregateOutputType | null
   _sum: ExerciseSumAggregateOutputType | null
@@ -231,7 +245,9 @@ export type ExerciseWhereInput = {
   muscleGroup?: Prisma.EnumMuscleGroupFilter<"Exercise"> | $Enums.MuscleGroup
   equipment?: Prisma.EnumEquipmentFilter<"Exercise"> | $Enums.Equipment
   isBodyweight?: Prisma.BoolFilter<"Exercise"> | boolean
+  experienceLevel?: Prisma.EnumExperienceLevelFilter<"Exercise"> | $Enums.ExperienceLevel
   createdAt?: Prisma.DateTimeFilter<"Exercise"> | Date | string
+  exerciseType?: Prisma.EnumExerciseTypeFilter<"Exercise"> | $Enums.ExerciseType
   workoutExercises?: Prisma.WorkoutExerciseListRelationFilter
 }
 
@@ -242,7 +258,9 @@ export type ExerciseOrderByWithRelationInput = {
   muscleGroup?: Prisma.SortOrder
   equipment?: Prisma.SortOrder
   isBodyweight?: Prisma.SortOrder
+  experienceLevel?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  exerciseType?: Prisma.SortOrder
   workoutExercises?: Prisma.WorkoutExerciseOrderByRelationAggregateInput
 }
 
@@ -256,7 +274,9 @@ export type ExerciseWhereUniqueInput = Prisma.AtLeast<{
   muscleGroup?: Prisma.EnumMuscleGroupFilter<"Exercise"> | $Enums.MuscleGroup
   equipment?: Prisma.EnumEquipmentFilter<"Exercise"> | $Enums.Equipment
   isBodyweight?: Prisma.BoolFilter<"Exercise"> | boolean
+  experienceLevel?: Prisma.EnumExperienceLevelFilter<"Exercise"> | $Enums.ExperienceLevel
   createdAt?: Prisma.DateTimeFilter<"Exercise"> | Date | string
+  exerciseType?: Prisma.EnumExerciseTypeFilter<"Exercise"> | $Enums.ExerciseType
   workoutExercises?: Prisma.WorkoutExerciseListRelationFilter
 }, "id" | "name">
 
@@ -267,7 +287,9 @@ export type ExerciseOrderByWithAggregationInput = {
   muscleGroup?: Prisma.SortOrder
   equipment?: Prisma.SortOrder
   isBodyweight?: Prisma.SortOrder
+  experienceLevel?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  exerciseType?: Prisma.SortOrder
   _count?: Prisma.ExerciseCountOrderByAggregateInput
   _avg?: Prisma.ExerciseAvgOrderByAggregateInput
   _max?: Prisma.ExerciseMaxOrderByAggregateInput
@@ -285,7 +307,9 @@ export type ExerciseScalarWhereWithAggregatesInput = {
   muscleGroup?: Prisma.EnumMuscleGroupWithAggregatesFilter<"Exercise"> | $Enums.MuscleGroup
   equipment?: Prisma.EnumEquipmentWithAggregatesFilter<"Exercise"> | $Enums.Equipment
   isBodyweight?: Prisma.BoolWithAggregatesFilter<"Exercise"> | boolean
+  experienceLevel?: Prisma.EnumExperienceLevelWithAggregatesFilter<"Exercise"> | $Enums.ExperienceLevel
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Exercise"> | Date | string
+  exerciseType?: Prisma.EnumExerciseTypeWithAggregatesFilter<"Exercise"> | $Enums.ExerciseType
 }
 
 export type ExerciseCreateInput = {
@@ -294,7 +318,9 @@ export type ExerciseCreateInput = {
   muscleGroup?: $Enums.MuscleGroup
   equipment?: $Enums.Equipment
   isBodyweight?: boolean
+  experienceLevel?: $Enums.ExperienceLevel
   createdAt?: Date | string
+  exerciseType?: $Enums.ExerciseType
   workoutExercises?: Prisma.WorkoutExerciseCreateNestedManyWithoutExerciseInput
 }
 
@@ -305,7 +331,9 @@ export type ExerciseUncheckedCreateInput = {
   muscleGroup?: $Enums.MuscleGroup
   equipment?: $Enums.Equipment
   isBodyweight?: boolean
+  experienceLevel?: $Enums.ExperienceLevel
   createdAt?: Date | string
+  exerciseType?: $Enums.ExerciseType
   workoutExercises?: Prisma.WorkoutExerciseUncheckedCreateNestedManyWithoutExerciseInput
 }
 
@@ -315,7 +343,9 @@ export type ExerciseUpdateInput = {
   muscleGroup?: Prisma.EnumMuscleGroupFieldUpdateOperationsInput | $Enums.MuscleGroup
   equipment?: Prisma.EnumEquipmentFieldUpdateOperationsInput | $Enums.Equipment
   isBodyweight?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  experienceLevel?: Prisma.EnumExperienceLevelFieldUpdateOperationsInput | $Enums.ExperienceLevel
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  exerciseType?: Prisma.EnumExerciseTypeFieldUpdateOperationsInput | $Enums.ExerciseType
   workoutExercises?: Prisma.WorkoutExerciseUpdateManyWithoutExerciseNestedInput
 }
 
@@ -326,7 +356,9 @@ export type ExerciseUncheckedUpdateInput = {
   muscleGroup?: Prisma.EnumMuscleGroupFieldUpdateOperationsInput | $Enums.MuscleGroup
   equipment?: Prisma.EnumEquipmentFieldUpdateOperationsInput | $Enums.Equipment
   isBodyweight?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  experienceLevel?: Prisma.EnumExperienceLevelFieldUpdateOperationsInput | $Enums.ExperienceLevel
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  exerciseType?: Prisma.EnumExerciseTypeFieldUpdateOperationsInput | $Enums.ExerciseType
   workoutExercises?: Prisma.WorkoutExerciseUncheckedUpdateManyWithoutExerciseNestedInput
 }
 
@@ -337,7 +369,9 @@ export type ExerciseCreateManyInput = {
   muscleGroup?: $Enums.MuscleGroup
   equipment?: $Enums.Equipment
   isBodyweight?: boolean
+  experienceLevel?: $Enums.ExperienceLevel
   createdAt?: Date | string
+  exerciseType?: $Enums.ExerciseType
 }
 
 export type ExerciseUpdateManyMutationInput = {
@@ -346,7 +380,9 @@ export type ExerciseUpdateManyMutationInput = {
   muscleGroup?: Prisma.EnumMuscleGroupFieldUpdateOperationsInput | $Enums.MuscleGroup
   equipment?: Prisma.EnumEquipmentFieldUpdateOperationsInput | $Enums.Equipment
   isBodyweight?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  experienceLevel?: Prisma.EnumExperienceLevelFieldUpdateOperationsInput | $Enums.ExperienceLevel
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  exerciseType?: Prisma.EnumExerciseTypeFieldUpdateOperationsInput | $Enums.ExerciseType
 }
 
 export type ExerciseUncheckedUpdateManyInput = {
@@ -356,7 +392,9 @@ export type ExerciseUncheckedUpdateManyInput = {
   muscleGroup?: Prisma.EnumMuscleGroupFieldUpdateOperationsInput | $Enums.MuscleGroup
   equipment?: Prisma.EnumEquipmentFieldUpdateOperationsInput | $Enums.Equipment
   isBodyweight?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  experienceLevel?: Prisma.EnumExperienceLevelFieldUpdateOperationsInput | $Enums.ExperienceLevel
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  exerciseType?: Prisma.EnumExerciseTypeFieldUpdateOperationsInput | $Enums.ExerciseType
 }
 
 export type ExerciseCountOrderByAggregateInput = {
@@ -366,7 +404,9 @@ export type ExerciseCountOrderByAggregateInput = {
   muscleGroup?: Prisma.SortOrder
   equipment?: Prisma.SortOrder
   isBodyweight?: Prisma.SortOrder
+  experienceLevel?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  exerciseType?: Prisma.SortOrder
 }
 
 export type ExerciseAvgOrderByAggregateInput = {
@@ -380,7 +420,9 @@ export type ExerciseMaxOrderByAggregateInput = {
   muscleGroup?: Prisma.SortOrder
   equipment?: Prisma.SortOrder
   isBodyweight?: Prisma.SortOrder
+  experienceLevel?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  exerciseType?: Prisma.SortOrder
 }
 
 export type ExerciseMinOrderByAggregateInput = {
@@ -390,7 +432,9 @@ export type ExerciseMinOrderByAggregateInput = {
   muscleGroup?: Prisma.SortOrder
   equipment?: Prisma.SortOrder
   isBodyweight?: Prisma.SortOrder
+  experienceLevel?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  exerciseType?: Prisma.SortOrder
 }
 
 export type ExerciseSumOrderByAggregateInput = {
@@ -418,6 +462,10 @@ export type BoolFieldUpdateOperationsInput = {
   set?: boolean
 }
 
+export type EnumExerciseTypeFieldUpdateOperationsInput = {
+  set?: $Enums.ExerciseType
+}
+
 export type ExerciseCreateNestedOneWithoutWorkoutExercisesInput = {
   create?: Prisma.XOR<Prisma.ExerciseCreateWithoutWorkoutExercisesInput, Prisma.ExerciseUncheckedCreateWithoutWorkoutExercisesInput>
   connectOrCreate?: Prisma.ExerciseCreateOrConnectWithoutWorkoutExercisesInput
@@ -438,7 +486,9 @@ export type ExerciseCreateWithoutWorkoutExercisesInput = {
   muscleGroup?: $Enums.MuscleGroup
   equipment?: $Enums.Equipment
   isBodyweight?: boolean
+  experienceLevel?: $Enums.ExperienceLevel
   createdAt?: Date | string
+  exerciseType?: $Enums.ExerciseType
 }
 
 export type ExerciseUncheckedCreateWithoutWorkoutExercisesInput = {
@@ -448,7 +498,9 @@ export type ExerciseUncheckedCreateWithoutWorkoutExercisesInput = {
   muscleGroup?: $Enums.MuscleGroup
   equipment?: $Enums.Equipment
   isBodyweight?: boolean
+  experienceLevel?: $Enums.ExperienceLevel
   createdAt?: Date | string
+  exerciseType?: $Enums.ExerciseType
 }
 
 export type ExerciseCreateOrConnectWithoutWorkoutExercisesInput = {
@@ -473,7 +525,9 @@ export type ExerciseUpdateWithoutWorkoutExercisesInput = {
   muscleGroup?: Prisma.EnumMuscleGroupFieldUpdateOperationsInput | $Enums.MuscleGroup
   equipment?: Prisma.EnumEquipmentFieldUpdateOperationsInput | $Enums.Equipment
   isBodyweight?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  experienceLevel?: Prisma.EnumExperienceLevelFieldUpdateOperationsInput | $Enums.ExperienceLevel
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  exerciseType?: Prisma.EnumExerciseTypeFieldUpdateOperationsInput | $Enums.ExerciseType
 }
 
 export type ExerciseUncheckedUpdateWithoutWorkoutExercisesInput = {
@@ -483,7 +537,9 @@ export type ExerciseUncheckedUpdateWithoutWorkoutExercisesInput = {
   muscleGroup?: Prisma.EnumMuscleGroupFieldUpdateOperationsInput | $Enums.MuscleGroup
   equipment?: Prisma.EnumEquipmentFieldUpdateOperationsInput | $Enums.Equipment
   isBodyweight?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  experienceLevel?: Prisma.EnumExperienceLevelFieldUpdateOperationsInput | $Enums.ExperienceLevel
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  exerciseType?: Prisma.EnumExerciseTypeFieldUpdateOperationsInput | $Enums.ExerciseType
 }
 
 
@@ -524,7 +580,9 @@ export type ExerciseSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   muscleGroup?: boolean
   equipment?: boolean
   isBodyweight?: boolean
+  experienceLevel?: boolean
   createdAt?: boolean
+  exerciseType?: boolean
   workoutExercises?: boolean | Prisma.Exercise$workoutExercisesArgs<ExtArgs>
   _count?: boolean | Prisma.ExerciseCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["exercise"]>
@@ -536,7 +594,9 @@ export type ExerciseSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   muscleGroup?: boolean
   equipment?: boolean
   isBodyweight?: boolean
+  experienceLevel?: boolean
   createdAt?: boolean
+  exerciseType?: boolean
 }, ExtArgs["result"]["exercise"]>
 
 export type ExerciseSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -546,7 +606,9 @@ export type ExerciseSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   muscleGroup?: boolean
   equipment?: boolean
   isBodyweight?: boolean
+  experienceLevel?: boolean
   createdAt?: boolean
+  exerciseType?: boolean
 }, ExtArgs["result"]["exercise"]>
 
 export type ExerciseSelectScalar = {
@@ -556,10 +618,12 @@ export type ExerciseSelectScalar = {
   muscleGroup?: boolean
   equipment?: boolean
   isBodyweight?: boolean
+  experienceLevel?: boolean
   createdAt?: boolean
+  exerciseType?: boolean
 }
 
-export type ExerciseOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "category" | "muscleGroup" | "equipment" | "isBodyweight" | "createdAt", ExtArgs["result"]["exercise"]>
+export type ExerciseOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "category" | "muscleGroup" | "equipment" | "isBodyweight" | "experienceLevel" | "createdAt" | "exerciseType", ExtArgs["result"]["exercise"]>
 export type ExerciseInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   workoutExercises?: boolean | Prisma.Exercise$workoutExercisesArgs<ExtArgs>
   _count?: boolean | Prisma.ExerciseCountOutputTypeDefaultArgs<ExtArgs>
@@ -579,7 +643,9 @@ export type $ExercisePayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     muscleGroup: $Enums.MuscleGroup
     equipment: $Enums.Equipment
     isBodyweight: boolean
+    experienceLevel: $Enums.ExperienceLevel
     createdAt: Date
+    exerciseType: $Enums.ExerciseType
   }, ExtArgs["result"]["exercise"]>
   composites: {}
 }
@@ -1010,7 +1076,9 @@ export interface ExerciseFieldRefs {
   readonly muscleGroup: Prisma.FieldRef<"Exercise", 'MuscleGroup'>
   readonly equipment: Prisma.FieldRef<"Exercise", 'Equipment'>
   readonly isBodyweight: Prisma.FieldRef<"Exercise", 'Boolean'>
+  readonly experienceLevel: Prisma.FieldRef<"Exercise", 'ExperienceLevel'>
   readonly createdAt: Prisma.FieldRef<"Exercise", 'DateTime'>
+  readonly exerciseType: Prisma.FieldRef<"Exercise", 'ExerciseType'>
 }
     
 

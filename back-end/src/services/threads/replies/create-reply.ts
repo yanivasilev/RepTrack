@@ -6,8 +6,10 @@ export async function createReplyService(userId: number, threadId: number, body:
         select: { id: true },
     });
 
+    // CHECKS IF THREAD EXISTS
     if (!thread) return { status: "not_found" as const };
 
+    // CREATES REPLY IN DB
     const reply = await prisma.$transaction(async (tx) => {
         const created = await tx.reply.create({
             data: {
@@ -25,6 +27,7 @@ export async function createReplyService(userId: number, threadId: number, body:
             },
         });
 
+        // UPDATES THREADS REPLY COUNT
         await tx.thread.update({ where: { id: threadId }, data: { replyCount: { increment: 1 } } });
 
         return created;

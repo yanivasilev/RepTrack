@@ -1,21 +1,9 @@
-import { ExperienceLevel, FitnessGoal, TrainingFrequency, TrainingStyle, UnitType } from "../../../libs/catalogs/register";
+import { ApiSucess } from "../../../libs/types/api-responds/ApiSuccess";
+import { ChangeDetailsType } from "../../../libs/types/settings/ChangeDetailsType";
 import { request } from "../customApi/request";
 
-export type ChangeDetailsPayload = {
-    weight: number;
-    weightUnitType: UnitType;
-    fitnessGoal: FitnessGoal;
-    experienceLevel: ExperienceLevel;
-    trainingStyle: TrainingStyle;
-    trainingFrequency: TrainingFrequency;
-};
-
-export type ChangeDetailsApiSuccess = {
-    message?: string;
-};
-
-export function changeDetailsApi(payload: ChangeDetailsPayload) {
-    return request<ChangeDetailsApiSuccess>(
+export function changeDetailsApi(payload: ChangeDetailsType) {
+    return request<ApiSucess>(
         {
             method: "PUT",
             url: "/settings/change-details",

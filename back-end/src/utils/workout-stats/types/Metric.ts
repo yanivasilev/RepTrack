@@ -1,0 +1,1 @@
+export type Metric = "workouts" | "durationSeconds" | "volumeKg";

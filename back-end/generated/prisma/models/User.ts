@@ -43,6 +43,7 @@ export type UserMinAggregateOutputType = {
   email: string | null
   password: string | null
   createdAt: Date | null
+  emailVerifiedAt: Date | null
   username: string | null
   lastUsernameChangeAt: Date | null
   dob: Date | null
@@ -63,6 +64,7 @@ export type UserMaxAggregateOutputType = {
   email: string | null
   password: string | null
   createdAt: Date | null
+  emailVerifiedAt: Date | null
   username: string | null
   lastUsernameChangeAt: Date | null
   dob: Date | null
@@ -83,6 +85,7 @@ export type UserCountAggregateOutputType = {
   email: number
   password: number
   createdAt: number
+  emailVerifiedAt: number
   username: number
   lastUsernameChangeAt: number
   dob: number
@@ -117,6 +120,7 @@ export type UserMinAggregateInputType = {
   email?: true
   password?: true
   createdAt?: true
+  emailVerifiedAt?: true
   username?: true
   lastUsernameChangeAt?: true
   dob?: true
@@ -137,6 +141,7 @@ export type UserMaxAggregateInputType = {
   email?: true
   password?: true
   createdAt?: true
+  emailVerifiedAt?: true
   username?: true
   lastUsernameChangeAt?: true
   dob?: true
@@ -157,6 +162,7 @@ export type UserCountAggregateInputType = {
   email?: true
   password?: true
   createdAt?: true
+  emailVerifiedAt?: true
   username?: true
   lastUsernameChangeAt?: true
   dob?: true
@@ -264,6 +270,7 @@ export type UserGroupByOutputType = {
   email: string
   password: string
   createdAt: Date
+  emailVerifiedAt: Date | null
   username: string
   lastUsernameChangeAt: Date | null
   dob: Date
@@ -307,6 +314,7 @@ export type UserWhereInput = {
   email?: Prisma.StringFilter<"User"> | string
   password?: Prisma.StringFilter<"User"> | string
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  emailVerifiedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   username?: Prisma.StringFilter<"User"> | string
   lastUsernameChangeAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   dob?: Prisma.DateTimeFilter<"User"> | Date | string
@@ -320,6 +328,7 @@ export type UserWhereInput = {
   avatarFileName?: Prisma.StringNullableFilter<"User"> | string | null
   heightUnitType?: Prisma.EnumUnitTypeFilter<"User"> | $Enums.UnitType
   weightUnitType?: Prisma.EnumUnitTypeFilter<"User"> | $Enums.UnitType
+  emailVerificationOtps?: Prisma.EmailVerificationOtpListRelationFilter
   forgotPasswordOtps?: Prisma.ForgotPasswordOtpListRelationFilter
   forgotPasswordSessions?: Prisma.ForgotPasswordSessionListRelationFilter
   threads?: Prisma.ThreadListRelationFilter
@@ -327,6 +336,7 @@ export type UserWhereInput = {
   threadLikes?: Prisma.ThreadLikeListRelationFilter
   replyLikes?: Prisma.ReplyLikeListRelationFilter
   workoutSessions?: Prisma.WorkoutSessionListRelationFilter
+  userBadges?: Prisma.UserBadgeListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -334,6 +344,7 @@ export type UserOrderByWithRelationInput = {
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  emailVerifiedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   username?: Prisma.SortOrder
   lastUsernameChangeAt?: Prisma.SortOrderInput | Prisma.SortOrder
   dob?: Prisma.SortOrder
@@ -347,6 +358,7 @@ export type UserOrderByWithRelationInput = {
   avatarFileName?: Prisma.SortOrderInput | Prisma.SortOrder
   heightUnitType?: Prisma.SortOrder
   weightUnitType?: Prisma.SortOrder
+  emailVerificationOtps?: Prisma.EmailVerificationOtpOrderByRelationAggregateInput
   forgotPasswordOtps?: Prisma.ForgotPasswordOtpOrderByRelationAggregateInput
   forgotPasswordSessions?: Prisma.ForgotPasswordSessionOrderByRelationAggregateInput
   threads?: Prisma.ThreadOrderByRelationAggregateInput
@@ -354,6 +366,7 @@ export type UserOrderByWithRelationInput = {
   threadLikes?: Prisma.ThreadLikeOrderByRelationAggregateInput
   replyLikes?: Prisma.ReplyLikeOrderByRelationAggregateInput
   workoutSessions?: Prisma.WorkoutSessionOrderByRelationAggregateInput
+  userBadges?: Prisma.UserBadgeOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -365,6 +378,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   password?: Prisma.StringFilter<"User"> | string
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  emailVerifiedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   lastUsernameChangeAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   dob?: Prisma.DateTimeFilter<"User"> | Date | string
   sex?: Prisma.EnumSexFilter<"User"> | $Enums.Sex
@@ -377,6 +391,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   avatarFileName?: Prisma.StringNullableFilter<"User"> | string | null
   heightUnitType?: Prisma.EnumUnitTypeFilter<"User"> | $Enums.UnitType
   weightUnitType?: Prisma.EnumUnitTypeFilter<"User"> | $Enums.UnitType
+  emailVerificationOtps?: Prisma.EmailVerificationOtpListRelationFilter
   forgotPasswordOtps?: Prisma.ForgotPasswordOtpListRelationFilter
   forgotPasswordSessions?: Prisma.ForgotPasswordSessionListRelationFilter
   threads?: Prisma.ThreadListRelationFilter
@@ -384,6 +399,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   threadLikes?: Prisma.ThreadLikeListRelationFilter
   replyLikes?: Prisma.ReplyLikeListRelationFilter
   workoutSessions?: Prisma.WorkoutSessionListRelationFilter
+  userBadges?: Prisma.UserBadgeListRelationFilter
 }, "id" | "email" | "username">
 
 export type UserOrderByWithAggregationInput = {
@@ -391,6 +407,7 @@ export type UserOrderByWithAggregationInput = {
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  emailVerifiedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   username?: Prisma.SortOrder
   lastUsernameChangeAt?: Prisma.SortOrderInput | Prisma.SortOrder
   dob?: Prisma.SortOrder
@@ -419,6 +436,7 @@ export type UserScalarWhereWithAggregatesInput = {
   email?: Prisma.StringWithAggregatesFilter<"User"> | string
   password?: Prisma.StringWithAggregatesFilter<"User"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
+  emailVerifiedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
   username?: Prisma.StringWithAggregatesFilter<"User"> | string
   lastUsernameChangeAt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
   dob?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
@@ -438,6 +456,7 @@ export type UserCreateInput = {
   email: string
   password: string
   createdAt?: Date | string
+  emailVerifiedAt?: Date | string | null
   username: string
   lastUsernameChangeAt?: Date | string | null
   dob: Date | string
@@ -451,6 +470,7 @@ export type UserCreateInput = {
   avatarFileName?: string | null
   heightUnitType?: $Enums.UnitType
   weightUnitType?: $Enums.UnitType
+  emailVerificationOtps?: Prisma.EmailVerificationOtpCreateNestedManyWithoutUserInput
   forgotPasswordOtps?: Prisma.ForgotPasswordOtpCreateNestedManyWithoutUserInput
   forgotPasswordSessions?: Prisma.ForgotPasswordSessionCreateNestedManyWithoutUserInput
   threads?: Prisma.ThreadCreateNestedManyWithoutAuthorInput
@@ -458,6 +478,7 @@ export type UserCreateInput = {
   threadLikes?: Prisma.ThreadLikeCreateNestedManyWithoutUserInput
   replyLikes?: Prisma.ReplyLikeCreateNestedManyWithoutUserInput
   workoutSessions?: Prisma.WorkoutSessionCreateNestedManyWithoutUserInput
+  userBadges?: Prisma.UserBadgeCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -465,6 +486,7 @@ export type UserUncheckedCreateInput = {
   email: string
   password: string
   createdAt?: Date | string
+  emailVerifiedAt?: Date | string | null
   username: string
   lastUsernameChangeAt?: Date | string | null
   dob: Date | string
@@ -478,6 +500,7 @@ export type UserUncheckedCreateInput = {
   avatarFileName?: string | null
   heightUnitType?: $Enums.UnitType
   weightUnitType?: $Enums.UnitType
+  emailVerificationOtps?: Prisma.EmailVerificationOtpUncheckedCreateNestedManyWithoutUserInput
   forgotPasswordOtps?: Prisma.ForgotPasswordOtpUncheckedCreateNestedManyWithoutUserInput
   forgotPasswordSessions?: Prisma.ForgotPasswordSessionUncheckedCreateNestedManyWithoutUserInput
   threads?: Prisma.ThreadUncheckedCreateNestedManyWithoutAuthorInput
@@ -485,12 +508,14 @@ export type UserUncheckedCreateInput = {
   threadLikes?: Prisma.ThreadLikeUncheckedCreateNestedManyWithoutUserInput
   replyLikes?: Prisma.ReplyLikeUncheckedCreateNestedManyWithoutUserInput
   workoutSessions?: Prisma.WorkoutSessionUncheckedCreateNestedManyWithoutUserInput
+  userBadges?: Prisma.UserBadgeUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   username?: Prisma.StringFieldUpdateOperationsInput | string
   lastUsernameChangeAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   dob?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -504,6 +529,7 @@ export type UserUpdateInput = {
   avatarFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   heightUnitType?: Prisma.EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
   weightUnitType?: Prisma.EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+  emailVerificationOtps?: Prisma.EmailVerificationOtpUpdateManyWithoutUserNestedInput
   forgotPasswordOtps?: Prisma.ForgotPasswordOtpUpdateManyWithoutUserNestedInput
   forgotPasswordSessions?: Prisma.ForgotPasswordSessionUpdateManyWithoutUserNestedInput
   threads?: Prisma.ThreadUpdateManyWithoutAuthorNestedInput
@@ -511,6 +537,7 @@ export type UserUpdateInput = {
   threadLikes?: Prisma.ThreadLikeUpdateManyWithoutUserNestedInput
   replyLikes?: Prisma.ReplyLikeUpdateManyWithoutUserNestedInput
   workoutSessions?: Prisma.WorkoutSessionUpdateManyWithoutUserNestedInput
+  userBadges?: Prisma.UserBadgeUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -518,6 +545,7 @@ export type UserUncheckedUpdateInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   username?: Prisma.StringFieldUpdateOperationsInput | string
   lastUsernameChangeAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   dob?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -531,6 +559,7 @@ export type UserUncheckedUpdateInput = {
   avatarFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   heightUnitType?: Prisma.EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
   weightUnitType?: Prisma.EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+  emailVerificationOtps?: Prisma.EmailVerificationOtpUncheckedUpdateManyWithoutUserNestedInput
   forgotPasswordOtps?: Prisma.ForgotPasswordOtpUncheckedUpdateManyWithoutUserNestedInput
   forgotPasswordSessions?: Prisma.ForgotPasswordSessionUncheckedUpdateManyWithoutUserNestedInput
   threads?: Prisma.ThreadUncheckedUpdateManyWithoutAuthorNestedInput
@@ -538,6 +567,7 @@ export type UserUncheckedUpdateInput = {
   threadLikes?: Prisma.ThreadLikeUncheckedUpdateManyWithoutUserNestedInput
   replyLikes?: Prisma.ReplyLikeUncheckedUpdateManyWithoutUserNestedInput
   workoutSessions?: Prisma.WorkoutSessionUncheckedUpdateManyWithoutUserNestedInput
+  userBadges?: Prisma.UserBadgeUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -545,6 +575,7 @@ export type UserCreateManyInput = {
   email: string
   password: string
   createdAt?: Date | string
+  emailVerifiedAt?: Date | string | null
   username: string
   lastUsernameChangeAt?: Date | string | null
   dob: Date | string
@@ -564,6 +595,7 @@ export type UserUpdateManyMutationInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   username?: Prisma.StringFieldUpdateOperationsInput | string
   lastUsernameChangeAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   dob?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -584,6 +616,7 @@ export type UserUncheckedUpdateManyInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   username?: Prisma.StringFieldUpdateOperationsInput | string
   lastUsernameChangeAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   dob?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -604,6 +637,7 @@ export type UserCountOrderByAggregateInput = {
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  emailVerifiedAt?: Prisma.SortOrder
   username?: Prisma.SortOrder
   lastUsernameChangeAt?: Prisma.SortOrder
   dob?: Prisma.SortOrder
@@ -630,6 +664,7 @@ export type UserMaxOrderByAggregateInput = {
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  emailVerifiedAt?: Prisma.SortOrder
   username?: Prisma.SortOrder
   lastUsernameChangeAt?: Prisma.SortOrder
   dob?: Prisma.SortOrder
@@ -650,6 +685,7 @@ export type UserMinOrderByAggregateInput = {
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  emailVerifiedAt?: Prisma.SortOrder
   username?: Prisma.SortOrder
   lastUsernameChangeAt?: Prisma.SortOrder
   dob?: Prisma.SortOrder
@@ -722,6 +758,20 @@ export type NullableStringFieldUpdateOperationsInput = {
 
 export type EnumUnitTypeFieldUpdateOperationsInput = {
   set?: $Enums.UnitType
+}
+
+export type UserCreateNestedOneWithoutEmailVerificationOtpsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutEmailVerificationOtpsInput, Prisma.UserUncheckedCreateWithoutEmailVerificationOtpsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutEmailVerificationOtpsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutEmailVerificationOtpsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutEmailVerificationOtpsInput, Prisma.UserUncheckedCreateWithoutEmailVerificationOtpsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutEmailVerificationOtpsInput
+  upsert?: Prisma.UserUpsertWithoutEmailVerificationOtpsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutEmailVerificationOtpsInput, Prisma.UserUpdateWithoutEmailVerificationOtpsInput>, Prisma.UserUncheckedUpdateWithoutEmailVerificationOtpsInput>
 }
 
 export type UserCreateNestedOneWithoutForgotPasswordOtpsInput = {
@@ -822,10 +872,25 @@ export type UserUpdateOneRequiredWithoutWorkoutSessionsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutWorkoutSessionsInput, Prisma.UserUpdateWithoutWorkoutSessionsInput>, Prisma.UserUncheckedUpdateWithoutWorkoutSessionsInput>
 }
 
-export type UserCreateWithoutForgotPasswordOtpsInput = {
+export type UserCreateNestedOneWithoutUserBadgesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUserBadgesInput, Prisma.UserUncheckedCreateWithoutUserBadgesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUserBadgesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutUserBadgesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUserBadgesInput, Prisma.UserUncheckedCreateWithoutUserBadgesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUserBadgesInput
+  upsert?: Prisma.UserUpsertWithoutUserBadgesInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutUserBadgesInput, Prisma.UserUpdateWithoutUserBadgesInput>, Prisma.UserUncheckedUpdateWithoutUserBadgesInput>
+}
+
+export type UserCreateWithoutEmailVerificationOtpsInput = {
   email: string
   password: string
   createdAt?: Date | string
+  emailVerifiedAt?: Date | string | null
   username: string
   lastUsernameChangeAt?: Date | string | null
   dob: Date | string
@@ -839,12 +904,144 @@ export type UserCreateWithoutForgotPasswordOtpsInput = {
   avatarFileName?: string | null
   heightUnitType?: $Enums.UnitType
   weightUnitType?: $Enums.UnitType
+  forgotPasswordOtps?: Prisma.ForgotPasswordOtpCreateNestedManyWithoutUserInput
   forgotPasswordSessions?: Prisma.ForgotPasswordSessionCreateNestedManyWithoutUserInput
   threads?: Prisma.ThreadCreateNestedManyWithoutAuthorInput
   replies?: Prisma.ReplyCreateNestedManyWithoutAuthorInput
   threadLikes?: Prisma.ThreadLikeCreateNestedManyWithoutUserInput
   replyLikes?: Prisma.ReplyLikeCreateNestedManyWithoutUserInput
   workoutSessions?: Prisma.WorkoutSessionCreateNestedManyWithoutUserInput
+  userBadges?: Prisma.UserBadgeCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutEmailVerificationOtpsInput = {
+  id?: number
+  email: string
+  password: string
+  createdAt?: Date | string
+  emailVerifiedAt?: Date | string | null
+  username: string
+  lastUsernameChangeAt?: Date | string | null
+  dob: Date | string
+  sex: $Enums.Sex
+  height: number
+  weight: number
+  fitnessGoal: $Enums.FitnessGoal
+  experienceLevel: $Enums.ExperienceLevel
+  trainingStyle: $Enums.TrainingStyle
+  trainingFrequency: $Enums.TrainingFrequency
+  avatarFileName?: string | null
+  heightUnitType?: $Enums.UnitType
+  weightUnitType?: $Enums.UnitType
+  forgotPasswordOtps?: Prisma.ForgotPasswordOtpUncheckedCreateNestedManyWithoutUserInput
+  forgotPasswordSessions?: Prisma.ForgotPasswordSessionUncheckedCreateNestedManyWithoutUserInput
+  threads?: Prisma.ThreadUncheckedCreateNestedManyWithoutAuthorInput
+  replies?: Prisma.ReplyUncheckedCreateNestedManyWithoutAuthorInput
+  threadLikes?: Prisma.ThreadLikeUncheckedCreateNestedManyWithoutUserInput
+  replyLikes?: Prisma.ReplyLikeUncheckedCreateNestedManyWithoutUserInput
+  workoutSessions?: Prisma.WorkoutSessionUncheckedCreateNestedManyWithoutUserInput
+  userBadges?: Prisma.UserBadgeUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutEmailVerificationOtpsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutEmailVerificationOtpsInput, Prisma.UserUncheckedCreateWithoutEmailVerificationOtpsInput>
+}
+
+export type UserUpsertWithoutEmailVerificationOtpsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutEmailVerificationOtpsInput, Prisma.UserUncheckedUpdateWithoutEmailVerificationOtpsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutEmailVerificationOtpsInput, Prisma.UserUncheckedCreateWithoutEmailVerificationOtpsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutEmailVerificationOtpsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutEmailVerificationOtpsInput, Prisma.UserUncheckedUpdateWithoutEmailVerificationOtpsInput>
+}
+
+export type UserUpdateWithoutEmailVerificationOtpsInput = {
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  lastUsernameChangeAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  dob?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sex?: Prisma.EnumSexFieldUpdateOperationsInput | $Enums.Sex
+  height?: Prisma.IntFieldUpdateOperationsInput | number
+  weight?: Prisma.IntFieldUpdateOperationsInput | number
+  fitnessGoal?: Prisma.EnumFitnessGoalFieldUpdateOperationsInput | $Enums.FitnessGoal
+  experienceLevel?: Prisma.EnumExperienceLevelFieldUpdateOperationsInput | $Enums.ExperienceLevel
+  trainingStyle?: Prisma.EnumTrainingStyleFieldUpdateOperationsInput | $Enums.TrainingStyle
+  trainingFrequency?: Prisma.EnumTrainingFrequencyFieldUpdateOperationsInput | $Enums.TrainingFrequency
+  avatarFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  heightUnitType?: Prisma.EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+  weightUnitType?: Prisma.EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+  forgotPasswordOtps?: Prisma.ForgotPasswordOtpUpdateManyWithoutUserNestedInput
+  forgotPasswordSessions?: Prisma.ForgotPasswordSessionUpdateManyWithoutUserNestedInput
+  threads?: Prisma.ThreadUpdateManyWithoutAuthorNestedInput
+  replies?: Prisma.ReplyUpdateManyWithoutAuthorNestedInput
+  threadLikes?: Prisma.ThreadLikeUpdateManyWithoutUserNestedInput
+  replyLikes?: Prisma.ReplyLikeUpdateManyWithoutUserNestedInput
+  workoutSessions?: Prisma.WorkoutSessionUpdateManyWithoutUserNestedInput
+  userBadges?: Prisma.UserBadgeUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutEmailVerificationOtpsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  lastUsernameChangeAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  dob?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sex?: Prisma.EnumSexFieldUpdateOperationsInput | $Enums.Sex
+  height?: Prisma.IntFieldUpdateOperationsInput | number
+  weight?: Prisma.IntFieldUpdateOperationsInput | number
+  fitnessGoal?: Prisma.EnumFitnessGoalFieldUpdateOperationsInput | $Enums.FitnessGoal
+  experienceLevel?: Prisma.EnumExperienceLevelFieldUpdateOperationsInput | $Enums.ExperienceLevel
+  trainingStyle?: Prisma.EnumTrainingStyleFieldUpdateOperationsInput | $Enums.TrainingStyle
+  trainingFrequency?: Prisma.EnumTrainingFrequencyFieldUpdateOperationsInput | $Enums.TrainingFrequency
+  avatarFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  heightUnitType?: Prisma.EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+  weightUnitType?: Prisma.EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+  forgotPasswordOtps?: Prisma.ForgotPasswordOtpUncheckedUpdateManyWithoutUserNestedInput
+  forgotPasswordSessions?: Prisma.ForgotPasswordSessionUncheckedUpdateManyWithoutUserNestedInput
+  threads?: Prisma.ThreadUncheckedUpdateManyWithoutAuthorNestedInput
+  replies?: Prisma.ReplyUncheckedUpdateManyWithoutAuthorNestedInput
+  threadLikes?: Prisma.ThreadLikeUncheckedUpdateManyWithoutUserNestedInput
+  replyLikes?: Prisma.ReplyLikeUncheckedUpdateManyWithoutUserNestedInput
+  workoutSessions?: Prisma.WorkoutSessionUncheckedUpdateManyWithoutUserNestedInput
+  userBadges?: Prisma.UserBadgeUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutForgotPasswordOtpsInput = {
+  email: string
+  password: string
+  createdAt?: Date | string
+  emailVerifiedAt?: Date | string | null
+  username: string
+  lastUsernameChangeAt?: Date | string | null
+  dob: Date | string
+  sex: $Enums.Sex
+  height: number
+  weight: number
+  fitnessGoal: $Enums.FitnessGoal
+  experienceLevel: $Enums.ExperienceLevel
+  trainingStyle: $Enums.TrainingStyle
+  trainingFrequency: $Enums.TrainingFrequency
+  avatarFileName?: string | null
+  heightUnitType?: $Enums.UnitType
+  weightUnitType?: $Enums.UnitType
+  emailVerificationOtps?: Prisma.EmailVerificationOtpCreateNestedManyWithoutUserInput
+  forgotPasswordSessions?: Prisma.ForgotPasswordSessionCreateNestedManyWithoutUserInput
+  threads?: Prisma.ThreadCreateNestedManyWithoutAuthorInput
+  replies?: Prisma.ReplyCreateNestedManyWithoutAuthorInput
+  threadLikes?: Prisma.ThreadLikeCreateNestedManyWithoutUserInput
+  replyLikes?: Prisma.ReplyLikeCreateNestedManyWithoutUserInput
+  workoutSessions?: Prisma.WorkoutSessionCreateNestedManyWithoutUserInput
+  userBadges?: Prisma.UserBadgeCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutForgotPasswordOtpsInput = {
@@ -852,6 +1049,7 @@ export type UserUncheckedCreateWithoutForgotPasswordOtpsInput = {
   email: string
   password: string
   createdAt?: Date | string
+  emailVerifiedAt?: Date | string | null
   username: string
   lastUsernameChangeAt?: Date | string | null
   dob: Date | string
@@ -865,12 +1063,14 @@ export type UserUncheckedCreateWithoutForgotPasswordOtpsInput = {
   avatarFileName?: string | null
   heightUnitType?: $Enums.UnitType
   weightUnitType?: $Enums.UnitType
+  emailVerificationOtps?: Prisma.EmailVerificationOtpUncheckedCreateNestedManyWithoutUserInput
   forgotPasswordSessions?: Prisma.ForgotPasswordSessionUncheckedCreateNestedManyWithoutUserInput
   threads?: Prisma.ThreadUncheckedCreateNestedManyWithoutAuthorInput
   replies?: Prisma.ReplyUncheckedCreateNestedManyWithoutAuthorInput
   threadLikes?: Prisma.ThreadLikeUncheckedCreateNestedManyWithoutUserInput
   replyLikes?: Prisma.ReplyLikeUncheckedCreateNestedManyWithoutUserInput
   workoutSessions?: Prisma.WorkoutSessionUncheckedCreateNestedManyWithoutUserInput
+  userBadges?: Prisma.UserBadgeUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutForgotPasswordOtpsInput = {
@@ -893,6 +1093,7 @@ export type UserUpdateWithoutForgotPasswordOtpsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   username?: Prisma.StringFieldUpdateOperationsInput | string
   lastUsernameChangeAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   dob?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -906,12 +1107,14 @@ export type UserUpdateWithoutForgotPasswordOtpsInput = {
   avatarFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   heightUnitType?: Prisma.EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
   weightUnitType?: Prisma.EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+  emailVerificationOtps?: Prisma.EmailVerificationOtpUpdateManyWithoutUserNestedInput
   forgotPasswordSessions?: Prisma.ForgotPasswordSessionUpdateManyWithoutUserNestedInput
   threads?: Prisma.ThreadUpdateManyWithoutAuthorNestedInput
   replies?: Prisma.ReplyUpdateManyWithoutAuthorNestedInput
   threadLikes?: Prisma.ThreadLikeUpdateManyWithoutUserNestedInput
   replyLikes?: Prisma.ReplyLikeUpdateManyWithoutUserNestedInput
   workoutSessions?: Prisma.WorkoutSessionUpdateManyWithoutUserNestedInput
+  userBadges?: Prisma.UserBadgeUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutForgotPasswordOtpsInput = {
@@ -919,6 +1122,7 @@ export type UserUncheckedUpdateWithoutForgotPasswordOtpsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   username?: Prisma.StringFieldUpdateOperationsInput | string
   lastUsernameChangeAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   dob?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -932,18 +1136,21 @@ export type UserUncheckedUpdateWithoutForgotPasswordOtpsInput = {
   avatarFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   heightUnitType?: Prisma.EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
   weightUnitType?: Prisma.EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+  emailVerificationOtps?: Prisma.EmailVerificationOtpUncheckedUpdateManyWithoutUserNestedInput
   forgotPasswordSessions?: Prisma.ForgotPasswordSessionUncheckedUpdateManyWithoutUserNestedInput
   threads?: Prisma.ThreadUncheckedUpdateManyWithoutAuthorNestedInput
   replies?: Prisma.ReplyUncheckedUpdateManyWithoutAuthorNestedInput
   threadLikes?: Prisma.ThreadLikeUncheckedUpdateManyWithoutUserNestedInput
   replyLikes?: Prisma.ReplyLikeUncheckedUpdateManyWithoutUserNestedInput
   workoutSessions?: Prisma.WorkoutSessionUncheckedUpdateManyWithoutUserNestedInput
+  userBadges?: Prisma.UserBadgeUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutForgotPasswordSessionsInput = {
   email: string
   password: string
   createdAt?: Date | string
+  emailVerifiedAt?: Date | string | null
   username: string
   lastUsernameChangeAt?: Date | string | null
   dob: Date | string
@@ -957,12 +1164,14 @@ export type UserCreateWithoutForgotPasswordSessionsInput = {
   avatarFileName?: string | null
   heightUnitType?: $Enums.UnitType
   weightUnitType?: $Enums.UnitType
+  emailVerificationOtps?: Prisma.EmailVerificationOtpCreateNestedManyWithoutUserInput
   forgotPasswordOtps?: Prisma.ForgotPasswordOtpCreateNestedManyWithoutUserInput
   threads?: Prisma.ThreadCreateNestedManyWithoutAuthorInput
   replies?: Prisma.ReplyCreateNestedManyWithoutAuthorInput
   threadLikes?: Prisma.ThreadLikeCreateNestedManyWithoutUserInput
   replyLikes?: Prisma.ReplyLikeCreateNestedManyWithoutUserInput
   workoutSessions?: Prisma.WorkoutSessionCreateNestedManyWithoutUserInput
+  userBadges?: Prisma.UserBadgeCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutForgotPasswordSessionsInput = {
@@ -970,6 +1179,7 @@ export type UserUncheckedCreateWithoutForgotPasswordSessionsInput = {
   email: string
   password: string
   createdAt?: Date | string
+  emailVerifiedAt?: Date | string | null
   username: string
   lastUsernameChangeAt?: Date | string | null
   dob: Date | string
@@ -983,12 +1193,14 @@ export type UserUncheckedCreateWithoutForgotPasswordSessionsInput = {
   avatarFileName?: string | null
   heightUnitType?: $Enums.UnitType
   weightUnitType?: $Enums.UnitType
+  emailVerificationOtps?: Prisma.EmailVerificationOtpUncheckedCreateNestedManyWithoutUserInput
   forgotPasswordOtps?: Prisma.ForgotPasswordOtpUncheckedCreateNestedManyWithoutUserInput
   threads?: Prisma.ThreadUncheckedCreateNestedManyWithoutAuthorInput
   replies?: Prisma.ReplyUncheckedCreateNestedManyWithoutAuthorInput
   threadLikes?: Prisma.ThreadLikeUncheckedCreateNestedManyWithoutUserInput
   replyLikes?: Prisma.ReplyLikeUncheckedCreateNestedManyWithoutUserInput
   workoutSessions?: Prisma.WorkoutSessionUncheckedCreateNestedManyWithoutUserInput
+  userBadges?: Prisma.UserBadgeUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutForgotPasswordSessionsInput = {
@@ -1011,6 +1223,7 @@ export type UserUpdateWithoutForgotPasswordSessionsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   username?: Prisma.StringFieldUpdateOperationsInput | string
   lastUsernameChangeAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   dob?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1024,12 +1237,14 @@ export type UserUpdateWithoutForgotPasswordSessionsInput = {
   avatarFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   heightUnitType?: Prisma.EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
   weightUnitType?: Prisma.EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+  emailVerificationOtps?: Prisma.EmailVerificationOtpUpdateManyWithoutUserNestedInput
   forgotPasswordOtps?: Prisma.ForgotPasswordOtpUpdateManyWithoutUserNestedInput
   threads?: Prisma.ThreadUpdateManyWithoutAuthorNestedInput
   replies?: Prisma.ReplyUpdateManyWithoutAuthorNestedInput
   threadLikes?: Prisma.ThreadLikeUpdateManyWithoutUserNestedInput
   replyLikes?: Prisma.ReplyLikeUpdateManyWithoutUserNestedInput
   workoutSessions?: Prisma.WorkoutSessionUpdateManyWithoutUserNestedInput
+  userBadges?: Prisma.UserBadgeUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutForgotPasswordSessionsInput = {
@@ -1037,6 +1252,7 @@ export type UserUncheckedUpdateWithoutForgotPasswordSessionsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   username?: Prisma.StringFieldUpdateOperationsInput | string
   lastUsernameChangeAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   dob?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1050,18 +1266,21 @@ export type UserUncheckedUpdateWithoutForgotPasswordSessionsInput = {
   avatarFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   heightUnitType?: Prisma.EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
   weightUnitType?: Prisma.EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+  emailVerificationOtps?: Prisma.EmailVerificationOtpUncheckedUpdateManyWithoutUserNestedInput
   forgotPasswordOtps?: Prisma.ForgotPasswordOtpUncheckedUpdateManyWithoutUserNestedInput
   threads?: Prisma.ThreadUncheckedUpdateManyWithoutAuthorNestedInput
   replies?: Prisma.ReplyUncheckedUpdateManyWithoutAuthorNestedInput
   threadLikes?: Prisma.ThreadLikeUncheckedUpdateManyWithoutUserNestedInput
   replyLikes?: Prisma.ReplyLikeUncheckedUpdateManyWithoutUserNestedInput
   workoutSessions?: Prisma.WorkoutSessionUncheckedUpdateManyWithoutUserNestedInput
+  userBadges?: Prisma.UserBadgeUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutThreadsInput = {
   email: string
   password: string
   createdAt?: Date | string
+  emailVerifiedAt?: Date | string | null
   username: string
   lastUsernameChangeAt?: Date | string | null
   dob: Date | string
@@ -1075,12 +1294,14 @@ export type UserCreateWithoutThreadsInput = {
   avatarFileName?: string | null
   heightUnitType?: $Enums.UnitType
   weightUnitType?: $Enums.UnitType
+  emailVerificationOtps?: Prisma.EmailVerificationOtpCreateNestedManyWithoutUserInput
   forgotPasswordOtps?: Prisma.ForgotPasswordOtpCreateNestedManyWithoutUserInput
   forgotPasswordSessions?: Prisma.ForgotPasswordSessionCreateNestedManyWithoutUserInput
   replies?: Prisma.ReplyCreateNestedManyWithoutAuthorInput
   threadLikes?: Prisma.ThreadLikeCreateNestedManyWithoutUserInput
   replyLikes?: Prisma.ReplyLikeCreateNestedManyWithoutUserInput
   workoutSessions?: Prisma.WorkoutSessionCreateNestedManyWithoutUserInput
+  userBadges?: Prisma.UserBadgeCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutThreadsInput = {
@@ -1088,6 +1309,7 @@ export type UserUncheckedCreateWithoutThreadsInput = {
   email: string
   password: string
   createdAt?: Date | string
+  emailVerifiedAt?: Date | string | null
   username: string
   lastUsernameChangeAt?: Date | string | null
   dob: Date | string
@@ -1101,12 +1323,14 @@ export type UserUncheckedCreateWithoutThreadsInput = {
   avatarFileName?: string | null
   heightUnitType?: $Enums.UnitType
   weightUnitType?: $Enums.UnitType
+  emailVerificationOtps?: Prisma.EmailVerificationOtpUncheckedCreateNestedManyWithoutUserInput
   forgotPasswordOtps?: Prisma.ForgotPasswordOtpUncheckedCreateNestedManyWithoutUserInput
   forgotPasswordSessions?: Prisma.ForgotPasswordSessionUncheckedCreateNestedManyWithoutUserInput
   replies?: Prisma.ReplyUncheckedCreateNestedManyWithoutAuthorInput
   threadLikes?: Prisma.ThreadLikeUncheckedCreateNestedManyWithoutUserInput
   replyLikes?: Prisma.ReplyLikeUncheckedCreateNestedManyWithoutUserInput
   workoutSessions?: Prisma.WorkoutSessionUncheckedCreateNestedManyWithoutUserInput
+  userBadges?: Prisma.UserBadgeUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutThreadsInput = {
@@ -1129,6 +1353,7 @@ export type UserUpdateWithoutThreadsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   username?: Prisma.StringFieldUpdateOperationsInput | string
   lastUsernameChangeAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   dob?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1142,12 +1367,14 @@ export type UserUpdateWithoutThreadsInput = {
   avatarFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   heightUnitType?: Prisma.EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
   weightUnitType?: Prisma.EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+  emailVerificationOtps?: Prisma.EmailVerificationOtpUpdateManyWithoutUserNestedInput
   forgotPasswordOtps?: Prisma.ForgotPasswordOtpUpdateManyWithoutUserNestedInput
   forgotPasswordSessions?: Prisma.ForgotPasswordSessionUpdateManyWithoutUserNestedInput
   replies?: Prisma.ReplyUpdateManyWithoutAuthorNestedInput
   threadLikes?: Prisma.ThreadLikeUpdateManyWithoutUserNestedInput
   replyLikes?: Prisma.ReplyLikeUpdateManyWithoutUserNestedInput
   workoutSessions?: Prisma.WorkoutSessionUpdateManyWithoutUserNestedInput
+  userBadges?: Prisma.UserBadgeUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutThreadsInput = {
@@ -1155,6 +1382,7 @@ export type UserUncheckedUpdateWithoutThreadsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   username?: Prisma.StringFieldUpdateOperationsInput | string
   lastUsernameChangeAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   dob?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1168,18 +1396,21 @@ export type UserUncheckedUpdateWithoutThreadsInput = {
   avatarFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   heightUnitType?: Prisma.EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
   weightUnitType?: Prisma.EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+  emailVerificationOtps?: Prisma.EmailVerificationOtpUncheckedUpdateManyWithoutUserNestedInput
   forgotPasswordOtps?: Prisma.ForgotPasswordOtpUncheckedUpdateManyWithoutUserNestedInput
   forgotPasswordSessions?: Prisma.ForgotPasswordSessionUncheckedUpdateManyWithoutUserNestedInput
   replies?: Prisma.ReplyUncheckedUpdateManyWithoutAuthorNestedInput
   threadLikes?: Prisma.ThreadLikeUncheckedUpdateManyWithoutUserNestedInput
   replyLikes?: Prisma.ReplyLikeUncheckedUpdateManyWithoutUserNestedInput
   workoutSessions?: Prisma.WorkoutSessionUncheckedUpdateManyWithoutUserNestedInput
+  userBadges?: Prisma.UserBadgeUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutRepliesInput = {
   email: string
   password: string
   createdAt?: Date | string
+  emailVerifiedAt?: Date | string | null
   username: string
   lastUsernameChangeAt?: Date | string | null
   dob: Date | string
@@ -1193,12 +1424,14 @@ export type UserCreateWithoutRepliesInput = {
   avatarFileName?: string | null
   heightUnitType?: $Enums.UnitType
   weightUnitType?: $Enums.UnitType
+  emailVerificationOtps?: Prisma.EmailVerificationOtpCreateNestedManyWithoutUserInput
   forgotPasswordOtps?: Prisma.ForgotPasswordOtpCreateNestedManyWithoutUserInput
   forgotPasswordSessions?: Prisma.ForgotPasswordSessionCreateNestedManyWithoutUserInput
   threads?: Prisma.ThreadCreateNestedManyWithoutAuthorInput
   threadLikes?: Prisma.ThreadLikeCreateNestedManyWithoutUserInput
   replyLikes?: Prisma.ReplyLikeCreateNestedManyWithoutUserInput
   workoutSessions?: Prisma.WorkoutSessionCreateNestedManyWithoutUserInput
+  userBadges?: Prisma.UserBadgeCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutRepliesInput = {
@@ -1206,6 +1439,7 @@ export type UserUncheckedCreateWithoutRepliesInput = {
   email: string
   password: string
   createdAt?: Date | string
+  emailVerifiedAt?: Date | string | null
   username: string
   lastUsernameChangeAt?: Date | string | null
   dob: Date | string
@@ -1219,12 +1453,14 @@ export type UserUncheckedCreateWithoutRepliesInput = {
   avatarFileName?: string | null
   heightUnitType?: $Enums.UnitType
   weightUnitType?: $Enums.UnitType
+  emailVerificationOtps?: Prisma.EmailVerificationOtpUncheckedCreateNestedManyWithoutUserInput
   forgotPasswordOtps?: Prisma.ForgotPasswordOtpUncheckedCreateNestedManyWithoutUserInput
   forgotPasswordSessions?: Prisma.ForgotPasswordSessionUncheckedCreateNestedManyWithoutUserInput
   threads?: Prisma.ThreadUncheckedCreateNestedManyWithoutAuthorInput
   threadLikes?: Prisma.ThreadLikeUncheckedCreateNestedManyWithoutUserInput
   replyLikes?: Prisma.ReplyLikeUncheckedCreateNestedManyWithoutUserInput
   workoutSessions?: Prisma.WorkoutSessionUncheckedCreateNestedManyWithoutUserInput
+  userBadges?: Prisma.UserBadgeUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutRepliesInput = {
@@ -1247,6 +1483,7 @@ export type UserUpdateWithoutRepliesInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   username?: Prisma.StringFieldUpdateOperationsInput | string
   lastUsernameChangeAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   dob?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1260,12 +1497,14 @@ export type UserUpdateWithoutRepliesInput = {
   avatarFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   heightUnitType?: Prisma.EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
   weightUnitType?: Prisma.EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+  emailVerificationOtps?: Prisma.EmailVerificationOtpUpdateManyWithoutUserNestedInput
   forgotPasswordOtps?: Prisma.ForgotPasswordOtpUpdateManyWithoutUserNestedInput
   forgotPasswordSessions?: Prisma.ForgotPasswordSessionUpdateManyWithoutUserNestedInput
   threads?: Prisma.ThreadUpdateManyWithoutAuthorNestedInput
   threadLikes?: Prisma.ThreadLikeUpdateManyWithoutUserNestedInput
   replyLikes?: Prisma.ReplyLikeUpdateManyWithoutUserNestedInput
   workoutSessions?: Prisma.WorkoutSessionUpdateManyWithoutUserNestedInput
+  userBadges?: Prisma.UserBadgeUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRepliesInput = {
@@ -1273,6 +1512,7 @@ export type UserUncheckedUpdateWithoutRepliesInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   username?: Prisma.StringFieldUpdateOperationsInput | string
   lastUsernameChangeAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   dob?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1286,18 +1526,21 @@ export type UserUncheckedUpdateWithoutRepliesInput = {
   avatarFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   heightUnitType?: Prisma.EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
   weightUnitType?: Prisma.EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+  emailVerificationOtps?: Prisma.EmailVerificationOtpUncheckedUpdateManyWithoutUserNestedInput
   forgotPasswordOtps?: Prisma.ForgotPasswordOtpUncheckedUpdateManyWithoutUserNestedInput
   forgotPasswordSessions?: Prisma.ForgotPasswordSessionUncheckedUpdateManyWithoutUserNestedInput
   threads?: Prisma.ThreadUncheckedUpdateManyWithoutAuthorNestedInput
   threadLikes?: Prisma.ThreadLikeUncheckedUpdateManyWithoutUserNestedInput
   replyLikes?: Prisma.ReplyLikeUncheckedUpdateManyWithoutUserNestedInput
   workoutSessions?: Prisma.WorkoutSessionUncheckedUpdateManyWithoutUserNestedInput
+  userBadges?: Prisma.UserBadgeUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutThreadLikesInput = {
   email: string
   password: string
   createdAt?: Date | string
+  emailVerifiedAt?: Date | string | null
   username: string
   lastUsernameChangeAt?: Date | string | null
   dob: Date | string
@@ -1311,12 +1554,14 @@ export type UserCreateWithoutThreadLikesInput = {
   avatarFileName?: string | null
   heightUnitType?: $Enums.UnitType
   weightUnitType?: $Enums.UnitType
+  emailVerificationOtps?: Prisma.EmailVerificationOtpCreateNestedManyWithoutUserInput
   forgotPasswordOtps?: Prisma.ForgotPasswordOtpCreateNestedManyWithoutUserInput
   forgotPasswordSessions?: Prisma.ForgotPasswordSessionCreateNestedManyWithoutUserInput
   threads?: Prisma.ThreadCreateNestedManyWithoutAuthorInput
   replies?: Prisma.ReplyCreateNestedManyWithoutAuthorInput
   replyLikes?: Prisma.ReplyLikeCreateNestedManyWithoutUserInput
   workoutSessions?: Prisma.WorkoutSessionCreateNestedManyWithoutUserInput
+  userBadges?: Prisma.UserBadgeCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutThreadLikesInput = {
@@ -1324,6 +1569,7 @@ export type UserUncheckedCreateWithoutThreadLikesInput = {
   email: string
   password: string
   createdAt?: Date | string
+  emailVerifiedAt?: Date | string | null
   username: string
   lastUsernameChangeAt?: Date | string | null
   dob: Date | string
@@ -1337,12 +1583,14 @@ export type UserUncheckedCreateWithoutThreadLikesInput = {
   avatarFileName?: string | null
   heightUnitType?: $Enums.UnitType
   weightUnitType?: $Enums.UnitType
+  emailVerificationOtps?: Prisma.EmailVerificationOtpUncheckedCreateNestedManyWithoutUserInput
   forgotPasswordOtps?: Prisma.ForgotPasswordOtpUncheckedCreateNestedManyWithoutUserInput
   forgotPasswordSessions?: Prisma.ForgotPasswordSessionUncheckedCreateNestedManyWithoutUserInput
   threads?: Prisma.ThreadUncheckedCreateNestedManyWithoutAuthorInput
   replies?: Prisma.ReplyUncheckedCreateNestedManyWithoutAuthorInput
   replyLikes?: Prisma.ReplyLikeUncheckedCreateNestedManyWithoutUserInput
   workoutSessions?: Prisma.WorkoutSessionUncheckedCreateNestedManyWithoutUserInput
+  userBadges?: Prisma.UserBadgeUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutThreadLikesInput = {
@@ -1365,6 +1613,7 @@ export type UserUpdateWithoutThreadLikesInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   username?: Prisma.StringFieldUpdateOperationsInput | string
   lastUsernameChangeAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   dob?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1378,12 +1627,14 @@ export type UserUpdateWithoutThreadLikesInput = {
   avatarFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   heightUnitType?: Prisma.EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
   weightUnitType?: Prisma.EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+  emailVerificationOtps?: Prisma.EmailVerificationOtpUpdateManyWithoutUserNestedInput
   forgotPasswordOtps?: Prisma.ForgotPasswordOtpUpdateManyWithoutUserNestedInput
   forgotPasswordSessions?: Prisma.ForgotPasswordSessionUpdateManyWithoutUserNestedInput
   threads?: Prisma.ThreadUpdateManyWithoutAuthorNestedInput
   replies?: Prisma.ReplyUpdateManyWithoutAuthorNestedInput
   replyLikes?: Prisma.ReplyLikeUpdateManyWithoutUserNestedInput
   workoutSessions?: Prisma.WorkoutSessionUpdateManyWithoutUserNestedInput
+  userBadges?: Prisma.UserBadgeUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutThreadLikesInput = {
@@ -1391,6 +1642,7 @@ export type UserUncheckedUpdateWithoutThreadLikesInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   username?: Prisma.StringFieldUpdateOperationsInput | string
   lastUsernameChangeAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   dob?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1404,18 +1656,21 @@ export type UserUncheckedUpdateWithoutThreadLikesInput = {
   avatarFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   heightUnitType?: Prisma.EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
   weightUnitType?: Prisma.EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+  emailVerificationOtps?: Prisma.EmailVerificationOtpUncheckedUpdateManyWithoutUserNestedInput
   forgotPasswordOtps?: Prisma.ForgotPasswordOtpUncheckedUpdateManyWithoutUserNestedInput
   forgotPasswordSessions?: Prisma.ForgotPasswordSessionUncheckedUpdateManyWithoutUserNestedInput
   threads?: Prisma.ThreadUncheckedUpdateManyWithoutAuthorNestedInput
   replies?: Prisma.ReplyUncheckedUpdateManyWithoutAuthorNestedInput
   replyLikes?: Prisma.ReplyLikeUncheckedUpdateManyWithoutUserNestedInput
   workoutSessions?: Prisma.WorkoutSessionUncheckedUpdateManyWithoutUserNestedInput
+  userBadges?: Prisma.UserBadgeUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutReplyLikesInput = {
   email: string
   password: string
   createdAt?: Date | string
+  emailVerifiedAt?: Date | string | null
   username: string
   lastUsernameChangeAt?: Date | string | null
   dob: Date | string
@@ -1429,12 +1684,14 @@ export type UserCreateWithoutReplyLikesInput = {
   avatarFileName?: string | null
   heightUnitType?: $Enums.UnitType
   weightUnitType?: $Enums.UnitType
+  emailVerificationOtps?: Prisma.EmailVerificationOtpCreateNestedManyWithoutUserInput
   forgotPasswordOtps?: Prisma.ForgotPasswordOtpCreateNestedManyWithoutUserInput
   forgotPasswordSessions?: Prisma.ForgotPasswordSessionCreateNestedManyWithoutUserInput
   threads?: Prisma.ThreadCreateNestedManyWithoutAuthorInput
   replies?: Prisma.ReplyCreateNestedManyWithoutAuthorInput
   threadLikes?: Prisma.ThreadLikeCreateNestedManyWithoutUserInput
   workoutSessions?: Prisma.WorkoutSessionCreateNestedManyWithoutUserInput
+  userBadges?: Prisma.UserBadgeCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutReplyLikesInput = {
@@ -1442,6 +1699,7 @@ export type UserUncheckedCreateWithoutReplyLikesInput = {
   email: string
   password: string
   createdAt?: Date | string
+  emailVerifiedAt?: Date | string | null
   username: string
   lastUsernameChangeAt?: Date | string | null
   dob: Date | string
@@ -1455,12 +1713,14 @@ export type UserUncheckedCreateWithoutReplyLikesInput = {
   avatarFileName?: string | null
   heightUnitType?: $Enums.UnitType
   weightUnitType?: $Enums.UnitType
+  emailVerificationOtps?: Prisma.EmailVerificationOtpUncheckedCreateNestedManyWithoutUserInput
   forgotPasswordOtps?: Prisma.ForgotPasswordOtpUncheckedCreateNestedManyWithoutUserInput
   forgotPasswordSessions?: Prisma.ForgotPasswordSessionUncheckedCreateNestedManyWithoutUserInput
   threads?: Prisma.ThreadUncheckedCreateNestedManyWithoutAuthorInput
   replies?: Prisma.ReplyUncheckedCreateNestedManyWithoutAuthorInput
   threadLikes?: Prisma.ThreadLikeUncheckedCreateNestedManyWithoutUserInput
   workoutSessions?: Prisma.WorkoutSessionUncheckedCreateNestedManyWithoutUserInput
+  userBadges?: Prisma.UserBadgeUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutReplyLikesInput = {
@@ -1483,6 +1743,7 @@ export type UserUpdateWithoutReplyLikesInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   username?: Prisma.StringFieldUpdateOperationsInput | string
   lastUsernameChangeAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   dob?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1496,12 +1757,14 @@ export type UserUpdateWithoutReplyLikesInput = {
   avatarFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   heightUnitType?: Prisma.EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
   weightUnitType?: Prisma.EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+  emailVerificationOtps?: Prisma.EmailVerificationOtpUpdateManyWithoutUserNestedInput
   forgotPasswordOtps?: Prisma.ForgotPasswordOtpUpdateManyWithoutUserNestedInput
   forgotPasswordSessions?: Prisma.ForgotPasswordSessionUpdateManyWithoutUserNestedInput
   threads?: Prisma.ThreadUpdateManyWithoutAuthorNestedInput
   replies?: Prisma.ReplyUpdateManyWithoutAuthorNestedInput
   threadLikes?: Prisma.ThreadLikeUpdateManyWithoutUserNestedInput
   workoutSessions?: Prisma.WorkoutSessionUpdateManyWithoutUserNestedInput
+  userBadges?: Prisma.UserBadgeUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReplyLikesInput = {
@@ -1509,6 +1772,7 @@ export type UserUncheckedUpdateWithoutReplyLikesInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   username?: Prisma.StringFieldUpdateOperationsInput | string
   lastUsernameChangeAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   dob?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1522,18 +1786,21 @@ export type UserUncheckedUpdateWithoutReplyLikesInput = {
   avatarFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   heightUnitType?: Prisma.EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
   weightUnitType?: Prisma.EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+  emailVerificationOtps?: Prisma.EmailVerificationOtpUncheckedUpdateManyWithoutUserNestedInput
   forgotPasswordOtps?: Prisma.ForgotPasswordOtpUncheckedUpdateManyWithoutUserNestedInput
   forgotPasswordSessions?: Prisma.ForgotPasswordSessionUncheckedUpdateManyWithoutUserNestedInput
   threads?: Prisma.ThreadUncheckedUpdateManyWithoutAuthorNestedInput
   replies?: Prisma.ReplyUncheckedUpdateManyWithoutAuthorNestedInput
   threadLikes?: Prisma.ThreadLikeUncheckedUpdateManyWithoutUserNestedInput
   workoutSessions?: Prisma.WorkoutSessionUncheckedUpdateManyWithoutUserNestedInput
+  userBadges?: Prisma.UserBadgeUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutWorkoutSessionsInput = {
   email: string
   password: string
   createdAt?: Date | string
+  emailVerifiedAt?: Date | string | null
   username: string
   lastUsernameChangeAt?: Date | string | null
   dob: Date | string
@@ -1547,12 +1814,14 @@ export type UserCreateWithoutWorkoutSessionsInput = {
   avatarFileName?: string | null
   heightUnitType?: $Enums.UnitType
   weightUnitType?: $Enums.UnitType
+  emailVerificationOtps?: Prisma.EmailVerificationOtpCreateNestedManyWithoutUserInput
   forgotPasswordOtps?: Prisma.ForgotPasswordOtpCreateNestedManyWithoutUserInput
   forgotPasswordSessions?: Prisma.ForgotPasswordSessionCreateNestedManyWithoutUserInput
   threads?: Prisma.ThreadCreateNestedManyWithoutAuthorInput
   replies?: Prisma.ReplyCreateNestedManyWithoutAuthorInput
   threadLikes?: Prisma.ThreadLikeCreateNestedManyWithoutUserInput
   replyLikes?: Prisma.ReplyLikeCreateNestedManyWithoutUserInput
+  userBadges?: Prisma.UserBadgeCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutWorkoutSessionsInput = {
@@ -1560,6 +1829,7 @@ export type UserUncheckedCreateWithoutWorkoutSessionsInput = {
   email: string
   password: string
   createdAt?: Date | string
+  emailVerifiedAt?: Date | string | null
   username: string
   lastUsernameChangeAt?: Date | string | null
   dob: Date | string
@@ -1573,12 +1843,14 @@ export type UserUncheckedCreateWithoutWorkoutSessionsInput = {
   avatarFileName?: string | null
   heightUnitType?: $Enums.UnitType
   weightUnitType?: $Enums.UnitType
+  emailVerificationOtps?: Prisma.EmailVerificationOtpUncheckedCreateNestedManyWithoutUserInput
   forgotPasswordOtps?: Prisma.ForgotPasswordOtpUncheckedCreateNestedManyWithoutUserInput
   forgotPasswordSessions?: Prisma.ForgotPasswordSessionUncheckedCreateNestedManyWithoutUserInput
   threads?: Prisma.ThreadUncheckedCreateNestedManyWithoutAuthorInput
   replies?: Prisma.ReplyUncheckedCreateNestedManyWithoutAuthorInput
   threadLikes?: Prisma.ThreadLikeUncheckedCreateNestedManyWithoutUserInput
   replyLikes?: Prisma.ReplyLikeUncheckedCreateNestedManyWithoutUserInput
+  userBadges?: Prisma.UserBadgeUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutWorkoutSessionsInput = {
@@ -1601,6 +1873,7 @@ export type UserUpdateWithoutWorkoutSessionsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   username?: Prisma.StringFieldUpdateOperationsInput | string
   lastUsernameChangeAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   dob?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1614,12 +1887,14 @@ export type UserUpdateWithoutWorkoutSessionsInput = {
   avatarFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   heightUnitType?: Prisma.EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
   weightUnitType?: Prisma.EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+  emailVerificationOtps?: Prisma.EmailVerificationOtpUpdateManyWithoutUserNestedInput
   forgotPasswordOtps?: Prisma.ForgotPasswordOtpUpdateManyWithoutUserNestedInput
   forgotPasswordSessions?: Prisma.ForgotPasswordSessionUpdateManyWithoutUserNestedInput
   threads?: Prisma.ThreadUpdateManyWithoutAuthorNestedInput
   replies?: Prisma.ReplyUpdateManyWithoutAuthorNestedInput
   threadLikes?: Prisma.ThreadLikeUpdateManyWithoutUserNestedInput
   replyLikes?: Prisma.ReplyLikeUpdateManyWithoutUserNestedInput
+  userBadges?: Prisma.UserBadgeUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutWorkoutSessionsInput = {
@@ -1627,6 +1902,7 @@ export type UserUncheckedUpdateWithoutWorkoutSessionsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   username?: Prisma.StringFieldUpdateOperationsInput | string
   lastUsernameChangeAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   dob?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1640,12 +1916,144 @@ export type UserUncheckedUpdateWithoutWorkoutSessionsInput = {
   avatarFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   heightUnitType?: Prisma.EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
   weightUnitType?: Prisma.EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+  emailVerificationOtps?: Prisma.EmailVerificationOtpUncheckedUpdateManyWithoutUserNestedInput
   forgotPasswordOtps?: Prisma.ForgotPasswordOtpUncheckedUpdateManyWithoutUserNestedInput
   forgotPasswordSessions?: Prisma.ForgotPasswordSessionUncheckedUpdateManyWithoutUserNestedInput
   threads?: Prisma.ThreadUncheckedUpdateManyWithoutAuthorNestedInput
   replies?: Prisma.ReplyUncheckedUpdateManyWithoutAuthorNestedInput
   threadLikes?: Prisma.ThreadLikeUncheckedUpdateManyWithoutUserNestedInput
   replyLikes?: Prisma.ReplyLikeUncheckedUpdateManyWithoutUserNestedInput
+  userBadges?: Prisma.UserBadgeUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutUserBadgesInput = {
+  email: string
+  password: string
+  createdAt?: Date | string
+  emailVerifiedAt?: Date | string | null
+  username: string
+  lastUsernameChangeAt?: Date | string | null
+  dob: Date | string
+  sex: $Enums.Sex
+  height: number
+  weight: number
+  fitnessGoal: $Enums.FitnessGoal
+  experienceLevel: $Enums.ExperienceLevel
+  trainingStyle: $Enums.TrainingStyle
+  trainingFrequency: $Enums.TrainingFrequency
+  avatarFileName?: string | null
+  heightUnitType?: $Enums.UnitType
+  weightUnitType?: $Enums.UnitType
+  emailVerificationOtps?: Prisma.EmailVerificationOtpCreateNestedManyWithoutUserInput
+  forgotPasswordOtps?: Prisma.ForgotPasswordOtpCreateNestedManyWithoutUserInput
+  forgotPasswordSessions?: Prisma.ForgotPasswordSessionCreateNestedManyWithoutUserInput
+  threads?: Prisma.ThreadCreateNestedManyWithoutAuthorInput
+  replies?: Prisma.ReplyCreateNestedManyWithoutAuthorInput
+  threadLikes?: Prisma.ThreadLikeCreateNestedManyWithoutUserInput
+  replyLikes?: Prisma.ReplyLikeCreateNestedManyWithoutUserInput
+  workoutSessions?: Prisma.WorkoutSessionCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutUserBadgesInput = {
+  id?: number
+  email: string
+  password: string
+  createdAt?: Date | string
+  emailVerifiedAt?: Date | string | null
+  username: string
+  lastUsernameChangeAt?: Date | string | null
+  dob: Date | string
+  sex: $Enums.Sex
+  height: number
+  weight: number
+  fitnessGoal: $Enums.FitnessGoal
+  experienceLevel: $Enums.ExperienceLevel
+  trainingStyle: $Enums.TrainingStyle
+  trainingFrequency: $Enums.TrainingFrequency
+  avatarFileName?: string | null
+  heightUnitType?: $Enums.UnitType
+  weightUnitType?: $Enums.UnitType
+  emailVerificationOtps?: Prisma.EmailVerificationOtpUncheckedCreateNestedManyWithoutUserInput
+  forgotPasswordOtps?: Prisma.ForgotPasswordOtpUncheckedCreateNestedManyWithoutUserInput
+  forgotPasswordSessions?: Prisma.ForgotPasswordSessionUncheckedCreateNestedManyWithoutUserInput
+  threads?: Prisma.ThreadUncheckedCreateNestedManyWithoutAuthorInput
+  replies?: Prisma.ReplyUncheckedCreateNestedManyWithoutAuthorInput
+  threadLikes?: Prisma.ThreadLikeUncheckedCreateNestedManyWithoutUserInput
+  replyLikes?: Prisma.ReplyLikeUncheckedCreateNestedManyWithoutUserInput
+  workoutSessions?: Prisma.WorkoutSessionUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutUserBadgesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutUserBadgesInput, Prisma.UserUncheckedCreateWithoutUserBadgesInput>
+}
+
+export type UserUpsertWithoutUserBadgesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutUserBadgesInput, Prisma.UserUncheckedUpdateWithoutUserBadgesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutUserBadgesInput, Prisma.UserUncheckedCreateWithoutUserBadgesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutUserBadgesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutUserBadgesInput, Prisma.UserUncheckedUpdateWithoutUserBadgesInput>
+}
+
+export type UserUpdateWithoutUserBadgesInput = {
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  lastUsernameChangeAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  dob?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sex?: Prisma.EnumSexFieldUpdateOperationsInput | $Enums.Sex
+  height?: Prisma.IntFieldUpdateOperationsInput | number
+  weight?: Prisma.IntFieldUpdateOperationsInput | number
+  fitnessGoal?: Prisma.EnumFitnessGoalFieldUpdateOperationsInput | $Enums.FitnessGoal
+  experienceLevel?: Prisma.EnumExperienceLevelFieldUpdateOperationsInput | $Enums.ExperienceLevel
+  trainingStyle?: Prisma.EnumTrainingStyleFieldUpdateOperationsInput | $Enums.TrainingStyle
+  trainingFrequency?: Prisma.EnumTrainingFrequencyFieldUpdateOperationsInput | $Enums.TrainingFrequency
+  avatarFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  heightUnitType?: Prisma.EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+  weightUnitType?: Prisma.EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+  emailVerificationOtps?: Prisma.EmailVerificationOtpUpdateManyWithoutUserNestedInput
+  forgotPasswordOtps?: Prisma.ForgotPasswordOtpUpdateManyWithoutUserNestedInput
+  forgotPasswordSessions?: Prisma.ForgotPasswordSessionUpdateManyWithoutUserNestedInput
+  threads?: Prisma.ThreadUpdateManyWithoutAuthorNestedInput
+  replies?: Prisma.ReplyUpdateManyWithoutAuthorNestedInput
+  threadLikes?: Prisma.ThreadLikeUpdateManyWithoutUserNestedInput
+  replyLikes?: Prisma.ReplyLikeUpdateManyWithoutUserNestedInput
+  workoutSessions?: Prisma.WorkoutSessionUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutUserBadgesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  lastUsernameChangeAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  dob?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sex?: Prisma.EnumSexFieldUpdateOperationsInput | $Enums.Sex
+  height?: Prisma.IntFieldUpdateOperationsInput | number
+  weight?: Prisma.IntFieldUpdateOperationsInput | number
+  fitnessGoal?: Prisma.EnumFitnessGoalFieldUpdateOperationsInput | $Enums.FitnessGoal
+  experienceLevel?: Prisma.EnumExperienceLevelFieldUpdateOperationsInput | $Enums.ExperienceLevel
+  trainingStyle?: Prisma.EnumTrainingStyleFieldUpdateOperationsInput | $Enums.TrainingStyle
+  trainingFrequency?: Prisma.EnumTrainingFrequencyFieldUpdateOperationsInput | $Enums.TrainingFrequency
+  avatarFileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  heightUnitType?: Prisma.EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+  weightUnitType?: Prisma.EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+  emailVerificationOtps?: Prisma.EmailVerificationOtpUncheckedUpdateManyWithoutUserNestedInput
+  forgotPasswordOtps?: Prisma.ForgotPasswordOtpUncheckedUpdateManyWithoutUserNestedInput
+  forgotPasswordSessions?: Prisma.ForgotPasswordSessionUncheckedUpdateManyWithoutUserNestedInput
+  threads?: Prisma.ThreadUncheckedUpdateManyWithoutAuthorNestedInput
+  replies?: Prisma.ReplyUncheckedUpdateManyWithoutAuthorNestedInput
+  threadLikes?: Prisma.ThreadLikeUncheckedUpdateManyWithoutUserNestedInput
+  replyLikes?: Prisma.ReplyLikeUncheckedUpdateManyWithoutUserNestedInput
+  workoutSessions?: Prisma.WorkoutSessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -1654,6 +2062,7 @@ export type UserUncheckedUpdateWithoutWorkoutSessionsInput = {
  */
 
 export type UserCountOutputType = {
+  emailVerificationOtps: number
   forgotPasswordOtps: number
   forgotPasswordSessions: number
   threads: number
@@ -1661,9 +2070,11 @@ export type UserCountOutputType = {
   threadLikes: number
   replyLikes: number
   workoutSessions: number
+  userBadges: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  emailVerificationOtps?: boolean | UserCountOutputTypeCountEmailVerificationOtpsArgs
   forgotPasswordOtps?: boolean | UserCountOutputTypeCountForgotPasswordOtpsArgs
   forgotPasswordSessions?: boolean | UserCountOutputTypeCountForgotPasswordSessionsArgs
   threads?: boolean | UserCountOutputTypeCountThreadsArgs
@@ -1671,6 +2082,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   threadLikes?: boolean | UserCountOutputTypeCountThreadLikesArgs
   replyLikes?: boolean | UserCountOutputTypeCountReplyLikesArgs
   workoutSessions?: boolean | UserCountOutputTypeCountWorkoutSessionsArgs
+  userBadges?: boolean | UserCountOutputTypeCountUserBadgesArgs
 }
 
 /**
@@ -1681,6 +2093,13 @@ export type UserCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensi
    * Select specific fields to fetch from the UserCountOutputType
    */
   select?: Prisma.UserCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountEmailVerificationOtpsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.EmailVerificationOtpWhereInput
 }
 
 /**
@@ -1732,12 +2151,20 @@ export type UserCountOutputTypeCountWorkoutSessionsArgs<ExtArgs extends runtime.
   where?: Prisma.WorkoutSessionWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountUserBadgesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UserBadgeWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   email?: boolean
   password?: boolean
   createdAt?: boolean
+  emailVerifiedAt?: boolean
   username?: boolean
   lastUsernameChangeAt?: boolean
   dob?: boolean
@@ -1751,6 +2178,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   avatarFileName?: boolean
   heightUnitType?: boolean
   weightUnitType?: boolean
+  emailVerificationOtps?: boolean | Prisma.User$emailVerificationOtpsArgs<ExtArgs>
   forgotPasswordOtps?: boolean | Prisma.User$forgotPasswordOtpsArgs<ExtArgs>
   forgotPasswordSessions?: boolean | Prisma.User$forgotPasswordSessionsArgs<ExtArgs>
   threads?: boolean | Prisma.User$threadsArgs<ExtArgs>
@@ -1758,6 +2186,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   threadLikes?: boolean | Prisma.User$threadLikesArgs<ExtArgs>
   replyLikes?: boolean | Prisma.User$replyLikesArgs<ExtArgs>
   workoutSessions?: boolean | Prisma.User$workoutSessionsArgs<ExtArgs>
+  userBadges?: boolean | Prisma.User$userBadgesArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1766,6 +2195,7 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   email?: boolean
   password?: boolean
   createdAt?: boolean
+  emailVerifiedAt?: boolean
   username?: boolean
   lastUsernameChangeAt?: boolean
   dob?: boolean
@@ -1786,6 +2216,7 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   email?: boolean
   password?: boolean
   createdAt?: boolean
+  emailVerifiedAt?: boolean
   username?: boolean
   lastUsernameChangeAt?: boolean
   dob?: boolean
@@ -1806,6 +2237,7 @@ export type UserSelectScalar = {
   email?: boolean
   password?: boolean
   createdAt?: boolean
+  emailVerifiedAt?: boolean
   username?: boolean
   lastUsernameChangeAt?: boolean
   dob?: boolean
@@ -1821,8 +2253,9 @@ export type UserSelectScalar = {
   weightUnitType?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "password" | "createdAt" | "username" | "lastUsernameChangeAt" | "dob" | "sex" | "height" | "weight" | "fitnessGoal" | "experienceLevel" | "trainingStyle" | "trainingFrequency" | "avatarFileName" | "heightUnitType" | "weightUnitType", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "password" | "createdAt" | "emailVerifiedAt" | "username" | "lastUsernameChangeAt" | "dob" | "sex" | "height" | "weight" | "fitnessGoal" | "experienceLevel" | "trainingStyle" | "trainingFrequency" | "avatarFileName" | "heightUnitType" | "weightUnitType", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  emailVerificationOtps?: boolean | Prisma.User$emailVerificationOtpsArgs<ExtArgs>
   forgotPasswordOtps?: boolean | Prisma.User$forgotPasswordOtpsArgs<ExtArgs>
   forgotPasswordSessions?: boolean | Prisma.User$forgotPasswordSessionsArgs<ExtArgs>
   threads?: boolean | Prisma.User$threadsArgs<ExtArgs>
@@ -1830,6 +2263,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   threadLikes?: boolean | Prisma.User$threadLikesArgs<ExtArgs>
   replyLikes?: boolean | Prisma.User$replyLikesArgs<ExtArgs>
   workoutSessions?: boolean | Prisma.User$workoutSessionsArgs<ExtArgs>
+  userBadges?: boolean | Prisma.User$userBadgesArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1838,6 +2272,7 @@ export type UserIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
 export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "User"
   objects: {
+    emailVerificationOtps: Prisma.$EmailVerificationOtpPayload<ExtArgs>[]
     forgotPasswordOtps: Prisma.$ForgotPasswordOtpPayload<ExtArgs>[]
     forgotPasswordSessions: Prisma.$ForgotPasswordSessionPayload<ExtArgs>[]
     threads: Prisma.$ThreadPayload<ExtArgs>[]
@@ -1845,12 +2280,14 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     threadLikes: Prisma.$ThreadLikePayload<ExtArgs>[]
     replyLikes: Prisma.$ReplyLikePayload<ExtArgs>[]
     workoutSessions: Prisma.$WorkoutSessionPayload<ExtArgs>[]
+    userBadges: Prisma.$UserBadgePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     email: string
     password: string
     createdAt: Date
+    emailVerifiedAt: Date | null
     username: string
     lastUsernameChangeAt: Date | null
     dob: Date
@@ -2258,6 +2695,7 @@ readonly fields: UserFieldRefs;
  */
 export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  emailVerificationOtps<T extends Prisma.User$emailVerificationOtpsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$emailVerificationOtpsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EmailVerificationOtpPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   forgotPasswordOtps<T extends Prisma.User$forgotPasswordOtpsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$forgotPasswordOtpsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ForgotPasswordOtpPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   forgotPasswordSessions<T extends Prisma.User$forgotPasswordSessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$forgotPasswordSessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ForgotPasswordSessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   threads<T extends Prisma.User$threadsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$threadsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ThreadPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -2265,6 +2703,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   threadLikes<T extends Prisma.User$threadLikesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$threadLikesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ThreadLikePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   replyLikes<T extends Prisma.User$replyLikesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$replyLikesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReplyLikePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   workoutSessions<T extends Prisma.User$workoutSessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$workoutSessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WorkoutSessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  userBadges<T extends Prisma.User$userBadgesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$userBadgesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserBadgePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2298,6 +2737,7 @@ export interface UserFieldRefs {
   readonly email: Prisma.FieldRef<"User", 'String'>
   readonly password: Prisma.FieldRef<"User", 'String'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
+  readonly emailVerifiedAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly username: Prisma.FieldRef<"User", 'String'>
   readonly lastUsernameChangeAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly dob: Prisma.FieldRef<"User", 'DateTime'>
@@ -2697,6 +3137,30 @@ export type UserDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
 }
 
 /**
+ * User.emailVerificationOtps
+ */
+export type User$emailVerificationOtpsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the EmailVerificationOtp
+   */
+  select?: Prisma.EmailVerificationOtpSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the EmailVerificationOtp
+   */
+  omit?: Prisma.EmailVerificationOtpOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EmailVerificationOtpInclude<ExtArgs> | null
+  where?: Prisma.EmailVerificationOtpWhereInput
+  orderBy?: Prisma.EmailVerificationOtpOrderByWithRelationInput | Prisma.EmailVerificationOtpOrderByWithRelationInput[]
+  cursor?: Prisma.EmailVerificationOtpWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.EmailVerificationOtpScalarFieldEnum | Prisma.EmailVerificationOtpScalarFieldEnum[]
+}
+
+/**
  * User.forgotPasswordOtps
  */
 export type User$forgotPasswordOtpsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2862,6 +3326,30 @@ export type User$workoutSessionsArgs<ExtArgs extends runtime.Types.Extensions.In
   take?: number
   skip?: number
   distinct?: Prisma.WorkoutSessionScalarFieldEnum | Prisma.WorkoutSessionScalarFieldEnum[]
+}
+
+/**
+ * User.userBadges
+ */
+export type User$userBadgesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UserBadge
+   */
+  select?: Prisma.UserBadgeSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the UserBadge
+   */
+  omit?: Prisma.UserBadgeOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserBadgeInclude<ExtArgs> | null
+  where?: Prisma.UserBadgeWhereInput
+  orderBy?: Prisma.UserBadgeOrderByWithRelationInput | Prisma.UserBadgeOrderByWithRelationInput[]
+  cursor?: Prisma.UserBadgeWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.UserBadgeScalarFieldEnum | Prisma.UserBadgeScalarFieldEnum[]
 }
 
 /**

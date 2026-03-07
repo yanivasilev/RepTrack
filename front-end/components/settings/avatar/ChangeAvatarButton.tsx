@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { View, Text, Pressable, Modal, ActivityIndicator } from "react-native";
+import { View } from "react-native";
 import { SubmitChangeAvatar } from "./SubmitChangeAvatar";
 import { Row } from "../Row";
-import { styles } from "./styles";
+import FeedbackModal from "../../FeedbackModal";
 
 export function ChangeAvatarButton({ onAvatarChanged }: { onAvatarChanged?: () => Promise<void> | void }) {
     const [loading, setLoading] = useState(false);
@@ -36,39 +36,13 @@ export function ChangeAvatarButton({ onAvatarChanged }: { onAvatarChanged?: () =
     return (
         <View>
             <Row title="Change avatar" onPress={handlePress} />
-
-            {/* FEEDBACK MESSAGE */}
-            {(overlay || loading) && (
-                <Modal
-                    visible={true}
-                    transparent
-                    animationType="fade"
-                    onRequestClose={() => setOverlay(null)} // ANDROID BACK BUTTON
-                >
-                    <View style={styles.overlay}>
-                        <View style={!loading && styles.box}>
-                            {loading ? (
-                                <ActivityIndicator size="large" color="#22c55e" />
-                            ) : (
-                                <Text
-                                    style={[
-                                        styles.text,
-                                        { color: overlay?.success ? "green" : "red" },
-                                    ]}
-                                >
-                                    {overlay?.text}
-                                </Text>
-                            )}
-
-                            {!loading && (
-                                <Pressable onPress={() => setOverlay(null)} style={({ pressed }) => [styles.closeButton, pressed && styles.closeButtonPressed]}>
-                                    <Text style={styles.closeText}>CLOSE</Text>
-                                </Pressable>
-                            )}
-                        </View>
-                    </View>
-                </Modal>
-            )}
+            <FeedbackModal
+                visible={Boolean(overlay) || loading}
+                loading={loading}
+                message={overlay?.text}
+                success={overlay?.success}
+                onClose={() => setOverlay(null)}
+            />
         </View>
     );
 }

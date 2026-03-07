@@ -1,8 +1,10 @@
 import { Alert, Pressable, StyleSheet, Text } from "react-native";
 import { useAuth } from "../../hooks/authContext";
+import { useWorkout } from "../../hooks/WorkoutSessionContext";
 
 export default function LogoutButton() {
     const { signOut } = useAuth();
+    const { reset } = useWorkout();
 
     const onLogout = () => {
         Alert.alert("Logout", "Are you sure you want to logout?", [
@@ -11,6 +13,7 @@ export default function LogoutButton() {
                 text: "Logout",
                 style: "destructive",
                 onPress: async () => {
+                    await reset();
                     await signOut();
                 },
             },
@@ -25,7 +28,7 @@ export default function LogoutButton() {
                 pressed && styles.logoutPressed,
             ]}
         >
-            <Text style={styles.logoutText}>Logout</Text>
+            <Text style={styles.logoutText}>LOGOUT</Text>
         </Pressable>
     );
 }
@@ -35,10 +38,11 @@ const styles = StyleSheet.create({
         borderRadius: 14,
         paddingVertical: 14,
         alignItems: "center",
-        backgroundColor: "red"
+        backgroundColor: "red",
+        marginBottom: 10
     },
     logoutPressed: {
-        opacity: 0.85
+        backgroundColor: "darkred"
     },
     logoutText: {
         color: "white",

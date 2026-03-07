@@ -1,15 +1,9 @@
+import { ApiSucess } from "../../../libs/types/api-responds/ApiSuccess";
+import { ChangeUsernameType } from "../../../libs/types/settings/ChangeUsernameType";
 import { request } from "../customApi/request";
 
-export type ChangeUsernamePayload = {
-    username: string;
-};
-
-export type ChangeUsernameApiSuccess = {
-    message?: string;
-};
-
-export function changeUsernameApi(payload: ChangeUsernamePayload) {
-    return request<ChangeUsernameApiSuccess>(
+export function changeUsernameApi(payload: ChangeUsernameType) {
+    return request<ApiSucess>(
         {
             method: "PUT",
             url: "/settings/change-username",

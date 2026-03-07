@@ -4,8 +4,8 @@ import { getAllThreadsSchema } from "../../schemas/threads/get-all-threads";
 
 export async function getAllThreadsController(req: Request, res: Response) {
     const user = (req as any).user;
-
     const parsed = getAllThreadsSchema.safeParse(req.query);
+
     if (!parsed.success) {
         return res.status(400).json({
             errors: parsed.error.issues.map((i) => ({
@@ -15,9 +15,9 @@ export async function getAllThreadsController(req: Request, res: Response) {
         });
     }
 
-    const { page, limit } = parsed.data;
+    const { page, limit, query } = parsed.data;
 
-    const result = await getAllThreadsService(user.id, { page, limit });
+    const result = await getAllThreadsService(user.id, { page, limit, query });
 
     return res.status(200).json(result);
 }

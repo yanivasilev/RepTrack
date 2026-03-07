@@ -1,14 +1,11 @@
 import * as ImagePicker from "expo-image-picker";
 import { changeAvatarApi } from "../../../services/api/settings/changeAvatarApi";
 
-export async function SubmitChangeAvatar(): Promise<{
-    success: boolean;
-    message: string;
-}> {
+export async function SubmitChangeAvatar(): Promise<{ success: boolean; message: string }> {
+
     const perm = await ImagePicker.requestMediaLibraryPermissionsAsync();
-    if (!perm.granted) {
-        return { success: false, message: "Permission denied. Please allow photo access." };
-    }
+
+    if (!perm.granted) return { success: false, message: "Media library permission denied. Go to settings and turn them on to use this feature." };
 
     const result = await ImagePicker.launchImageLibraryAsync({
         mediaTypes: ["images"],
@@ -17,20 +14,17 @@ export async function SubmitChangeAvatar(): Promise<{
         quality: 1,
     });
 
-    if (result.canceled) {
-        return { success: false, message: "Canceled" };
-    }
+    if (result.canceled) return { success: false, message: "Canceled" };
+
 
     const asset = result.assets[0];
 
     const uri = asset.uri;
-    const name =
-        (asset as any).fileName ??
-        `avatar-${Date.now()}.jpg`;
+    const name = (asset as any).fileName ?? `avatar-${Date.now()}.jpg`;
 
     const type = asset.mimeType ?? "image/jpeg";
 
-    const res = await changeAvatarApi({ uri, name, type });
+    const res = await changeAvatarApi(uri, name, type);
 
     return {
         success: true,

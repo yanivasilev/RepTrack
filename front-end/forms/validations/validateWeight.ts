@@ -1,4 +1,4 @@
-import { UnitType } from "../../libs/catalogs/register";
+import { UnitType } from "../../libs/types/common/UnitType";
 
 export function validateWeight(weight: number | null, unitType: UnitType | null): string | null {
     if (!weight) return "Weight is required";

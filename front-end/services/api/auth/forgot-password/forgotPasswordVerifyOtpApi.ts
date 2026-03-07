@@ -1,17 +1,9 @@
+import { ApiSuccessForgotPasswordVerifyOtp } from "../../../../libs/types/api-responds/ApiSucessForgotPasswordVerifyOtp";
+import { ForgotPasswordVerifyOtpType } from "../../../../libs/types/auth/forgot-password/ForgotPasswordVerifyOtpType";
 import { request } from "../../customApi/request";
 
-export type ForgotPasswordVerifyOtpPayload = {
-    email: string;
-    otp: string;
-};
-
-export type ForgotPasswordVerifyOtpApiSuccess = {
-    message?: string;
-    token: string;
-};
-
-export function forgotPasswordVerifyOtpApi(payload: ForgotPasswordVerifyOtpPayload) {
-    return request<ForgotPasswordVerifyOtpApiSuccess>(
+export function forgotPasswordVerifyOtpApi(payload: ForgotPasswordVerifyOtpType) {
+    return request<ApiSuccessForgotPasswordVerifyOtp>(
         {
             method: "POST",
             url: "/auth/forgot-password/verify",

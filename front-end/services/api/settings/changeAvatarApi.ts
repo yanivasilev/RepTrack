@@ -1,25 +1,16 @@
+import { ApiSucess } from "../../../libs/types/api-responds/ApiSuccess";
 import { request } from "../customApi/request";
 
-export type ChangeAvatarPayload = {
-    uri: string;
-    name: string;
-    type: string;
-};
-
-export type ChangeAvatarApiSuccess = {
-    message?: string;
-};
-
-export function changeAvatarApi(payload: ChangeAvatarPayload) {
+export function changeAvatarApi(uri: string, name: string, type: string) {
     const form = new FormData();
 
     form.append("avatar", {
-        uri: payload.uri,
-        name: payload.name,
-        type: payload.type,
+        uri: uri,
+        name: name,
+        type: type,
     } as any);
 
-    return request<ChangeAvatarApiSuccess>(
+    return request<ApiSucess>(
         {
             method: "PUT",
             url: "/settings/change-avatar",

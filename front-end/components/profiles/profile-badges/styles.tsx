@@ -1,0 +1,150 @@
+import { StyleSheet } from "react-native";
+
+export const styles = StyleSheet.create({
+    section: {
+        width: "100%",
+        paddingHorizontal: 16,
+        paddingTop: 8,
+        paddingBottom: 6,
+        gap: 10,
+    },
+    headerRow: {
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+    },
+    title: {
+        color: "green",
+        fontSize: 18,
+        fontWeight: "800",
+    },
+    count: {
+        color: "#666",
+        fontSize: 13,
+        fontWeight: "700",
+    },
+    emptyBox: {
+        borderWidth: 1,
+        borderColor: "#d6d6d6",
+        borderRadius: 12,
+        paddingVertical: 14,
+        paddingHorizontal: 12,
+        backgroundColor: "#fafafa",
+        alignItems: "center",
+    },
+    emptyText: {
+        color: "#666",
+        fontSize: 13,
+        textAlign: "center",
+    },
+    earnedList: {
+        gap: 10,
+        paddingRight: 6,
+    },
+    earnedCard: {
+        width: 96,
+        alignItems: "center",
+        paddingVertical: 8,
+        paddingHorizontal: 6,
+        borderWidth: 1,
+        borderColor: "#d8d8d8",
+        borderRadius: 12,
+        backgroundColor: "white",
+    },
+    badgeName: {
+        marginTop: 6,
+        color: "#2f2f2f",
+        fontSize: 11,
+        fontWeight: "700",
+        textAlign: "center",
+    },
+    badgeSub: {
+        marginTop: 2,
+        color: "#6b7280",
+        fontSize: 10,
+        fontWeight: "700",
+        textAlign: "center",
+    },
+    overlay: {
+        flex: 1,
+        backgroundColor: "rgba(0,0,0,0.5)",
+        justifyContent: "center",
+        alignItems: "center",
+        padding: 16,
+    },
+    modalCard: {
+        width: "100%",
+        maxWidth: 420,
+        maxHeight: "86%",
+        backgroundColor: "white",
+        borderRadius: 16,
+        paddingHorizontal: 14,
+        paddingTop: 14,
+        paddingBottom: 10,
+    },
+    modalHeader: {
+        gap: 2,
+        marginBottom: 10,
+    },
+    modalTitle: {
+        color: "green",
+        fontSize: 20,
+        fontWeight: "800",
+    },
+    modalSubtitle: {
+        color: "#6b7280",
+        fontSize: 13,
+    },
+    allList: {
+        gap: 8,
+        paddingBottom: 8,
+    },
+    allItem: {
+        flexDirection: "row",
+        alignItems: "center",
+        gap: 10,
+        borderWidth: 1,
+        borderColor: "#e4e4e4",
+        borderRadius: 12,
+        paddingVertical: 8,
+        paddingHorizontal: 8,
+        backgroundColor: "#fff",
+    },
+    allItemLocked: {
+        opacity: 0.55,
+    },
+    allItemTextWrap: {
+        flex: 1,
+    },
+    allItemTitle: {
+        color: "#1f2937",
+        fontSize: 14,
+        fontWeight: "700",
+    },
+    statusEarned: {
+        marginTop: 2,
+        color: "green",
+        fontSize: 12,
+        fontWeight: "700",
+    },
+    statusLocked: {
+        marginTop: 2,
+        color: "#9ca3af",
+        fontSize: 12,
+        fontWeight: "700",
+    },
+    targetText: {
+        marginTop: 2,
+        color: "#6b7280",
+        fontSize: 12,
+        fontWeight: "600",
+    },
+    closeButton: {
+        marginTop: 6,
+        backgroundColor: "gray",
+        borderRadius: 12,
+        alignItems: "center",
+        justifyContent: "center",
+        paddingVertical: 10,
+    }
+});

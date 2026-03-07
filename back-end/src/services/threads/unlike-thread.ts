@@ -6,16 +6,16 @@ export async function unlikeThreadService(userId: number, threadId: number) {
         select: { id: true }
     });
 
+    // CHECKS IF THREAD EXISTS
     if (!thread) return { status: "not_found" as const };
 
     const result = await prisma.$transaction(async (tx) => {
-
-        // CHECK IF ITS ALREADY UNLIKED
         const existing = await tx.threadLike.findUnique({
             where: { threadId_userId: { threadId, userId } },
             select: { id: true }
         });
 
+        // CHECKS IF ITS ALREADY UNLIKED
         if (!existing) {
             const t = await tx.thread.findUnique({
                 where: { id: threadId },
@@ -25,6 +25,7 @@ export async function unlikeThreadService(userId: number, threadId: number) {
             return { status: "ok" as const, liked: false, likeCount: t?.likeCount ?? 0 };
         }
 
+        // UPDATES DB
         await tx.threadLike.delete({ where: { threadId_userId: { threadId, userId } }, });
 
         const updated = await tx.thread.update({

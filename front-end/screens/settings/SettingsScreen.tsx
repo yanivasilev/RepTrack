@@ -1,18 +1,18 @@
-import { Alert, Pressable, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import { SafeAreaView } from "react-native-safe-area-context";
 import { styles } from './styles';
 import LogoutButton from '../../components/settings/LogoutButton';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import BackButton from '../../components/BackButton';
+import BackButton from '../../components/buttons/BackButton';
 import { Row } from '../../components/settings/Row';
-import { AppStackParamList } from '../../navigation/AppNavigator';
 import { ChangeAvatarButton } from '../../components/settings/avatar/ChangeAvatarButton';
+import { ProfilesParamList } from '../../navigation/ProfilesNavigator';
 
-type Props = NativeStackScreenProps<AppStackParamList, "Settings">;
+type Props = NativeStackScreenProps<ProfilesParamList, "Settings">;
 
 export default function SettingsScreen({ navigation }: Props) {
     return (
-        <SafeAreaView style={styles.safe}>
+        <SafeAreaView style={styles.safe} edges={["top", "left", "right"]}>
             <View style={styles.root}>
                 <BackButton navigation={navigation} />
                 <Text style={styles.title}>Settings</Text>

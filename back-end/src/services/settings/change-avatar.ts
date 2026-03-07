@@ -4,19 +4,26 @@ import { prisma } from "../../db";
 
 const AVATAR_DIR = path.join(process.cwd(), "public", "uploads", "avatars");
 
-export async function changeAvatarService(user: { email: string; avatarFileName?: string | null }, newFilename: string) {
+export async function changeAvatarService(userId: number, newFilename: string) {
+    const user = await prisma.user.findUnique({
+        where: { id: userId },
+        select: { avatarFileName: true },
+    });
+
+    // CHECKS IF USER EXISTS
+    if (!user) return { status: "user_not_found" as const };
+
+    // CHECKS IF USER EXISTS AND CHECKS IF AVATAR FILE NAME IS EMPTY
     const oldFilename = user.avatarFileName ?? null;
 
-    // UPDATE AVATAR IN DB
+    // UPDATES DB
     await prisma.user.update({
-        where: { email: user.email },
+        where: { id: userId },
         data: { avatarFileName: newFilename },
     });
 
-    // DELETE OLD AVATAR FILE
-    if (oldFilename && oldFilename !== newFilename) {
-        await fs.unlink(path.join(AVATAR_DIR, oldFilename)).catch(() => { });
-    }
+    // CHECKS IF OLD FILE STILL EXISTS AND DELETES IT
+    if (oldFilename && oldFilename !== newFilename) await fs.unlink(path.join(AVATAR_DIR, oldFilename)).catch(() => { });
 
-    return { oldFilename };
+    return { status: "updated" as const };
 }

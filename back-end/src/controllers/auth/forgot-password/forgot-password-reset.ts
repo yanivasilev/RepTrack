@@ -15,14 +15,8 @@ export async function forgotPasswordResetController(req: Request, res: Response)
 
     const result = await forgotPasswordResetService(parsed.data);
 
-    if (result.status === "password_mismatch") {
-        // 400 is more typical than 409, but keep your style if you prefer
-        return res.status(409).json({ message: "Password and confirm password must match." });
-    }
-
-    if (result.status === "invalid_session") {
-        return res.status(400).json({ message: "Your reset password session is either invalid or expired." });
-    }
+    if (result.status === "password_mismatch") return res.status(400).json({ message: "Password and confirm password must match." });
+    if (result.status === "invalid_session") return res.status(400).json({ message: "Your reset password session is either invalid or expired." });
 
     return res.status(200).json({ message: "Your password was changed successfully." });
 }

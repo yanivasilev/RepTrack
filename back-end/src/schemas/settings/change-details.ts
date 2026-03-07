@@ -7,6 +7,7 @@ export const changeDetailsSchema = z.object({
         .min(20, "Weight looks too small.")
         .max(635, "Weight looks too large."),
     weightUnitType: z.nativeEnum(UnitType, "Unit type is invalid."),
+    heightUnitType: z.nativeEnum(UnitType, "Unit type is invalid."),
 
     fitnessGoal: z.nativeEnum(FitnessGoal, "Fitness goal is invalid."),
     experienceLevel: z.nativeEnum(ExperienceLevel, "Experience level is invalid."),

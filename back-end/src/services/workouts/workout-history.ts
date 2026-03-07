@@ -15,6 +15,7 @@ export async function workoutHistoryService(userId: number, opts: { page: number
 
     const orderBy = { startedAt: sort === "latest" ? ("desc" as const) : ("asc" as const) };
 
+    // GETS WORKOUTS FROM DB
     const [total, rows] = await Promise.all([
         prisma.workoutSession.count({ where }),
         prisma.workoutSession.findMany({
@@ -25,7 +26,7 @@ export async function workoutHistoryService(userId: number, opts: { page: number
             select: {
                 id: true,
                 startedAt: true,
-                endedAt: true,
+                durationSeconds: true,
                 notes: true,
                 _count: {
                     select: {
@@ -41,19 +42,17 @@ export async function workoutHistoryService(userId: number, opts: { page: number
         }),
     ]);
 
+    // MAPS THEM TO THE CORRECT FORMAT
     const items = rows.map((w) => {
         const totalSets = w.exercises.reduce((sum, ex) => sum + ex._count.sets, 0);
-        const durationSeconds =
-            w.endedAt ? Math.max(0, Math.floor((w.endedAt.getTime() - w.startedAt.getTime()) / 1000)) : null;
 
         return {
             id: w.id,
             startedAt: w.startedAt,
-            endedAt: w.endedAt,
             notes: w.notes,
             exerciseCount: w._count.exercises,
             setCount: totalSets,
-            durationSeconds,
+            durationSeconds: w.durationSeconds,
         };
     });
 

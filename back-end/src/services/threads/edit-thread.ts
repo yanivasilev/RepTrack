@@ -6,6 +6,7 @@ export async function editThreadService(userId: number, threadId: number, data: 
         select: { authorId: true, title: true, body: true },
     });
 
+    // CHECKS IF THREAD EXISTS AND IF AUTHOR MATCHES
     if (!thread) return { status: "not_found" as const };
     if (thread.authorId !== userId) return { status: "unauthorised" as const };
 
@@ -18,8 +19,10 @@ export async function editThreadService(userId: number, threadId: number, data: 
     const titleSame = !titleProvided || newTitle === thread.title;
     const bodySame = !bodyProvided || newBody === thread.body;
 
+    // CHECKS IF TITLE AND BODY HAVE CHANGES
     if (titleSame && bodySame) return { status: "no_changes" as const };
 
+    // UPDATES THREAD IN THE DB
     const updated = await prisma.thread.update({
         where: { id: threadId },
         data: {
@@ -29,5 +32,5 @@ export async function editThreadService(userId: number, threadId: number, data: 
         select: { id: true, title: true, body: true, updatedAt: true },
     });
 
-    return { status: "ok" as const, thread: updated };
+    return { status: "updated" as const, thread: updated };
 }

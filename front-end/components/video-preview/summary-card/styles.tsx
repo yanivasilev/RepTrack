@@ -12,5 +12,9 @@ export const styles = StyleSheet.create({
         fontWeight: "900",
         color: "green",
         marginBottom: 10
+    },
+    container: {
+        flexDirection: "row",
+        gap: 10
     }
 })

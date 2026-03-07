@@ -52,6 +52,7 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   User: 'User',
+  EmailVerificationOtp: 'EmailVerificationOtp',
   ForgotPasswordOtp: 'ForgotPasswordOtp',
   ForgotPasswordSession: 'ForgotPasswordSession',
   Thread: 'Thread',
@@ -61,7 +62,9 @@ export const ModelName = {
   Exercise: 'Exercise',
   WorkoutSession: 'WorkoutSession',
   WorkoutExercise: 'WorkoutExercise',
-  WorkoutSet: 'WorkoutSet'
+  WorkoutSet: 'WorkoutSet',
+  Badge: 'Badge',
+  UserBadge: 'UserBadge'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -82,6 +85,7 @@ export const UserScalarFieldEnum = {
   email: 'email',
   password: 'password',
   createdAt: 'createdAt',
+  emailVerifiedAt: 'emailVerifiedAt',
   username: 'username',
   lastUsernameChangeAt: 'lastUsernameChangeAt',
   dob: 'dob',
@@ -98,6 +102,19 @@ export const UserScalarFieldEnum = {
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+export const EmailVerificationOtpScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  otpHash: 'otpHash',
+  expiresAt: 'expiresAt',
+  usedAt: 'usedAt',
+  attempts: 'attempts',
+  createdAt: 'createdAt'
+} as const
+
+export type EmailVerificationOtpScalarFieldEnum = (typeof EmailVerificationOtpScalarFieldEnum)[keyof typeof EmailVerificationOtpScalarFieldEnum]
 
 
 export const ForgotPasswordOtpScalarFieldEnum = {
@@ -179,7 +196,9 @@ export const ExerciseScalarFieldEnum = {
   muscleGroup: 'muscleGroup',
   equipment: 'equipment',
   isBodyweight: 'isBodyweight',
-  createdAt: 'createdAt'
+  experienceLevel: 'experienceLevel',
+  createdAt: 'createdAt',
+  exerciseType: 'exerciseType'
 } as const
 
 export type ExerciseScalarFieldEnum = (typeof ExerciseScalarFieldEnum)[keyof typeof ExerciseScalarFieldEnum]
@@ -189,10 +208,9 @@ export const WorkoutSessionScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
   startedAt: 'startedAt',
+  durationSeconds: 'durationSeconds',
   endedAt: 'endedAt',
-  notes: 'notes',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  notes: 'notes'
 } as const
 
 export type WorkoutSessionScalarFieldEnum = (typeof WorkoutSessionScalarFieldEnum)[keyof typeof WorkoutSessionScalarFieldEnum]
@@ -216,14 +234,32 @@ export const WorkoutSetScalarFieldEnum = {
   reps: 'reps',
   weight: 'weight',
   durationSeconds: 'durationSeconds',
-  distanceMeters: 'distanceMeters',
-  rpe: 'rpe',
-  isWarmup: 'isWarmup',
-  isFailure: 'isFailure',
+  notes: 'notes',
   createdAt: 'createdAt'
 } as const
 
 export type WorkoutSetScalarFieldEnum = (typeof WorkoutSetScalarFieldEnum)[keyof typeof WorkoutSetScalarFieldEnum]
+
+
+export const BadgeScalarFieldEnum = {
+  id: 'id',
+  type: 'type',
+  name: 'name',
+  icon: 'icon',
+  createdAt: 'createdAt'
+} as const
+
+export type BadgeScalarFieldEnum = (typeof BadgeScalarFieldEnum)[keyof typeof BadgeScalarFieldEnum]
+
+
+export const UserBadgeScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  badgeId: 'badgeId',
+  earnedAt: 'earnedAt'
+} as const
+
+export type UserBadgeScalarFieldEnum = (typeof UserBadgeScalarFieldEnum)[keyof typeof UserBadgeScalarFieldEnum]
 
 
 export const SortOrder = {

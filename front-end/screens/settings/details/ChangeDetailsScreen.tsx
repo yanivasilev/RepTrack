@@ -1,32 +1,34 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { AppStackParamList } from "../../../navigation/AppNavigator";
 import { styles } from "./styles";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { ActivityIndicator, Keyboard, Modal, Pressable, Text, TouchableWithoutFeedback, View } from "react-native";
-import BackButton from "../../../components/BackButton";
-import Button from "../../../components/Button";
+import { Keyboard, KeyboardAvoidingView, Platform, ScrollView, Text, TouchableWithoutFeedback, View } from "react-native";
+import BackButton from "../../../components/buttons/BackButton";
+import Button from "../../../components/buttons/Button";
 import { useEffect, useState } from "react";
-import { profileDetailsApi } from "../../../services/api/profileDetailsApi";
-import { EXPERIENCE_LEVEL, ExperienceLevel, FITNESS_GOALS, FitnessGoal, TRAINING_FREQUENCY, TRAINING_STYLE, TrainingFrequency, TrainingStyle, UnitType } from "../../../libs/catalogs/register";
-import UnitInput from "../../../components/UnitInput";
-import Selector from "../../../components/Selector";
+import UnitInput from "../../../components/inputs/UnitInput";
+import Selector from "../../../components/inputs/Selector";
 import { SubmitChangeDetails } from "../../../components/settings/SubmitChangeDetails";
-import { convertWeightString } from "../../../libs/helpers/convertWeight";
+import { convertWeightToString } from "../../../libs/helpers/convertWeightToString";
+import { UnitType } from "../../../libs/types/common/UnitType";
+import { FITNESS_GOALS } from "../../../libs/types/common/FitnessGoals";
+import { EXPERIENCE_LEVEL } from "../../../libs/types/common/ExperienceLevel";
+import { TRAINING_STYLE } from "../../../libs/types/common/TrainingStyle";
+import { TRAINING_FREQUENCY } from "../../../libs/types/common/TrainingFrequency";
+import { ProfilesParamList } from "../../../navigation/ProfilesNavigator";
+import { getProfileApi } from "../../../services/api/profiles/getProfileApi";
+import Loading from "../../../components/Loading";
+import Error from "../../../components/Error";
+import FeedbackModal from "../../../components/FeedbackModal";
+import { ChangeDetailsType } from "../../../libs/types/settings/ChangeDetailsType";
+import DualSelectionInput from "../../../components/inputs/DualSelectionInput";
+import { convertWeight } from "../../../libs/helpers/convertWeight";
 
-type Props = NativeStackScreenProps<AppStackParamList, "ChangeDetails">;
+type Props = NativeStackScreenProps<ProfilesParamList, "ChangeDetails">;
 
-type ChangeDetailsData = {
-    weight: string;
-    weightUnitType: UnitType;
-    fitnessGoal: FitnessGoal | null;
-    experienceLevel: ExperienceLevel | null;
-    trainingStyle: TrainingStyle | null;
-    trainingFrequency: TrainingFrequency | null;
-};
-
-const initialChangeDetailsData: ChangeDetailsData = {
-    weight: "",
+const initialChangeDetails: ChangeDetailsType = {
+    weight: 0,
     weightUnitType: "METRIC",
+    heightUnitType: "METRIC",
     fitnessGoal: null,
     experienceLevel: null,
     trainingStyle: null,
@@ -34,27 +36,22 @@ const initialChangeDetailsData: ChangeDetailsData = {
 };
 
 export default function ChangeDetailsScreen({ navigation }: Props) {
-    const [data, setData] = useState(initialChangeDetailsData);
-    const [overlay, setOverlay] = useState<{ text: string; success: boolean; } | null>(null);
-    const [loading, setLoading] = useState(false);
-    const [errors, setErrors] = useState<Partial<Record<keyof ChangeDetailsData, string>>>({});
-
-    const modalVisible = loading || overlay != null;
-
-    const onChange = <K extends keyof ChangeDetailsData>(key: K, value: ChangeDetailsData[K]) => {
-        setData(prev => ({ ...prev, [key]: value }));
-    };
+    const [data, setData] = useState<ChangeDetailsType>(initialChangeDetails);
+    const [weightText, setWeightText] = useState("");
+    const [overlay, setOverlay] = useState<{ text: string; success: boolean } | null>(null);
+    const [submitting, setSubmitting] = useState(false);
+    const [loading, setLoading] = useState(true);
+    const [fetchError, setFetchError] = useState<string | null>(null);
+    const [errors, setErrors] = useState<Partial<Record<keyof ChangeDetailsType, string>>>({});
 
     useEffect(() => {
         (async () => {
             try {
                 setLoading(true);
+                setFetchError(null);
                 await fetchDetails();
             } catch (e: any) {
-                setOverlay({
-                    text: e?.message ?? "Failed to load details.",
-                    success: false,
-                });
+                setFetchError(e?.message ?? "Failed to load details.");
             } finally {
                 setLoading(false);
             }
@@ -63,11 +60,18 @@ export default function ChangeDetailsScreen({ navigation }: Props) {
 
     const fetchDetails = async () => {
         setErrors({});
-        const res = await profileDetailsApi();
-        setData(prev => ({
+        const res = await getProfileApi();
+        const nextWeightKg = res.weight ?? 0;
+        const nextWeight =
+            res.weightUnitType === "IMPERIAL"
+                ? Math.round(convertWeight(nextWeightKg, "METRIC", "IMPERIAL"))
+                : nextWeightKg;
+        setWeightText(res.weight != null ? String(nextWeight) : "");
+        setData((prev) => ({
             ...prev,
-            weight: res.weight != null ? String(res.weight) : "",
+            weight: nextWeight,
             weightUnitType: res.weightUnitType,
+            heightUnitType: res.heightUnitType,
             fitnessGoal: res.fitnessGoal,
             experienceLevel: res.experienceLevel,
             trainingStyle: res.trainingStyle,
@@ -75,13 +79,13 @@ export default function ChangeDetailsScreen({ navigation }: Props) {
         }));
     };
 
-
     const handleChangeDetailsPress = async () => {
-        setLoading(true);
+        setSubmitting(true);
         setErrors({});
 
         const res = await SubmitChangeDetails({ data });
-        setLoading(false);
+
+        setSubmitting(false);
 
         if (!res.success) {
             if (!res.errors) {
@@ -99,26 +103,40 @@ export default function ChangeDetailsScreen({ navigation }: Props) {
             text: res.message,
             success: true,
         });
-        return;
-    }
+    };
+
+    if (loading) return <Loading message="Loading details..." />;
+
+    if (fetchError) return <Error navigation={navigation} error={fetchError ?? "Something went wrong."} />;
 
     return (
-
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-            <SafeAreaView style={styles.safe}>
-                <View style={styles.root}>
+        <SafeAreaView style={styles.safe} edges={["top", "left", "right"]}>
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+                <KeyboardAvoidingView
+                    style={styles.root}
+                    behavior={Platform.OS === "ios" ? "padding" : "height"}
+                    keyboardVerticalOffset={Platform.OS === "ios" ? 0 : 20}
+                >
                     <BackButton navigation={navigation} />
                     <Text style={styles.title}>Change{"\n"}Details</Text>
 
                     <View style={styles.container}>
-                        <View style={{ gap: 10 }}>
+                        <ScrollView
+                            style={styles.formScroll}
+                            contentContainerStyle={styles.formContent}
+                            keyboardShouldPersistTaps="handled"
+                            showsVerticalScrollIndicator={false}
+                        >
                             <UnitInput<UnitType>
                                 label="Weight"
-                                text={data.weight}
+                                text={weightText}
                                 onTextChange={(val) => {
                                     const cleaned = val.replace(/[^0-9]/g, "");
-
-                                    setData(prev => ({ ...prev, weight: cleaned }));
+                                    setWeightText(cleaned);
+                                    setData((prev) => ({
+                                        ...prev,
+                                        weight: cleaned ? Number(cleaned) : 0,
+                                    }));
                                 }}
                                 placeholder="Enter weight"
                                 unit={data.weightUnitType}
@@ -127,87 +145,77 @@ export default function ChangeDetailsScreen({ navigation }: Props) {
                                 unit1Label="KG"
                                 unit2Label="LB"
                                 onUnitChange={(nextUnit) => {
-                                    setData(prev => ({
+                                    const converted = convertWeightToString(weightText, data.weightUnitType, nextUnit);
+                                    setWeightText(converted);
+                                    setData((prev) => ({
                                         ...prev,
-                                        weight: convertWeightString(prev.weight, prev.weightUnitType, nextUnit),
+                                        weight: converted ? Number(converted) : 0,
                                         weightUnitType: nextUnit,
                                     }));
                                 }}
                                 error={errors.weight || errors.weightUnitType}
                             />
 
+                            <DualSelectionInput
+                                label='Height Unit Type'
+                                value={data.heightUnitType}
+                                option='METRIC'
+                                optionName="CM"
+                                option2='IMPERIAL'
+                                optionName2="FT"
+                                onPress={(val) => setData((prev) => ({ ...prev, heightUnitType: val }))}
+                                error={errors.heightUnitType}
+                            />
+
                             <Selector
                                 label="Fitness Goal"
                                 options={FITNESS_GOALS}
                                 value={data.fitnessGoal}
-                                onSelect={(val) => setData(prev => ({ ...prev, fitnessGoal: val }))}
+                                onSelect={(val) => setData((prev) => ({ ...prev, fitnessGoal: val }))}
                                 layout="two-rows"
                                 error={errors.fitnessGoal}
                             />
 
                             <Selector
-                                label='Experience Level'
+                                label="Experience Level"
                                 options={EXPERIENCE_LEVEL}
                                 value={data.experienceLevel}
-                                onSelect={(val) => setData(prev => ({ ...prev, experienceLevel: val }))}
+                                onSelect={(val) => setData((prev) => ({ ...prev, experienceLevel: val }))}
                                 error={errors.experienceLevel}
                             />
 
                             <Selector
-                                label='Training Style'
+                                label="Training Style"
                                 options={TRAINING_STYLE}
                                 value={data.trainingStyle}
-                                onSelect={(val) => setData(prev => ({ ...prev, trainingStyle: val }))}
-                                layout='two-rows'
+                                onSelect={(val) => setData((prev) => ({ ...prev, trainingStyle: val }))}
+                                layout="two-rows"
                                 error={errors.trainingStyle}
                             />
 
                             <Selector
-                                label='Training Frequency'
+                                label="Training Frequency"
                                 options={TRAINING_FREQUENCY}
                                 value={data.trainingFrequency}
-                                onSelect={(val) => setData(prev => ({ ...prev, trainingFrequency: val }))}
+                                onSelect={(val) => setData((prev) => ({ ...prev, trainingFrequency: val }))}
                                 error={errors.trainingFrequency}
                             />
-                        </View>
+                        </ScrollView>
 
-                        <Button label="DONE" onPress={handleChangeDetailsPress} />
+                        <View style={styles.actions}>
+                            <Button label="DONE" onPress={handleChangeDetailsPress} />
+                        </View>
                     </View>
-                </View>
 
-                {/* FEEDBACK MESSAGE */}
-                {(overlay || loading) && (
-                    <Modal
-                        visible={modalVisible}
-                        transparent
-                        animationType="fade"
-                        onRequestClose={() => setOverlay(null)} // ANDROID BACK BUTTON
-                    >
-                        <View style={styles.overlay}>
-                            <View style={!loading && styles.box}>
-                                {loading ? (
-                                    <ActivityIndicator size="large" color="#22c55e" />
-                                ) : (
-                                    <Text
-                                        style={[
-                                            styles.text,
-                                            { color: overlay?.success ? "green" : "red" },
-                                        ]}
-                                    >
-                                        {overlay?.text}
-                                    </Text>
-                                )}
-
-                                {!loading && (
-                                    <Pressable onPress={() => setOverlay(null)} style={({ pressed }) => [styles.closeButton, pressed && styles.closeButtonPressed]}>
-                                        <Text style={styles.closeText}>CLOSE</Text>
-                                    </Pressable>
-                                )}
-                            </View>
-                        </View>
-                    </Modal>
-                )}
-            </SafeAreaView>
-        </TouchableWithoutFeedback>
+                    <FeedbackModal
+                        visible={Boolean(overlay) || submitting}
+                        loading={submitting}
+                        message={overlay?.text}
+                        success={overlay?.success}
+                        onClose={() => setOverlay(null)}
+                    />
+                </KeyboardAvoidingView>
+            </TouchableWithoutFeedback>
+        </SafeAreaView>
     );
 }

@@ -2,17 +2,18 @@ import multer from "multer";
 import path from "path";
 import fs from "fs";
 
+// CHECKS IF DIR EXISTS AND PATH FOR WHERE AVATARS ARE STORED
 const dir = path.join(process.cwd(), "public", "uploads", "avatars");
 fs.mkdirSync(dir, { recursive: true });
 
-// STORAGE AND FILE NAME
+// HOW AVATARS ARE STORED
 const storage = multer.diskStorage({
+    // DIR LOCATION
     destination: (_req, _file, cb) => cb(null, dir),
 
+    // GENERATES A FILE NAME
     filename: (req, file, cb) => {
-        if (!req.user) {
-            return cb(new Error("Invalid or expired access token."), "");
-        }
+        if (!req.user) return cb(new Error("Invalid or expired access token."), "");
 
         const ext = path.extname(file.originalname).toLowerCase();
         cb(null, `avatar-${req.user.id}${ext}`);
@@ -23,9 +24,8 @@ const storage = multer.diskStorage({
 const fileFilter: multer.Options["fileFilter"] = (_req, file, cb) => {
     const allowed = ["image/jpeg", "image/png", "image/webp"];
 
-    if (!allowed.includes(file.mimetype)) {
-        return cb(new Error("Only .JPG, .PNG and .WEBP files are allowed."));
-    }
+    // CHECKS IF FILE TYPE IS ALLOWED
+    if (!allowed.includes(file.mimetype)) return cb(new Error("Only .JPG, .PNG and .WEBP files are allowed."));
 
     cb(null, true);
 };

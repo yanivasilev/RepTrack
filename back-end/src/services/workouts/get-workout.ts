@@ -7,10 +7,8 @@ export async function getWorkoutService(userId: number, workoutId: number) {
             id: true,
             userId: true,
             startedAt: true,
-            endedAt: true,
+            durationSeconds: true,
             notes: true,
-            createdAt: true,
-            updatedAt: true,
             exercises: {
                 orderBy: { orderIndex: "asc" },
                 select: {
@@ -26,10 +24,7 @@ export async function getWorkoutService(userId: number, workoutId: number) {
                             reps: true,
                             weight: true,
                             durationSeconds: true,
-                            distanceMeters: true,
-                            rpe: true,
-                            isWarmup: true,
-                            isFailure: true,
+                            notes: true
                         },
                     },
                 },
@@ -37,18 +32,15 @@ export async function getWorkoutService(userId: number, workoutId: number) {
         },
     });
 
+    // CHECKS IF WORKOUT EXISTS AND OWNER MATCHES
     if (!workout) return { status: "not_found" as const };
     if (workout.userId !== userId) return { status: "unauthorised" as const };
 
-    // SUMMARISE WORKOUT DURATION
-    const durationSeconds =
-        workout.endedAt ? Math.max(0, Math.floor((workout.endedAt.getTime() - workout.startedAt.getTime()) / 1000)) : null;
+    // REMOVES USER ID
+    const { userId: _ignored, ...safeWorkout } = workout;
 
     return {
         status: "ok" as const,
-        workout: {
-            ...workout,
-            durationSeconds,
-        },
+        workout: safeWorkout
     };
 }

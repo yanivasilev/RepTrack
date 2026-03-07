@@ -1,11 +1,21 @@
 import type { Request, Response } from "express";
+import { threadIdSchema } from "../../schemas/threads/thread-id";
 import { unlikeThreadService } from "../../services/threads/unlike-thread";
 
 export async function unlikeThreadController(req: Request, res: Response) {
     const user = (req as any).user;
-    const threadId = Number(req.params.threadId);
+    const parsed = threadIdSchema.safeParse(req.params);
 
-    if (!Number.isInteger(threadId) || threadId <= 0) return res.status(400).json({ message: "Invalid thread id." });
+    if (!parsed.success) {
+        return res.status(400).json({
+            errors: parsed.error.issues.map((i) => ({
+                field: i.path.join("."),
+                message: i.message,
+            })),
+        });
+    }
+
+    const { threadId } = parsed.data;
 
     const result = await unlikeThreadService(user.id, threadId);
 

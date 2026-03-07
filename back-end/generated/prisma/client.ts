@@ -43,6 +43,11 @@ export { Prisma }
  */
 export type User = Prisma.UserModel
 /**
+ * Model EmailVerificationOtp
+ * 
+ */
+export type EmailVerificationOtp = Prisma.EmailVerificationOtpModel
+/**
  * Model ForgotPasswordOtp
  * 
  */
@@ -92,3 +97,13 @@ export type WorkoutExercise = Prisma.WorkoutExerciseModel
  * 
  */
 export type WorkoutSet = Prisma.WorkoutSetModel
+/**
+ * Model Badge
+ * 
+ */
+export type Badge = Prisma.BadgeModel
+/**
+ * Model UserBadge
+ * 
+ */
+export type UserBadge = Prisma.UserBadgeModel

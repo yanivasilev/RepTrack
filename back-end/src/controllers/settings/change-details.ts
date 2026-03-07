@@ -3,6 +3,7 @@ import { changeDetailsSchema } from "../../schemas/settings/change-details";
 import { changeDetailsService } from "../../services/settings/change-details";
 
 export async function changeDetailsController(req: Request, res: Response) {
+    const user = (req as any).user;
     const parsed = changeDetailsSchema.safeParse(req.body);
 
     if (!parsed.success) {
@@ -13,17 +14,10 @@ export async function changeDetailsController(req: Request, res: Response) {
         return res.status(400).json({ errors });
     }
 
-    const authUser = (req as any).user;
+    const result = await changeDetailsService(user.id, parsed.data);
 
-    const result = await changeDetailsService(authUser.email, parsed.data);
-
-    if (result.status === "user_not_found") {
-        return res.status(401).json({ message: "User not found." });
-    }
-
-    if (result.status === "no_changes") {
-        return res.status(400).json({ message: "No changes were made." });
-    }
+    if (result.status === "user_not_found") return res.status(401).json({ message: "User not found." });
+    if (result.status === "no_changes") return res.status(400).json({ message: "No changes were made." });
 
     return res.status(200).json({ message: "Details updated successfully." });
 }

@@ -385,6 +385,7 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 export const ModelName = {
   User: 'User',
+  EmailVerificationOtp: 'EmailVerificationOtp',
   ForgotPasswordOtp: 'ForgotPasswordOtp',
   ForgotPasswordSession: 'ForgotPasswordSession',
   Thread: 'Thread',
@@ -394,7 +395,9 @@ export const ModelName = {
   Exercise: 'Exercise',
   WorkoutSession: 'WorkoutSession',
   WorkoutExercise: 'WorkoutExercise',
-  WorkoutSet: 'WorkoutSet'
+  WorkoutSet: 'WorkoutSet',
+  Badge: 'Badge',
+  UserBadge: 'UserBadge'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -410,7 +413,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "forgotPasswordOtp" | "forgotPasswordSession" | "thread" | "reply" | "threadLike" | "replyLike" | "exercise" | "workoutSession" | "workoutExercise" | "workoutSet"
+    modelProps: "user" | "emailVerificationOtp" | "forgotPasswordOtp" | "forgotPasswordSession" | "thread" | "reply" | "threadLike" | "replyLike" | "exercise" | "workoutSession" | "workoutExercise" | "workoutSet" | "badge" | "userBadge"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -485,6 +488,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.UserCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.UserCountAggregateOutputType> | number
+        }
+      }
+    }
+    EmailVerificationOtp: {
+      payload: Prisma.$EmailVerificationOtpPayload<ExtArgs>
+      fields: Prisma.EmailVerificationOtpFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.EmailVerificationOtpFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailVerificationOtpPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.EmailVerificationOtpFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailVerificationOtpPayload>
+        }
+        findFirst: {
+          args: Prisma.EmailVerificationOtpFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailVerificationOtpPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.EmailVerificationOtpFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailVerificationOtpPayload>
+        }
+        findMany: {
+          args: Prisma.EmailVerificationOtpFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailVerificationOtpPayload>[]
+        }
+        create: {
+          args: Prisma.EmailVerificationOtpCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailVerificationOtpPayload>
+        }
+        createMany: {
+          args: Prisma.EmailVerificationOtpCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.EmailVerificationOtpCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailVerificationOtpPayload>[]
+        }
+        delete: {
+          args: Prisma.EmailVerificationOtpDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailVerificationOtpPayload>
+        }
+        update: {
+          args: Prisma.EmailVerificationOtpUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailVerificationOtpPayload>
+        }
+        deleteMany: {
+          args: Prisma.EmailVerificationOtpDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.EmailVerificationOtpUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.EmailVerificationOtpUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailVerificationOtpPayload>[]
+        }
+        upsert: {
+          args: Prisma.EmailVerificationOtpUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailVerificationOtpPayload>
+        }
+        aggregate: {
+          args: Prisma.EmailVerificationOtpAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateEmailVerificationOtp>
+        }
+        groupBy: {
+          args: Prisma.EmailVerificationOtpGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EmailVerificationOtpGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.EmailVerificationOtpCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EmailVerificationOtpCountAggregateOutputType> | number
         }
       }
     }
@@ -1228,6 +1305,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Badge: {
+      payload: Prisma.$BadgePayload<ExtArgs>
+      fields: Prisma.BadgeFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.BadgeFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BadgePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.BadgeFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BadgePayload>
+        }
+        findFirst: {
+          args: Prisma.BadgeFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BadgePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.BadgeFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BadgePayload>
+        }
+        findMany: {
+          args: Prisma.BadgeFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BadgePayload>[]
+        }
+        create: {
+          args: Prisma.BadgeCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BadgePayload>
+        }
+        createMany: {
+          args: Prisma.BadgeCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.BadgeCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BadgePayload>[]
+        }
+        delete: {
+          args: Prisma.BadgeDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BadgePayload>
+        }
+        update: {
+          args: Prisma.BadgeUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BadgePayload>
+        }
+        deleteMany: {
+          args: Prisma.BadgeDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.BadgeUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.BadgeUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BadgePayload>[]
+        }
+        upsert: {
+          args: Prisma.BadgeUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BadgePayload>
+        }
+        aggregate: {
+          args: Prisma.BadgeAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateBadge>
+        }
+        groupBy: {
+          args: Prisma.BadgeGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BadgeGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.BadgeCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BadgeCountAggregateOutputType> | number
+        }
+      }
+    }
+    UserBadge: {
+      payload: Prisma.$UserBadgePayload<ExtArgs>
+      fields: Prisma.UserBadgeFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.UserBadgeFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserBadgePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.UserBadgeFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserBadgePayload>
+        }
+        findFirst: {
+          args: Prisma.UserBadgeFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserBadgePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.UserBadgeFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserBadgePayload>
+        }
+        findMany: {
+          args: Prisma.UserBadgeFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserBadgePayload>[]
+        }
+        create: {
+          args: Prisma.UserBadgeCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserBadgePayload>
+        }
+        createMany: {
+          args: Prisma.UserBadgeCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.UserBadgeCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserBadgePayload>[]
+        }
+        delete: {
+          args: Prisma.UserBadgeDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserBadgePayload>
+        }
+        update: {
+          args: Prisma.UserBadgeUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserBadgePayload>
+        }
+        deleteMany: {
+          args: Prisma.UserBadgeDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.UserBadgeUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.UserBadgeUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserBadgePayload>[]
+        }
+        upsert: {
+          args: Prisma.UserBadgeUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserBadgePayload>
+        }
+        aggregate: {
+          args: Prisma.UserBadgeAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateUserBadge>
+        }
+        groupBy: {
+          args: Prisma.UserBadgeGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UserBadgeGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.UserBadgeCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UserBadgeCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -1269,6 +1494,7 @@ export const UserScalarFieldEnum = {
   email: 'email',
   password: 'password',
   createdAt: 'createdAt',
+  emailVerifiedAt: 'emailVerifiedAt',
   username: 'username',
   lastUsernameChangeAt: 'lastUsernameChangeAt',
   dob: 'dob',
@@ -1285,6 +1511,19 @@ export const UserScalarFieldEnum = {
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+export const EmailVerificationOtpScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  otpHash: 'otpHash',
+  expiresAt: 'expiresAt',
+  usedAt: 'usedAt',
+  attempts: 'attempts',
+  createdAt: 'createdAt'
+} as const
+
+export type EmailVerificationOtpScalarFieldEnum = (typeof EmailVerificationOtpScalarFieldEnum)[keyof typeof EmailVerificationOtpScalarFieldEnum]
 
 
 export const ForgotPasswordOtpScalarFieldEnum = {
@@ -1366,7 +1605,9 @@ export const ExerciseScalarFieldEnum = {
   muscleGroup: 'muscleGroup',
   equipment: 'equipment',
   isBodyweight: 'isBodyweight',
-  createdAt: 'createdAt'
+  experienceLevel: 'experienceLevel',
+  createdAt: 'createdAt',
+  exerciseType: 'exerciseType'
 } as const
 
 export type ExerciseScalarFieldEnum = (typeof ExerciseScalarFieldEnum)[keyof typeof ExerciseScalarFieldEnum]
@@ -1376,10 +1617,9 @@ export const WorkoutSessionScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
   startedAt: 'startedAt',
+  durationSeconds: 'durationSeconds',
   endedAt: 'endedAt',
-  notes: 'notes',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  notes: 'notes'
 } as const
 
 export type WorkoutSessionScalarFieldEnum = (typeof WorkoutSessionScalarFieldEnum)[keyof typeof WorkoutSessionScalarFieldEnum]
@@ -1403,14 +1643,32 @@ export const WorkoutSetScalarFieldEnum = {
   reps: 'reps',
   weight: 'weight',
   durationSeconds: 'durationSeconds',
-  distanceMeters: 'distanceMeters',
-  rpe: 'rpe',
-  isWarmup: 'isWarmup',
-  isFailure: 'isFailure',
+  notes: 'notes',
   createdAt: 'createdAt'
 } as const
 
 export type WorkoutSetScalarFieldEnum = (typeof WorkoutSetScalarFieldEnum)[keyof typeof WorkoutSetScalarFieldEnum]
+
+
+export const BadgeScalarFieldEnum = {
+  id: 'id',
+  type: 'type',
+  name: 'name',
+  icon: 'icon',
+  createdAt: 'createdAt'
+} as const
+
+export type BadgeScalarFieldEnum = (typeof BadgeScalarFieldEnum)[keyof typeof BadgeScalarFieldEnum]
+
+
+export const UserBadgeScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  badgeId: 'badgeId',
+  earnedAt: 'earnedAt'
+} as const
+
+export type UserBadgeScalarFieldEnum = (typeof UserBadgeScalarFieldEnum)[keyof typeof UserBadgeScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1527,9 +1785,23 @@ export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel,
 
 
 /**
+ * Reference to a field of type 'ExerciseType'
+ */
+export type EnumExerciseTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ExerciseType'>
+    
+
+
+/**
  * Reference to a field of type 'Float'
  */
 export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+/**
+ * Reference to a field of type 'BadgeType'
+ */
+export type EnumBadgeTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BadgeType'>
     
 
 /**
@@ -1628,6 +1900,7 @@ export type PrismaClientOptions = ({
 }
 export type GlobalOmitConfig = {
   user?: Prisma.UserOmit
+  emailVerificationOtp?: Prisma.EmailVerificationOtpOmit
   forgotPasswordOtp?: Prisma.ForgotPasswordOtpOmit
   forgotPasswordSession?: Prisma.ForgotPasswordSessionOmit
   thread?: Prisma.ThreadOmit
@@ -1638,6 +1911,8 @@ export type GlobalOmitConfig = {
   workoutSession?: Prisma.WorkoutSessionOmit
   workoutExercise?: Prisma.WorkoutExerciseOmit
   workoutSet?: Prisma.WorkoutSetOmit
+  badge?: Prisma.BadgeOmit
+  userBadge?: Prisma.UserBadgeOmit
 }
 
 /* Types for Logging */

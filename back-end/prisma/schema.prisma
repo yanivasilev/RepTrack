@@ -77,11 +77,62 @@ enum Equipment {
   OTHER
 }
 
+enum ExerciseType {
+  TIMED
+  REPS
+}
+
+enum BadgeType {
+  FIRST_WORKOUT
+  WORKOUTS_5
+  WORKOUTS_15
+  WORKOUTS_20
+  WORKOUTS_25
+  WORKOUTS_50
+  WORKOUTS_75
+  WORKOUTS_100
+  WORKOUTS_150
+  WORKOUTS_200
+  WORKOUTS_300
+  WORKOUTS_400
+  WORKOUTS_500
+  WORKOUTS_600
+  WORKOUTS_750
+  WORKOUTS_1000
+  TOTAL_5_HOURS
+  TOTAL_10_HOURS
+  TOTAL_15_HOURS
+  TOTAL_20_HOURS
+  TOTAL_25_HOURS
+  TOTAL_50_HOURS
+  TOTAL_75_HOURS
+  TOTAL_100_HOURS
+  TOTAL_150_HOURS
+  TOTAL_200_HOURS
+  TOTAL_300_HOURS
+  TOTAL_500_HOURS
+  TOTAL_1000_HOURS
+  STREAK_2
+  STREAK_3
+  STREAK_7
+  VOLUME_1000
+  VOLUME_5000
+  VOLUME_10K
+  VOLUME_25k
+  VOLUME_50k
+  VOLUME_75k
+  VOLUME_100k
+  VOLUME_250k
+  VOLUME_500k
+  VOLUME_1M
+}
+
 model User {
   id                     Int                     @id @default(autoincrement())
   email                  String                  @unique
   password               String
   createdAt              DateTime                @default(now())
+  emailVerifiedAt        DateTime?
   username               String                  @unique
   lastUsernameChangeAt   DateTime?
   dob                    DateTime
@@ -95,6 +146,7 @@ model User {
   avatarFileName         String?
   heightUnitType         UnitType                @default(METRIC)
   weightUnitType         UnitType                @default(METRIC)
+  emailVerificationOtps  EmailVerificationOtp[]
   forgotPasswordOtps     ForgotPasswordOtp[]
   forgotPasswordSessions ForgotPasswordSession[]
   threads                Thread[]
@@ -102,6 +154,22 @@ model User {
   threadLikes            ThreadLike[]
   replyLikes             ReplyLike[]
   workoutSessions        WorkoutSession[]
+  userBadges             UserBadge[]
+}
+
+model EmailVerificationOtp {
+  id        Int       @id @default(autoincrement())
+  userId    Int       @unique
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  otpHash   String
+  expiresAt DateTime
+  usedAt    DateTime?
+  attempts  Int       @default(0)
+  createdAt DateTime  @default(now())
+
+  @@index([userId])
+  @@index([expiresAt])
 }
 
 model ForgotPasswordOtp {
@@ -197,7 +265,9 @@ model Exercise {
   muscleGroup      MuscleGroup       @default(OTHER)
   equipment        Equipment         @default(OTHER)
   isBodyweight     Boolean           @default(false)
+  experienceLevel  ExperienceLevel   @default(BEGINNER)
   createdAt        DateTime          @default(now())
+  exerciseType     ExerciseType      @default(REPS)
   workoutExercises WorkoutExercise[]
 
   @@index([muscleGroup])
@@ -205,28 +275,27 @@ model Exercise {
 }
 
 model WorkoutSession {
-  id        Int                @id @default(autoincrement())
-  userId    Int
-  user      User               @relation(fields: [userId], references: [id], onDelete: Cascade)
-  startedAt DateTime           @default(now())
-  endedAt   DateTime?
-  notes     String?
-  createdAt DateTime           @default(now())
-  updatedAt DateTime           @updatedAt
-  exercises WorkoutExercise[]
+  id               Int                @id @default(autoincrement())
+  userId           Int
+  user             User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  startedAt        DateTime
+  durationSeconds  Int
+  endedAt          DateTime
+  notes            String?
+  exercises        WorkoutExercise[]
 
   @@index([userId, startedAt])
 }
 
 model WorkoutExercise {
-  id         Int            @id @default(autoincrement())
-  sessionId  Int
-  session    WorkoutSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
-  exerciseId Int
-  exercise   Exercise       @relation(fields: [exerciseId], references: [id], onDelete: Restrict)
-  orderIndex Int            @default(0)
-  notes      String?
-  sets       WorkoutSet[]
+  id           Int            @id @default(autoincrement())
+  sessionId    Int
+  session      WorkoutSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  exerciseId   Int
+  exercise     Exercise       @relation(fields: [exerciseId], references: [id], onDelete: Restrict)
+  orderIndex   Int            @default(0)
+  notes        String?
+  sets         WorkoutSet[]
 
   @@index([sessionId])
   @@index([exerciseId])
@@ -241,14 +310,34 @@ model WorkoutSet {
   setNumber         Int
   reps              Int?
   weight            Float?          // STORED AS KG
-  durationSeconds   Int?            // FOR TIMED SETS (E.G PLANK)
-  distanceMeters    Float?          // FOR CARDIO SETS
-  rpe               Int?            // 1..10
-  isWarmup          Boolean         @default(false)
-  isFailure         Boolean         @default(false)
-
+  durationSeconds   Int?            
+  notes             String?
   createdAt         DateTime        @default(now())
 
   @@unique([workoutExerciseId, setNumber])
   @@index([workoutExerciseId])
+}
+
+model Badge {
+  id          Int         @id @default(autoincrement())
+  type        BadgeType   @unique
+  name        String
+  icon        String
+  createdAt   DateTime    @default(now())
+
+  userBadges  UserBadge[]
+}
+
+model UserBadge {
+  id        Int           @id @default(autoincrement())
+  userId    Int
+  badgeId   Int
+  earnedAt  DateTime      @default(now())
+
+  user      User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  badge     Badge         @relation(fields: [badgeId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, badgeId])
+  @@index([userId, earnedAt])
+  @@index([badgeId])
 }

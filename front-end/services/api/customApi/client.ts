@@ -2,8 +2,16 @@ import axios, { AxiosHeaders } from "axios";
 import { deleteAccessToken, getAccessToken } from "../../../libs/storage/token";
 import chalk from "chalk";
 
+export const BASE_URLS = {
+    local: "http://192.168.1.146:3000",
+    emo_valyo: "http://192.168.4.100:3000",
+    hotspot: "http://172.20.10.2:3000",
+} as const;
+
+export const ENV: keyof typeof BASE_URLS = "emo_valyo";
+
 export const api = axios.create({
-    baseURL: "http://192.168.1.146:3000",
+    baseURL: BASE_URLS[ENV],
     timeout: 120000,
 });
 

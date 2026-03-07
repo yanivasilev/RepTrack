@@ -1,0 +1,1 @@
+export type SearchModeType = "threads" | "profiles";

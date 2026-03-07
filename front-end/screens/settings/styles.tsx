@@ -17,8 +17,9 @@ export const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
-        padding: 16,
+        paddingHorizontal: 16,
         justifyContent: "space-between",
+        paddingTop: 10,
     },
     card: {
         borderWidth: 1,
@@ -26,8 +27,9 @@ export const styles = StyleSheet.create({
         borderRadius: 16,
         overflow: "hidden",
     },
-    dangerText: { color: "red" },
-
+    dangerText: {
+        color: "red"
+    },
     footer: {
         paddingTop: 12,
     },
