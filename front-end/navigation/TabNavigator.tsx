@@ -5,11 +5,11 @@ import WorkoutNavigator, { WorkoutsParamList } from "./WorkoutsNavigator";
 import { NavigatorScreenParams, StackActions } from "@react-navigation/native";
 import ThreadsNavigator, { ThreadsParamList } from "./ThreadsNavigator";
 import ProfileNavigator, { ProfilesParamList } from "./ProfilesNavigator";
-import FormFeedbackNavigator, { FormFeedbackParamList } from "./FormFeedbackNavigator";
+import ExerciseAnalysisNavigator, { ExerciseAnalysisParamList } from "./ExerciseAnalysisNavigator";
 
 export type AppTabParamList = {
     Threads: NavigatorScreenParams<ThreadsParamList>;
-    FormFeedback: NavigatorScreenParams<FormFeedbackParamList>;
+    ExerciseAnalysis: NavigatorScreenParams<ExerciseAnalysisParamList>;
     WorkoutDashboard: NavigatorScreenParams<WorkoutsParamList>;
     Profile: NavigatorScreenParams<ProfilesParamList>;
 };
@@ -26,7 +26,7 @@ export default function TabNavigator() {
                     const icons = {
                         Threads: focused ? HomeSolid : HomeOutline,
                         Profile: focused ? UserSolid : UserOutline,
-                        FormFeedback: focused ? VideoCameraSolid : VideoCameraOutline,
+                        ExerciseAnalysis: focused ? VideoCameraSolid : VideoCameraOutline,
                         WorkoutDashboard: focused ? ChartBarSolid : ChartBarOutline,
                     } as const;
 
@@ -49,12 +49,12 @@ export default function TabNavigator() {
             />
 
             <Tab.Screen
-                name="FormFeedback"
-                component={FormFeedbackNavigator}
-                options={{ tabBarLabel: "Form Feedback" }}
+                name="ExerciseAnalysis"
+                component={ExerciseAnalysisNavigator}
+                options={{ tabBarLabel: "Exercise Analysis" }}
                 listeners={({ navigation, route }) => ({
                     tabPress: () => {
-                        navigation.navigate(route.name, { screen: "FormFeedbackMain" });
+                        navigation.navigate(route.name, { screen: "ExerciseAnalysisMain" });
                     },
                 })}
             />

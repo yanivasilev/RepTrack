@@ -1,0 +1,19 @@
+@startuml
+left to right direction
+
+actor "Authenticated User" as User
+
+rectangle "Settings" {
+  usecase "Change Username\n(PUT /settings/change-username)" as UC_Username
+  usecase "Change Password\n(PUT /settings/change-password)" as UC_Password
+  usecase "Change Profile Details\n(PUT /settings/change-details)" as UC_Details
+  usecase "Change Avatar\n(PUT /settings/change-avatar)" as UC_Avatar
+}
+
+User --> UC_Username
+User --> UC_Password
+User --> UC_Details
+User --> UC_Avatar
+
+@enduml
+

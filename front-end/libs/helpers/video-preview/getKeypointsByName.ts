@@ -1,4 +1,4 @@
-import { PoseKeypointType } from "../../types/form-feedback/PoseKeypointType";
+import { PoseKeypointType } from "../../types/exercise-analysis/PoseKeypointType";
 import { DrawBox } from "../../types/video-preview/DrawBox";
 import { KeypointByName } from "../../types/video-preview/KeypointByName";
 import { mapNormalizedPointToBox } from "./mapNormalisedPointToBox";

@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import { View } from "react-native";
 import Svg, { Circle, Line } from "react-native-svg";
-import { PoseFrameType } from "../../libs/types/form-feedback/PoseFrameType";
+import { PoseFrameType } from "../../libs/types/exercise-analysis/PoseFrameType";
 import { getKeypointsByName } from "../../libs/helpers/video-preview/getKeypointsByName";
 import { mapNormalizedPointToBox } from "../../libs/helpers/video-preview/mapNormalisedPointToBox";
 import { DrawBox } from "../../libs/types/video-preview/DrawBox";

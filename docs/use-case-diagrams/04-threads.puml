@@ -1,0 +1,31 @@
+@startuml
+left to right direction
+
+actor "Authenticated User" as User
+
+rectangle "Threads" {
+  usecase "View Threads Feed\n(GET /threads)" as UC_ThreadsFeed
+  usecase "Search Threads\n(GET /threads?query=)" as UC_ThreadsSearch
+  usecase "View Thread Details\n(GET /threads/:threadId)" as UC_ThreadDetails
+  usecase "Create Thread\n(POST /threads)" as UC_CreateThread
+  usecase "Edit Own Thread\n(PATCH /threads/:threadId)" as UC_EditThread
+  usecase "Delete Own Thread\n(DELETE /threads/:threadId)" as UC_DeleteThread
+  usecase "Like Thread\n(POST /threads/:threadId/like)" as UC_LikeThread
+  usecase "Unlike Thread\n(DELETE /threads/:threadId/like)" as UC_UnlikeThread
+}
+
+User --> UC_ThreadsFeed
+User --> UC_ThreadsSearch
+User --> UC_ThreadDetails
+User --> UC_CreateThread
+User --> UC_EditThread
+User --> UC_DeleteThread
+User --> UC_LikeThread
+User --> UC_UnlikeThread
+
+UC_ThreadDetails .> UC_LikeThread : <<extend>>
+UC_ThreadDetails .> UC_UnlikeThread : <<extend>>
+UC_ThreadsFeed .> UC_ThreadsSearch : <<extend>>
+
+@enduml
+

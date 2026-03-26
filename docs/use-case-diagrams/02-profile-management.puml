@@ -1,0 +1,28 @@
+@startuml
+left to right direction
+
+actor "Authenticated User" as User
+
+rectangle "Profile Management" {
+  usecase "View Own Profile\n(/profiles/me)" as UC_ProfileMe
+  usecase "View Other User Profile\n(/profiles/:userId)" as UC_ProfileById
+  usecase "Browse/Search Profiles\n(/profiles?query=)" as UC_Profiles
+  usecase "View Profile Threads\n(/profiles/:userId/threads)" as UC_ProfileThreads
+  usecase "View Profile Replies\n(/profiles/:userId/replies)" as UC_ProfileReplies
+  usecase "View Earned Badges" as UC_EarnedBadges
+  usecase "View Badge Catalog\n(Frontend catalog)" as UC_BadgeCatalog
+}
+
+User --> UC_ProfileMe
+User --> UC_ProfileById
+User --> UC_Profiles
+User --> UC_ProfileThreads
+User --> UC_ProfileReplies
+User --> UC_EarnedBadges
+User --> UC_BadgeCatalog
+
+UC_ProfileMe .> UC_EarnedBadges : <<include>>
+UC_ProfileById .> UC_EarnedBadges : <<include>>
+
+@enduml
+

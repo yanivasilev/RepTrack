@@ -1,0 +1,21 @@
+@startuml
+left to right direction
+
+actor "Authenticated User" as User
+
+rectangle "Replies" {
+  usecase "Create Reply\n(POST /reply/:threadId)" as UC_CreateReply
+  usecase "Edit Own Reply\n(PATCH /reply/:replyId)" as UC_EditReply
+  usecase "Delete Own Reply\n(DELETE /reply/:replyId)" as UC_DeleteReply
+  usecase "Like Reply\n(POST /reply/:replyId/like)" as UC_LikeReply
+  usecase "Unlike Reply\n(DELETE /reply/:replyId/like)" as UC_UnlikeReply
+}
+
+User --> UC_CreateReply
+User --> UC_EditReply
+User --> UC_DeleteReply
+User --> UC_LikeReply
+User --> UC_UnlikeReply
+
+@enduml
+

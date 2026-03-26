@@ -1,0 +1,54 @@
+@startuml
+title Activity Diagram - Exercise Analysis
+
+start
+
+:Open Exercise Analysis screen;
+:Tap "UPLOAD VIDEO";
+
+:Request media library permission;
+if (Permission granted?) then (yes)
+  :Open video picker;
+  if (Video selected?) then (yes)
+    :Set submitting/loading state;
+    :Build FormData with video;
+    :POST /exercise-analysis/:exerciseId;
+
+    :Validate params + file (schema);
+    if (Valid request?) then (yes)
+      :Find exercise by ID;
+      if (Exercise exists?) then (yes)
+        if (Exercise is Push-up?) then (yes)
+          :Extract frames from video;
+          :Estimate pose on frames;
+          :Normalise frame times;
+          :Count push-ups + feedback;
+          :Return analysis payload (200);
+          :Navigate to VideoPreview with analysis;
+          stop
+        else (no)
+          :Return "exercise_not_supported" (404);
+          :Show feedback modal error;
+          stop
+        endif
+      else (no)
+        :Return "exercise not found" (404);
+        :Show feedback modal error;
+        stop
+      endif
+    else (no)
+      :Return validation errors (400);
+      :Show feedback modal error;
+      stop
+    endif
+  else (no)
+    :Show "No video selected";
+    stop
+  endif
+else (no)
+  :Show permission denied message;
+  stop
+endif
+
+@enduml
+

@@ -1,0 +1,35 @@
+@startuml
+left to right direction
+
+actor "Unathenticated User" as Unauthenticated_User
+actor "Authenticated User" as User
+actor "Email Service" as Email
+
+rectangle "Authentication" {
+  usecase "Register Account" as UC_Register
+  usecase "Login" as UC_Login
+  usecase "Check Auth Session\n(/auth/check)" as UC_Check
+  usecase "Request Email Verification OTP" as UC_EmailOTP
+  usecase "Verify Email OTP" as UC_EmailVerify
+  usecase "Request Forgot Password OTP" as UC_FPReq
+  usecase "Verify Forgot Password OTP" as UC_FPVerify
+  usecase "Reset Password" as UC_FPReset
+  usecase "Logout\n(Client token clear)" as UC_Logout
+}
+
+Unauthenticated_User --> UC_Register
+Unauthenticated_User --> UC_Login
+Unauthenticated_User --> UC_EmailOTP
+Unauthenticated_User --> UC_EmailVerify
+Unauthenticated_User --> UC_FPReq
+Unauthenticated_User --> UC_FPVerify
+Unauthenticated_User --> UC_FPReset
+
+User --> UC_Check
+User --> UC_Logout
+
+UC_EmailOTP --> Email
+UC_FPReq --> Email
+
+@enduml
+

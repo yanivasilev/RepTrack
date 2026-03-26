@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { ActivityIndicator, Keyboard, KeyboardAvoidingView, Modal, Platform, Pressable, Text, TextInput, TouchableWithoutFeedback, View, } from "react-native";
 import { styles } from "./styles";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
 type EditModalProps = {
     visible: boolean;
@@ -71,68 +71,70 @@ export default function EditModal({ visible, onClose, onSubmit, initialTitle, in
 
     return (
         <Modal visible={visible} animationType="slide" onRequestClose={close}>
-            <SafeAreaView style={styles.root}>
-                <KeyboardAvoidingView style={styles.root} behavior={Platform.OS === "ios" ? "padding" : undefined}>
-                    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-                        <View style={styles.root}>
-                            <View style={styles.top}>
-                                <Pressable onPress={close} disabled={loading} style={[styles.button, loading && { opacity: 0.5 }]}>
-                                    <Text style={styles.cancel}>Cancel</Text>
-                                </Pressable>
+            <SafeAreaProvider>
+                <SafeAreaView style={styles.root} edges={["top", "bottom", "left", "right"]}>
+                    <KeyboardAvoidingView style={styles.root} behavior={Platform.OS === "ios" ? "padding" : undefined}>
+                        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+                            <View style={styles.root}>
+                                <View style={styles.top}>
+                                    <Pressable onPress={close} disabled={loading} style={[styles.button, loading && { opacity: 0.5 }]}>
+                                        <Text style={styles.cancel}>Cancel</Text>
+                                    </Pressable>
 
-                                <Text style={styles.title}>{headerTitle}</Text>
+                                    <Text style={styles.title}>{headerTitle}</Text>
 
-                                <Pressable
-                                    onPress={submit}
-                                    disabled={!canSubmit}
-                                    style={[styles.button, styles.saveButton, !canSubmit && { opacity: 0.5 }]}
-                                >
-                                    {loading ? (
-                                        <ActivityIndicator size="small" color="blue" />
-                                    ) : (
-                                        <Text style={styles.save}>{submitText}</Text>
+                                    <Pressable
+                                        onPress={submit}
+                                        disabled={!canSubmit}
+                                        style={[styles.button, styles.saveButton, !canSubmit && { opacity: 0.5 }]}
+                                    >
+                                        {loading ? (
+                                            <ActivityIndicator size="small" color="blue" />
+                                        ) : (
+                                            <Text style={styles.save}>{submitText}</Text>
+                                        )}
+                                    </Pressable>
+                                </View>
+
+                                <View style={styles.inputContainer}>
+                                    {hasTitleField && (
+                                        <>
+                                            <TextInput
+                                                value={title}
+                                                onChangeText={setTitle}
+                                                editable={!loading}
+                                                placeholder={titlePlaceholder}
+                                                placeholderTextColor="#9CA3AF"
+                                                maxLength={maxTitleLength}
+                                                style={styles.titleInput}
+                                            />
+                                            <Text style={{ marginBottom: 10, opacity: 0.6, color: "gray" }}>
+                                                {title.length}/{maxTitleLength}
+                                            </Text>
+                                        </>
                                     )}
-                                </Pressable>
-                            </View>
 
-                            <View style={styles.inputContainer}>
-                                {hasTitleField && (
-                                    <>
-                                        <TextInput
-                                            value={title}
-                                            onChangeText={setTitle}
-                                            editable={!loading}
-                                            placeholder={titlePlaceholder}
-                                            placeholderTextColor="#9CA3AF"
-                                            maxLength={maxTitleLength}
-                                            style={styles.titleInput}
-                                        />
-                                        <Text style={{ marginBottom: 10, opacity: 0.6, color: "gray" }}>
-                                            {title.length}/{maxTitleLength}
-                                        </Text>
-                                    </>
-                                )}
-
-                                <TextInput
-                                    value={body}
-                                    onChangeText={setBody}
-                                    editable={!loading}
-                                    placeholder={bodyPlaceholder}
-                                    placeholderTextColor="#9CA3AF"
-                                    multiline
-                                    scrollEnabled
-                                    maxLength={maxBodyLength}
-                                    textAlignVertical="top"
-                                    style={styles.input}
-                                />
-                                <Text style={{ marginTop: 10, opacity: 0.6, color: "gray" }}>
-                                    {body.length}/{maxBodyLength}
-                                </Text>
+                                    <TextInput
+                                        value={body}
+                                        onChangeText={setBody}
+                                        editable={!loading}
+                                        placeholder={bodyPlaceholder}
+                                        placeholderTextColor="#9CA3AF"
+                                        multiline
+                                        scrollEnabled
+                                        maxLength={maxBodyLength}
+                                        textAlignVertical="top"
+                                        style={styles.input}
+                                    />
+                                    <Text style={{ marginTop: 10, opacity: 0.6, color: "gray" }}>
+                                        {body.length}/{maxBodyLength}
+                                    </Text>
+                                </View>
                             </View>
-                        </View>
-                    </TouchableWithoutFeedback>
-                </KeyboardAvoidingView>
-            </SafeAreaView>
+                        </TouchableWithoutFeedback>
+                    </KeyboardAvoidingView>
+                </SafeAreaView>
+            </SafeAreaProvider>
         </Modal>
     );
 }

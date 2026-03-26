@@ -282,7 +282,7 @@ export default function ThreadDetailsScreen({ route, navigation }: Props) {
                                 author: res.reply.author ?? {
                                     id: 0,
                                     username: "Unknown",
-                                    avatarUrl: "",
+                                    avatarFileName: "",
                                 },
                             };
 

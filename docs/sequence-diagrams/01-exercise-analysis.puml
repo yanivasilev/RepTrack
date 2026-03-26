@@ -1,0 +1,79 @@
+@startuml
+title Exercise Analysis - Sequence Diagram
+autonumber
+
+actor User
+participant "exerciseAnalysisMainScreen" as FE
+participant "exerciseAnalysisApi" as API
+participant "Backend Route\nPOST /exercise-analysis/:exerciseId" as Route
+participant "exerciseAnalysisController" as Controller
+participant "exerciseAnalysisSchema\n(zod safeParse)" as Schema
+participant "exerciseAnalysisService" as Service
+database "Prisma (Exercise)" as DB
+participant "extractFrames" as Frames
+participant "estimatePoseOnFrames" as Pose
+participant "normaliseFrameTimes" as Normalize
+participant "countPushups" as Counter
+
+User -> FE: Tap "UPLOAD VIDEO"
+FE -> FE: Request media library permission
+
+alt Permission denied
+  FE --> User: FeedbackModal("permission denied")
+else Permission granted
+  FE -> FE: launchImageLibraryAsync(videos)
+
+  alt No asset selected
+    FE --> User: FeedbackModal("No video selected")
+  else Video selected
+    FE -> FE: setSubmitting(true)
+    FE -> API: exerciseAnalysisApi(exerciseId, video)
+    API -> Route: POST multipart/form-data (video)
+    Route -> Controller: exerciseAnalysisController(req, res)
+    Controller -> Schema: safeParse({ params, file })
+
+    alt Schema invalid
+      Schema --> Controller: parse error
+      Controller --> API: 400 { errors[] }
+      API --> FE: throw ApiError
+      FE --> User: FeedbackModal(error.message)
+    else Schema valid
+      Schema --> Controller: { exerciseId, file }
+      Controller -> Service: exerciseAnalysisService(exerciseId, video)
+      Service -> DB: findUnique(exerciseId)
+
+      alt Exercise not found
+        DB --> Service: null
+        Service --> Controller: { status: "not_found" }
+        Controller --> API: 404 { message: "Exercise not found." }
+        API --> FE: throw ApiError
+        FE --> User: FeedbackModal(error.message)
+      else Exercise exists but not Push-up
+        DB --> Service: exercise
+        Service --> Controller: { status: "exercise_not_supported" }
+        Controller --> API: 404 { message: "Push-up is currently only supported." }
+        API --> FE: throw ApiError
+        FE --> User: FeedbackModal(error.message)
+      else Supported exercise
+        DB --> Service: Push-up exercise
+        Service -> Frames: extractFrames(video.uri, framesDir, fps=30)
+        Frames --> Service: framePaths[]
+        Service -> Pose: estimatePoseOnFrames(framePaths, fps)
+        Pose --> Service: framesRaw[]
+        Service -> Normalize: normaliseFrameTimes(framesRaw, fps)
+        Normalize --> Service: frames[]
+        Service -> Counter: countPushups(frames)
+        Counter --> Service: reps + feedback + repFeedbacks
+        Service --> Controller: analysis payload
+        Controller --> API: 200 { fps, poseMeta, poseFrames, reps, feedback, repFeedbacks, goodReps, badReps, timingsMs }
+        API --> FE: analysis
+        FE -> FE: setSubmitting(false)
+        FE -> FE: navigate("VideoPreview", { video, analysis })
+        FE --> User: Show analysis preview screen
+      end
+    end
+  end
+end
+
+@enduml
+

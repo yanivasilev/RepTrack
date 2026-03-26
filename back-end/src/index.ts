@@ -47,7 +47,7 @@ import { getProfileByIdController } from "./controllers/profiles/get-profile-by-
 import { getAllProfilesController } from "./controllers/profiles/get-all-profiles";
 import { getProfileThreadsController } from "./controllers/profiles/get-profile-threads";
 import { getProfileRepliesController } from "./controllers/profiles/get-profile-replies";
-import { formFeedbackController } from "./controllers/form-feedback/form-feedback";
+import { exerciseAnalysisController } from "./controllers/exercise-analysis/exercise-analysis";
 
 dotenv.config();
 
@@ -119,8 +119,8 @@ app.get("/workouts-suggestion/:exerciseId", requireLoggedIn, workoutSuggestionCo
 app.get("/exercises", requireLoggedIn, getAllExercisesController);
 app.get("/exercises/:exerciseId", requireLoggedIn, getExerciseController);
 
-// FORM FEEDBACK
-app.post("/form-feedback/:exerciseId", uploadVideo.single("video"), formFeedbackController);
+// EXERCISE ANALYSIS
+app.post("/exercise-analysis/:exerciseId", requireLoggedIn, uploadVideo.single("video"), exerciseAnalysisController);
 
 app.use("/uploads", express.static(path.join(process.cwd(), "public", "uploads")));
 

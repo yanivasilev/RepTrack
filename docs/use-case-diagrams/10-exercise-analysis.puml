@@ -1,0 +1,27 @@
+@startuml
+left to right direction
+
+actor "Authenticated User" as User
+actor "Pose Model / Video Process" as Model
+
+rectangle "Exercise Analysis" {
+  usecase "Select Video" as UC_SelectVideo
+  usecase "Preview Video" as UC_PreviewVideo
+  usecase "Submit Video for Analysis\n(POST /exercise-analysis/:exerciseId)" as UC_SubmitVideo
+  usecase "Validate Input\n(exerciseId + file)" as UC_Validate
+  usecase "Analyse Push-up Form" as UC_Analyze
+  usecase "Return Rep Feedback + Summary" as UC_Result
+}
+
+User --> UC_SelectVideo
+User --> UC_PreviewVideo
+User --> UC_SubmitVideo
+User --> UC_Result
+
+UC_SubmitVideo .> UC_Validate : <<include>>
+UC_SubmitVideo .> UC_Analyze : <<include>>
+UC_Analyze --> Model
+UC_Analyze .> UC_Result : <<include>>
+
+@enduml
+

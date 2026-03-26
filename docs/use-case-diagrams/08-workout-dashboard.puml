@@ -1,0 +1,23 @@
+@startuml
+left to right direction
+
+actor "Authenticated User" as User
+
+rectangle "Workout Dashboard" {
+  usecase "View Workout Stats\n(GET /workouts-stats)" as UC_Stats
+  usecase "View Timeframes\n(7d / 30d / 365d / all-time stats)" as UC_Timeframes
+  usecase "View Charts\n(workouts, duration, volume)" as UC_Charts
+  usecase "View Streaks\n(current and best)" as UC_Streaks 
+}
+
+User --> UC_Stats
+User --> UC_Timeframes
+User --> UC_Charts
+User --> UC_Streaks
+
+UC_Stats .> UC_Timeframes : <<include>>
+UC_Stats .> UC_Charts : <<include>>
+UC_Stats .> UC_Streaks : <<include>>
+
+@enduml
+

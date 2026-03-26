@@ -1,0 +1,192 @@
+@startuml
+title System Class Diagram
+skinparam classAttributeIconSize 0
+skinparam linetype ortho
+hide methods
+
+package "Auth & User" {
+  enum Sex
+  enum FitnessGoal
+  enum ExperienceLevel
+  enum TrainingStyle
+  enum TrainingFrequency
+  enum UnitType
+
+  class User {
+    +id: Int
+    +email: String
+    +password: String
+    +username: String
+    +dob: DateTime
+    +sex: Sex
+    +height: Int
+    +weight: Int
+    +fitnessGoal: FitnessGoal
+    +experienceLevel: ExperienceLevel
+    +trainingStyle: TrainingStyle
+    +trainingFrequency: TrainingFrequency
+    +heightUnitType: UnitType
+    +weightUnitType: UnitType
+    +avatarFileName: String?
+    +emailVerifiedAt: DateTime?
+    +createdAt: DateTime
+  }
+
+  class EmailVerificationOtp {
+    +id: Int
+    +userId: Int
+    +otpHash: String
+    +expiresAt: DateTime
+    +usedAt: DateTime?
+    +attempts: Int
+    +createdAt: DateTime
+  }
+
+  class ForgotPasswordOtp {
+    +id: Int
+    +userId: Int
+    +otpHash: String
+    +expiresAt: DateTime
+    +usedAt: DateTime?
+    +attempts: Int
+    +createdAt: DateTime
+  }
+
+  class ForgotPasswordSession {
+    +id: Int
+    +userId: Int
+    +tokenHash: String
+    +expiresAt: DateTime
+    +usedAt: DateTime?
+    +createdAt: DateTime
+  }
+}
+
+package "Threads & Replies" {
+  class Thread {
+    +id: Int
+    +title: String
+    +body: String
+    +createdAt: DateTime
+    +updatedAt: DateTime
+    +replyCount: Int
+    +likeCount: Int
+    +authorId: Int
+  }
+
+  class Reply {
+    +id: Int
+    +body: String
+    +createdAt: DateTime
+    +updatedAt: DateTime
+    +likeCount: Int
+    +authorId: Int
+    +threadId: Int
+  }
+
+  class ThreadLike {
+    +id: Int
+    +createdAt: DateTime
+    +threadId: Int
+    +userId: Int
+  }
+
+  class ReplyLike {
+    +id: Int
+    +createdAt: DateTime
+    +replyId: Int
+    +userId: Int
+  }
+}
+
+package "Workouts" {
+  enum ExerciseType
+  enum ExerciseCategory
+  enum MuscleGroup
+  enum Equipment
+
+  class Exercise {
+    +id: Int
+    +name: String
+    +exerciseType: ExerciseType
+    +category: ExerciseCategory
+    +muscleGroup: MuscleGroup
+    +equipment: Equipment
+    +isBodyweight: Boolean
+    +experienceLevel: ExperienceLevel
+    +createdAt: DateTime
+  }
+
+  class WorkoutSession {
+    +id: Int
+    +userId: Int
+    +startedAt: DateTime
+    +endedAt: DateTime
+    +durationSeconds: Int
+    +notes: String?
+  }
+
+  class WorkoutExercise {
+    +id: Int
+    +sessionId: Int
+    +exerciseId: Int
+    +orderIndex: Int
+    +notes: String?
+  }
+
+  class WorkoutSet {
+    +id: Int
+    +workoutExerciseId: Int
+    +setNumber: Int
+    +reps: Int?
+    +weight: Float?
+    +durationSeconds: Int?
+    +notes: String?
+    +createdAt: DateTime
+  }
+}
+
+package "Badges" {
+  enum BadgeType
+
+  class Badge {
+    +id: Int
+    +type: BadgeType
+    +name: String
+    +icon: String
+    +createdAt: DateTime
+  }
+
+  class UserBadge {
+    +id: Int
+    +userId: Int
+    +badgeId: Int
+    +earnedAt: DateTime
+  }
+}
+
+' Auth relations
+User "1" -- "0..1" EmailVerificationOtp
+User "1" -- "0..1" ForgotPasswordOtp
+User "1" -- "0..1" ForgotPasswordSession
+
+' Community relations
+User "1" -- "0..*" Thread : authors >
+User "1" -- "0..*" Reply : authors >
+Thread "1" -- "0..*" Reply : contains >
+Thread "1" -- "0..*" ThreadLike
+User "1" -- "0..*" ThreadLike
+Reply "1" -- "0..*" ReplyLike
+User "1" -- "0..*" ReplyLike
+
+' Workout relations
+User "1" -- "0..*" WorkoutSession
+WorkoutSession "1" -- "1..*" WorkoutExercise
+Exercise "1" -- "0..*" WorkoutExercise
+WorkoutExercise "1" -- "1..*" WorkoutSet
+
+' Badge relations
+User "1" -- "0..*" UserBadge
+Badge "1" -- "0..*" UserBadge
+
+@enduml

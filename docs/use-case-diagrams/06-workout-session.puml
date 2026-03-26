@@ -1,0 +1,26 @@
+@startuml
+left to right direction
+
+actor "Authenticated User" as User
+
+rectangle "Workout Session" {
+  usecase "Start Workout Session\n(Frontend session state)" as UC_Start
+  usecase "Add Exercise to Session" as UC_AddExercise
+  usecase "Manage Sets\n(reps/weight/duration/notes)" as UC_Sets
+  usecase "Pause/Resume Session\n(Frontend session state)" as UC_PauseResume
+  usecase "Save Workout\n(POST /workouts)" as UC_SaveWorkout
+  usecase "Award New Badges\n(On save-workout)" as UC_AwardBadges
+}
+
+User --> UC_Start
+User --> UC_AddExercise
+User --> UC_Sets
+User --> UC_PauseResume
+User --> UC_SaveWorkout
+
+UC_SaveWorkout .> UC_AwardBadges : <<include>>
+UC_Start .> UC_AddExercise : <<include>>
+UC_Start .> UC_Sets : <<include>>
+
+@enduml
+

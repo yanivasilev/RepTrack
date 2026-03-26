@@ -1,0 +1,24 @@
+@startuml
+left to right direction
+
+actor "Authenticated User" as User
+
+rectangle "Workout History" {
+  usecase "View Workout History\n(GET /workouts-history)" as UC_History
+  usecase "Filter Workout History by Date" as UC_FilterHistory
+  usecase "Sort Workout History\n(latest/oldest)" as UC_SortHistory
+  usecase "View Workout Details\n(GET /workouts/:workoutId)" as UC_Details
+  usecase "Delete Workout\n(DELETE /workouts/delete/:workoutId)" as UC_Delete
+}
+
+User --> UC_History
+User --> UC_FilterHistory
+User --> UC_SortHistory
+User --> UC_Details
+User --> UC_Delete
+
+UC_History .> UC_FilterHistory : <<extend>>
+UC_History .> UC_SortHistory : <<extend>>
+
+@enduml
+

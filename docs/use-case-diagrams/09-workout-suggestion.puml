@@ -1,0 +1,17 @@
+@startuml
+left to right direction
+
+actor "Authenticated User" as User
+
+rectangle "Workout Suggestion" {
+  usecase "Request Exercise Suggestion\n(GET /workouts-suggestion/:exerciseId)" as UC_Suggestion
+  usecase "Read Last 3 Matching Sessions" as UC_History3
+  usecase "Build Suggestion Message" as UC_Message
+}
+
+User --> UC_Suggestion
+UC_Suggestion .> UC_History3 : <<include>>
+UC_Suggestion .> UC_Message : <<include>>
+
+@enduml
+

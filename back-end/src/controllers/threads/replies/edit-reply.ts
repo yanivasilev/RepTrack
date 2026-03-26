@@ -19,7 +19,7 @@ export async function editReplyController(req: Request, res: Response) {
     }
 
     const { replyId } = parsed.data.params;
-    const result = await editReplyService(user.id, replyId, parsed.data.body);
+    const result = await editReplyService(user.id, replyId, parsed.data.body.body);
 
     if (result.status === "not_found") return res.status(404).json({ message: "Reply not found." });
     if (result.status === "unauthorised") return res.status(403).json({ message: "The reply is not yours." });
