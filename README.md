@@ -10,7 +10,7 @@ Originally developed as a university final-year project, RepTrack explores how c
 
 ## Project Overview
 
-![RepTrack architecture, AI analysis pipeline and database overview](docs/images/reptrack-system-architecture.png)
+![RepTrack architecture, AI analysis pipeline and database overview](docs/images/reptrack_system_architecture.png)
 
 ---
 
