@@ -8,6 +8,12 @@ Originally developed as a university final-year project, RepTrack explores how c
 
 ---
 
+## Project Overview
+
+![RepTrack architecture, AI analysis pipeline and database overview](docs/images/reptrack-system-architecture.png)
+
+---
+
 ## Features
 
 ### Workout Tracking
@@ -475,6 +481,8 @@ RepTrack is a development/academic project rather than a production fitness or m
 **Yani Ivanov Vasilev**
 
 GitHub: [@yanivasilev](https://github.com/yanivasilev)
+
+LinkedIn: [@yanivasilev](www.linkedin.com/in/yanivasilev)
 
 ---
 
